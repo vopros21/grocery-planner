@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Shopping Planner</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<style>
+  :root {
+    --bg: #f7f7f8;
+    --card: #ffffff;
+    --border: #e3e3e6;
+    --text: #1d1d1f;
+    --muted: #767678;
+    --accent: #0071e3;
+    --low: #d0451f;
+    --low-bg: #fdeeea;
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    margin: 0;
+    padding: 32px;
+  }
+  h1 { font-size: 22px; margin-bottom: 4px; }
+  h2 { font-size: 16px; margin: 0 0 12px; }
+  .subtitle { color: var(--muted); margin-bottom: 24px; font-size: 14px; }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+  }
+  .controls { display: flex; gap: 16px; align-items: center; margin-bottom: 20px; flex-wrap: wrap; }
+  .controls label { font-size: 13px; color: var(--muted); }
+  select {
+    padding: 6px 10px; border-radius: 8px; border: 1px solid var(--border);
+    font-size: 13px; background: white;
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); }
+  th { color: var(--muted); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.02em; }
+  tr.running-low { background: var(--low-bg); }
+  .tag { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 600; }
+  .tag.low { background: var(--low); color: white; }
+  .tag.ok { background: #e9f5ea; color: #1f7a34; }
+  .muted { color: var(--muted); }
+  .toggle-form { display: inline; }
+  .toggle-btn {
+    border: 1px solid var(--border); background: white; border-radius: 6px;
+    padding: 3px 8px; font-size: 12px; cursor: pointer; color: var(--text);
+  }
+  .toggle-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
+  canvas { max-height: 320px; }
+  .empty { color: var(--muted); font-size: 13px; padding: 12px 0; }
+</style>
+</head>
+<body>
+
+<h1>Shopping Planner</h1>
+<div class="subtitle">Bulk-buy suggestions for stockable items (meat, frozen, canned/dry goods) — buffer target: {{ buffer_months }} month(s)</div>
+
+<div class="card">
+  <h2>What to stock up on now</h2>
+  {% if shopping_list %}
+  <table>
+    <tr>
+      <th>Product</th>
+      <th>Category</th>
+      <th>Avg / month</th>
+      <th>Suggested buy ({{ buffer_months }}mo)</th>
+      <th>Last bought</th>
+      <th>Status</th>
+    </tr>
+    {% for p in shopping_list %}
+    <tr class="{{ 'running-low' if p.running_low else '' }}">
+      <td>{{ p.name }}</td>
+      <td>{{ p.category }}</td>
+      <td>{{ p.avg_units_per_month }} {{ p.unit_type }}</td>
+      <td><strong>{{ p.suggested_buy }} {{ p.unit_type }}</strong></td>
+      <td class="muted">{{ p.last_date }} ({{ p.days_since_last }}d ago)</td>
+      <td>
+        {% if p.running_low %}<span class="tag low">running low</span>
+        {% else %}<span class="tag ok">stocked</span>{% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% else %}
+  <div class="empty">No stockable products with enough purchase history yet. Buying 2 packs of something in one trip doesn't count as a purchase pattern — I need to see a product bought on at least 2 different shopping dates, 14+ days apart, before suggesting a monthly rate. This will fill in naturally as more receipts come in.</div>
+  {% endif %}
+</div>
+
+<div class="card">
+  <h2>Monthly spend by category</h2>
+  {% if months %}
+  <canvas id="spendChart"></canvas>
+  {% else %}
+  <div class="empty">No dated purchases yet.</div>
+  {% endif %}
+</div>
+
+<div class="card">
+  <form method="get" class="controls">
+    <label>Consumption rate: rolling avg over
+      <select name="window" onchange="this.form.submit()">
+        {% for w in [1.0, 2.0, 3.0, 6.0] %}
+        <option value="{{ w }}" {{ 'selected' if window_months == w else '' }}>{{ w|int }} month(s)</option>
+        {% endfor %}
+      </select>
+    </label>
+    <label>Buffer target
+      <select name="buffer" onchange="this.form.submit()">
+        {% for b in [1.0, 1.5, 2.0, 3.0] %}
+        <option value="{{ b }}" {{ 'selected' if buffer_months == b else '' }}>{{ b }} month(s)</option>
+        {% endfor %}
+      </select>
+    </label>
+    <label>Sort by
+      <select name="sort" onchange="this.form.submit()">
+        <option value="category" {{ 'selected' if sort_by == 'category' else '' }}>Category</option>
+        <option value="spend" {{ 'selected' if sort_by == 'spend' else '' }}>Total spend</option>
+        <option value="last" {{ 'selected' if sort_by == 'last' else '' }}>Longest since last bought</option>
+      </select>
+    </label>
+  </form>
+
+  <h2>All products</h2>
+  <table>
+    <tr>
+      <th>Product</th>
+      <th>Category</th>
+      <th>Store(s)</th>
+      <th>Shopping dates</th>
+      <th>Total spend</th>
+      <th>Avg / month</th>
+      <th>Last bought</th>
+      <th>Stockable?</th>
+    </tr>
+    {% for p in products %}
+    <tr class="{{ 'running-low' if p.running_low else '' }}">
+      <td>{{ p.name }}</td>
+      <td>{{ p.category }}</td>
+      <td class="muted">{{ p.stores_seen | join(', ') }}</td>
+      <td>{{ p.purchase_dates_count }}</td>
+      <td>&euro;{{ '%.2f' | format(p.total_spend) }}</td>
+      <td>{% if p.avg_units_per_month %}{{ p.avg_units_per_month }} {{ p.unit_type }}{% elif not p.enough_history %}<span class="muted" title="Need at least 2 shopping dates 14+ days apart to estimate a rate">need more history</span>{% else %}<span class="muted">n/a</span>{% endif %}</td>
+      <td class="muted">{{ p.last_date }}</td>
+      <td>
+        <form class="toggle-form" method="post" action="{{ url_for('planner.toggle_stockable') }}">
+          <input type="hidden" name="key" value="{{ p.key }}">
+          <input type="hidden" name="value" value="{{ 'false' if p.stockable else 'true' }}">
+          <input type="hidden" name="buffer" value="{{ buffer_months }}">
+          <input type="hidden" name="window" value="{{ window_months }}">
+          <input type="hidden" name="sort" value="{{ sort_by }}">
+          <button type="submit" class="toggle-btn {{ 'active' if p.stockable else '' }}">
+            {{ 'stockable' if p.stockable else 'not stockable' }}
+          </button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+
+<script>
+  const months = {{ months | tojson }};
+  const categories = {{ chart_categories | tojson }};
+  const series = {{ chart_series | tojson }};
+
+  if (months.length) {
+    const palette = ['#0071e3', '#d0451f', '#1f7a34', '#a259d9', '#e0a800', '#767678', '#00a3a3', '#c2185b'];
+    const datasets = categories.map((cat, i) => ({
+      label: cat,
+      data: series[cat],
+      backgroundColor: palette[i % palette.length],
+    }));
+
+    new Chart(document.getElementById('spendChart'), {
+      type: 'bar',
+      data: { labels: months, datasets },
+      options: {
+        responsive: true,
+        scales: { x: { stacked: true }, y: { stacked: true, title: { display: true, text: 'EUR' } } },
+        plugins: { legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } } },
+      },
+    });
+  }
+</script>
+
+</body>
+</html>

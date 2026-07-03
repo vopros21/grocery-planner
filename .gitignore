@@ -1,0 +1,7 @@
+__pycache__/
+venv/
+data/pending.json
+inbox/*
+processed/*
+!inbox/.gitkeep
+!processed/.gitkeep
