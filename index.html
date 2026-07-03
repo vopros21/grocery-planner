@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shopping Planner</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+<style>
+  :root {
+    --bg: #f7f7f8;
+    --card: #ffffff;
+    --border: #e3e3e6;
+    --text: #1d1d1f;
+    --muted: #767678;
+    --accent: #0071e3;
+    --low: #d0451f;
+    --low-bg: #fdeeea;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    margin: 0;
+    padding: 20px 16px 48px;
+  }
+  h1 { font-size: 20px; margin: 0 0 4px; }
+  h2 { font-size: 15px; margin: 0 0 12px; }
+  .subtitle { color: var(--muted); margin-bottom: 20px; font-size: 13px; }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin-bottom: 18px;
+  }
+  .controls { display: flex; gap: 12px; align-items: center; margin-bottom: 4px; flex-wrap: wrap; }
+  .controls label { font-size: 12px; color: var(--muted); display: flex; flex-direction: column; gap: 3px; }
+  select {
+    padding: 6px 8px; border-radius: 8px; border: 1px solid var(--border);
+    font-size: 13px; background: white; color: var(--text);
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td { text-align: left; padding: 7px 8px; border-bottom: 1px solid var(--border); }
+  th { color: var(--muted); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.02em; }
+  tr.running-low { background: var(--low-bg); }
+  .tag { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 600; white-space: nowrap; }
+  .tag.low { background: var(--low); color: white; }
+  .tag.ok { background: #e9f5ea; color: #1f7a34; }
+  .muted { color: var(--muted); }
+  canvas { max-height: 280px; }
+  .empty { color: var(--muted); font-size: 13px; padding: 8px 0; }
+  .loading { color: var(--muted); font-size: 13px; }
+  .error { color: var(--low); font-size: 13px; }
+  details summary {
+    cursor: pointer; font-size: 13px; color: var(--accent); font-weight: 600;
+    padding: 4px 0; list-style: none;
+  }
+  details summary::-webkit-details-marker { display: none; }
+  details summary::after { content: " ▾"; }
+  details[open] summary::after { content: " ▴"; }
+  .table-wrap { overflow-x: auto; }
+  .stale { color: var(--low); font-size: 12px; }
+</style>
+</head>
+<body>
+
+<h1>Shopping Planner</h1>
+<div class="subtitle" id="subtitle">Bulk-buy suggestions for stockable items — read-only, synced from GitHub</div>
+
+<div class="card" id="statusCard"><div class="loading">Loading latest data…</div></div>
+
+<div class="card" id="shoppingCard" style="display:none">
+  <h2>What to stock up on now</h2>
+  <div id="shoppingListBody"></div>
+</div>
+
+<div class="card" id="controlsCard" style="display:none">
+  <div class="controls">
+    <label>Rate over
+      <select id="windowSelect">
+        <option value="1">1 month</option>
+        <option value="2">2 months</option>
+        <option value="3" selected>3 months</option>
+        <option value="6">6 months</option>
+      </select>
+    </label>
+    <label>Buffer target
+      <select id="bufferSelect">
+        <option value="1">1 month</option>
+        <option value="1.5">1.5 months</option>
+        <option value="2" selected>2 months</option>
+        <option value="3">3 months</option>
+      </select>
+    </label>
+    <label>Sort by
+      <select id="sortSelect">
+        <option value="category" selected>Category</option>
+        <option value="spend">Total spend</option>
+        <option value="last">Longest since last bought</option>
+      </select>
+    </label>
+  </div>
+</div>
+
+<div class="card" id="chartCard" style="display:none">
+  <h2>Monthly spend by category</h2>
+  <canvas id="spendChart"></canvas>
+</div>
+
+<div class="card" id="allProductsCard" style="display:none">
+  <details>
+    <summary>All products</summary>
+    <div class="table-wrap" id="allProductsBody" style="margin-top:12px"></div>
+  </details>
+</div>
+
+<script>
+// ---------------------------------------------------------------------------
+// CONFIG — fill these in to point at your repo
+// ---------------------------------------------------------------------------
+const GITHUB_USER   = "vopros21";
+const GITHUB_REPO   = "grocery-planner";
+const GITHUB_BRANCH = "main";
+const ITEMS_CSV_PATH        = "data/items.csv";
+const OVERRIDES_JSON_PATH   = "data/stockable_overrides.json";
+
+const RAW_BASE = `https://raw.githubusercontent.com/${GITHUB_USER}/${GITHUB_REPO}/${GITHUB_BRANCH}/`;
+const ITEMS_URL     = RAW_BASE + ITEMS_CSV_PATH;
+const OVERRIDES_URL = RAW_BASE + OVERRIDES_JSON_PATH;
+
+// ---------------------------------------------------------------------------
+// Ported from analysis.py — same logic, same constants
+// ---------------------------------------------------------------------------
+const CORRUPTED_NAME_RE = /^\d+,\d+%\s+\d+,\d+\s+\d+,\d+$/;
+
+const STOCKABLE_CATEGORIES = new Set([
+  "talho", "peixaria", "congelados", "mercearia salgada", "mercearia doce", "conservas",
+]);
+const NOT_STOCKABLE_CATEGORIES = new Set([
+  "frutas e legumes", "padaria", "pastelaria", "laticinios", "laticínios",
+]);
+const STOCKABLE_KEYWORDS = [
+  "feijao", "feijão", "grao", "grão", "lentilha", "arroz", "massa", "esparguete",
+  "atum", "sardinha", "conserva", "enlatado", "congelad",
+  "azeite", "oleo", "óleo", "acucar", "açucar", "açúcar", "farinha", "cereais",
+];
+const PERISHABLE_KEYWORDS = [
+  "alface", "tomate", "banana", "maca", "maçã", "laranja", "pao ", "pão ",
+  "iogurte", "queijo fresco", "salada", "cogumelo", "morango", "uva",
+];
+
+const MIN_PURCHASE_DATES = 2;
+const MIN_SPAN_DAYS = 14;
+const DAYS_PER_MONTH = 30.44;
+
+function normalizeName(name) {
+  return (name || "").trim().toLowerCase().replace(/\s+/g, " ");
+}
+
+function guessStockable(category, name) {
+  const cat = (category || "").trim().toLowerCase();
+  if (STOCKABLE_CATEGORIES.has(cat)) return true;
+  if (NOT_STOCKABLE_CATEGORIES.has(cat)) return false;
+  const n = normalizeName(name);
+  if (PERISHABLE_KEYWORDS.some(k => n.includes(k))) return false;
+  if (STOCKABLE_KEYWORDS.some(k => n.includes(k))) return true;
+  return false;
+}
+
+function toFloat(s) {
+  const n = parseFloat(s);
+  return Number.isNaN(n) ? 0 : n;
+}
+
+function parseISODate(s) {
+  if (!s) return null;
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(s).trim());
+  if (!m) return null;
+  return new Date(Date.UTC(+m[1], +m[2] - 1, +m[3]));
+}
+function utcToday() {
+  const d = new Date();
+  return new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()));
+}
+function diffDays(a, b) { return Math.round((b.getTime() - a.getTime()) / 86400000); }
+function addDays(d, days) { return new Date(d.getTime() + days * 86400000); }
+function roundTo(x, decimals) { const f = 10 ** decimals; return Math.round(x * f) / f; }
+function mode(arr) {
+  const counts = new Map();
+  for (const v of arr) counts.set(v, (counts.get(v) || 0) + 1);
+  let best = arr[0], bestCount = -1;
+  for (const [v, c] of counts) if (c > bestCount) { best = v; bestCount = c; }
+  return best;
+}
+
+function loadItemsFromParsed(parsedRows) {
+  return parsedRows.filter(row => !CORRUPTED_NAME_RE.test((row.name || "").trim()));
+}
+
+function computeProductStats(rows, overrides, bufferMonths, windowMonths) {
+  const groups = new Map();
+  for (const r of rows) {
+    const key = normalizeName(r.name);
+    if (!key) continue;
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key).push(r);
+  }
+
+  const today = utcToday();
+  const windowDays = windowMonths * DAYS_PER_MONTH;
+  const products = [];
+
+  for (const [key, items] of groups) {
+    const datedItems = [];
+    for (const r of items) {
+      const d = parseISODate(r.date);
+      if (d) datedItems.push([d, r]);
+    }
+    if (!datedItems.length) continue;
+
+    const distinctTimes = Array.from(new Set(datedItems.map(([d]) => d.getTime()))).sort((a, b) => a - b);
+    const distinctDates = distinctTimes.map(t => new Date(t));
+    const purchaseDatesCount = distinctDates.length;
+    const firstDate = distinctDates[0];
+    const lastDate = distinctDates[distinctDates.length - 1];
+    const overallSpanDays = diffDays(firstDate, lastDate);
+
+    const unitType = items.some(r => toFloat(r.weight_kg) > 0) ? "kg" : "un";
+    const unitsFor = (r) => {
+      const wk = toFloat(r.weight_kg);
+      return (unitType === "kg" && wk > 0) ? wk : toFloat(r.qty);
+    };
+
+    const totalUnits = items.reduce((s, r) => s + unitsFor(r), 0);
+    const totalSpend = items.reduce((s, r) => s + toFloat(r.total_price), 0);
+    const categories = items.map(r => r.category).filter(Boolean);
+    const category = categories.length ? mode(categories) : "";
+    const displayName = items.reduce((a, r) => (r.name && r.name.length > a.length ? r.name : a), items[0].name || "");
+
+    const enoughHistory = purchaseDatesCount >= MIN_PURCHASE_DATES && overallSpanDays >= MIN_SPAN_DAYS;
+
+    let avgUnitsPerMonth = null, avgSpendPerMonth = null;
+    if (enoughHistory) {
+      const windowStart = addDays(today, -windowDays);
+      const effectiveStart = windowStart.getTime() > firstDate.getTime() ? windowStart : firstDate;
+      let effectiveSpanDays = diffDays(effectiveStart, today);
+      effectiveSpanDays = Math.max(effectiveSpanDays, MIN_SPAN_DAYS);
+      const effectiveSpanMonths = effectiveSpanDays / DAYS_PER_MONTH;
+
+      const inWindow = datedItems.filter(([d]) => d.getTime() >= effectiveStart.getTime());
+      const windowUnits = inWindow.reduce((s, [, r]) => s + unitsFor(r), 0);
+      const windowSpend = inWindow.reduce((s, [, r]) => s + toFloat(r.total_price), 0);
+
+      avgUnitsPerMonth = windowUnits / effectiveSpanMonths;
+      avgSpendPerMonth = windowSpend / effectiveSpanMonths;
+    }
+
+    let stockable = Object.prototype.hasOwnProperty.call(overrides, key) ? overrides[key] : null;
+    if (stockable === null) stockable = guessStockable(category, displayName);
+
+    const daysSinceLast = diffDays(lastDate, today);
+    let suggestedBuy = null, runningLow = false;
+    if (stockable && avgUnitsPerMonth) {
+      suggestedBuy = roundTo(avgUnitsPerMonth * bufferMonths, unitType === "kg" ? 2 : 0);
+      const expectedCycleDays = overallSpanDays / (purchaseDatesCount - 1);
+      runningLow = daysSinceLast >= expectedCycleDays;
+    }
+
+    products.push({
+      key,
+      name: displayName,
+      category: category || "(uncategorized — Lidl)",
+      storesSeen: Array.from(new Set(items.map(r => r.store).filter(Boolean))).sort(),
+      purchaseDatesCount,
+      unitType,
+      totalUnits: roundTo(totalUnits, 2),
+      totalSpend: roundTo(totalSpend, 2),
+      avgUnitsPerMonth: avgUnitsPerMonth ? roundTo(avgUnitsPerMonth, 2) : null,
+      avgSpendPerMonth: avgSpendPerMonth ? roundTo(avgSpendPerMonth, 2) : null,
+      lastDate: lastDate.toISOString().slice(0, 10),
+      daysSinceLast,
+      enoughHistory,
+      stockable,
+      suggestedBuy,
+      runningLow,
+    });
+  }
+
+  return products;
+}
+
+function computeMonthlyCategorySpend(rows) {
+  const monthly = new Map();
+  for (const r of rows) {
+    const d = parseISODate(r.date);
+    if (!d) continue;
+    const monthKey = `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, "0")}`;
+    const cat = r.category || "(uncategorized)";
+    if (!monthly.has(monthKey)) monthly.set(monthKey, new Map());
+    const catMap = monthly.get(monthKey);
+    catMap.set(cat, (catMap.get(cat) || 0) + toFloat(r.total_price));
+  }
+  return monthly;
+}
+
+// ---------------------------------------------------------------------------
+// Rendering
+// ---------------------------------------------------------------------------
+let ALL_ROWS = [];
+let OVERRIDES = {};
+let chartInstance = null;
+
+function esc(s) {
+  return String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+}
+
+function render() {
+  const bufferMonths = parseFloat(document.getElementById("bufferSelect").value);
+  const windowMonths = parseFloat(document.getElementById("windowSelect").value);
+  const sortBy = document.getElementById("sortSelect").value;
+
+  const products = computeProductStats(ALL_ROWS, OVERRIDES, bufferMonths, windowMonths);
+  const monthlySpend = computeMonthlyCategorySpend(ALL_ROWS);
+
+  // Shopping list
+  const shoppingList = products
+    .filter(p => p.stockable && p.suggestedBuy)
+    .sort((a, b) => {
+      if (a.runningLow !== b.runningLow) return a.runningLow ? -1 : 1;
+      if (a.category !== b.category) return a.category < b.category ? -1 : 1;
+      return a.name < b.name ? -1 : 1;
+    });
+
+  const shoppingBody = document.getElementById("shoppingListBody");
+  if (!shoppingList.length) {
+    shoppingBody.innerHTML = `<div class="empty">No stockable products with enough purchase history yet. Needs a product bought on 2+ shopping dates, 14+ days apart, before a rate is estimated.</div>`;
+  } else {
+    let html = `<table><tr><th>Product</th><th>Avg/mo</th><th>Buy now (${bufferMonths}mo)</th><th>Last</th><th>Status</th></tr>`;
+    for (const p of shoppingList) {
+      html += `<tr class="${p.runningLow ? "running-low" : ""}">
+        <td>${esc(p.name)}<div class="muted" style="font-size:11px">${esc(p.category)}</div></td>
+        <td>${p.avgUnitsPerMonth} ${esc(p.unitType)}</td>
+        <td><strong>${p.suggestedBuy} ${esc(p.unitType)}</strong></td>
+        <td class="muted">${p.daysSinceLast}d ago</td>
+        <td>${p.runningLow ? '<span class="tag low">running low</span>' : '<span class="tag ok">stocked</span>'}</td>
+      </tr>`;
+    }
+    html += "</table>";
+    shoppingBody.innerHTML = html;
+  }
+
+  // All products table
+  let sortedProducts = products.slice();
+  if (sortBy === "spend") sortedProducts.sort((a, b) => b.totalSpend - a.totalSpend);
+  else if (sortBy === "last") sortedProducts.sort((a, b) => b.daysSinceLast - a.daysSinceLast);
+  else sortedProducts.sort((a, b) => (a.category === b.category ? (a.name < b.name ? -1 : 1) : (a.category < b.category ? -1 : 1)));
+
+  let allHtml = `<table><tr><th>Product</th><th>Category</th><th>Store(s)</th><th>Dates</th><th>Spend</th><th>Avg/mo</th><th>Last</th><th>Stockable?</th></tr>`;
+  for (const p of sortedProducts) {
+    const rateCell = p.avgUnitsPerMonth
+      ? `${p.avgUnitsPerMonth} ${esc(p.unitType)}`
+      : (!p.enoughHistory ? `<span class="muted">need more history</span>` : `<span class="muted">n/a</span>`);
+    allHtml += `<tr class="${p.runningLow ? "running-low" : ""}">
+      <td>${esc(p.name)}</td>
+      <td>${esc(p.category)}</td>
+      <td class="muted">${esc(p.storesSeen.join(", "))}</td>
+      <td>${p.purchaseDatesCount}</td>
+      <td>&euro;${p.totalSpend.toFixed(2)}</td>
+      <td>${rateCell}</td>
+      <td class="muted">${p.lastDate}</td>
+      <td>${p.stockable ? '<span class="tag ok">stockable</span>' : '<span class="muted">not stockable</span>'}</td>
+    </tr>`;
+  }
+  allHtml += "</table>";
+  document.getElementById("allProductsBody").innerHTML = allHtml;
+
+  // Chart
+  const months = Array.from(monthlySpend.keys()).sort();
+  const allCategories = Array.from(new Set(
+    Array.from(monthlySpend.values()).flatMap(m => Array.from(m.keys()))
+  )).sort();
+  const chartCard = document.getElementById("chartCard");
+  if (months.length) {
+    chartCard.style.display = "";
+    const palette = ["#0071e3", "#d0451f", "#1f7a34", "#a259d9", "#e0a800", "#767678", "#00a3a3", "#c2185b"];
+    const datasets = allCategories.map((cat, i) => ({
+      label: cat,
+      data: months.map(m => roundTo((monthlySpend.get(m) || new Map()).get(cat) || 0, 2)),
+      backgroundColor: palette[i % palette.length],
+    }));
+    if (chartInstance) chartInstance.destroy();
+    chartInstance = new Chart(document.getElementById("spendChart"), {
+      type: "bar",
+      data: { labels: months, datasets },
+      options: {
+        responsive: true,
+        scales: { x: { stacked: true }, y: { stacked: true, title: { display: true, text: "EUR" } } },
+        plugins: { legend: { position: "bottom", labels: { boxWidth: 12, font: { size: 11 } } } },
+      },
+    });
+  } else {
+    chartCard.style.display = "none";
+  }
+}
+
+async function fetchOverrides() {
+  try {
+    const res = await fetch(OVERRIDES_URL, { cache: "no-store" });
+    if (!res.ok) return {};
+    return await res.json();
+  } catch {
+    return {};
+  }
+}
+
+async function init() {
+  const statusCard = document.getElementById("statusCard");
+  try {
+    const [itemsRes, overrides] = await Promise.all([
+      fetch(ITEMS_URL, { cache: "no-store" }),
+      fetchOverrides(),
+    ]);
+    if (!itemsRes.ok) throw new Error(`Could not fetch items.csv (HTTP ${itemsRes.status})`);
+    const csvText = await itemsRes.text();
+    const parsed = Papa.parse(csvText, { header: true, skipEmptyLines: true });
+    ALL_ROWS = loadItemsFromParsed(parsed.data);
+    OVERRIDES = overrides;
+
+    const dates = ALL_ROWS.map(r => parseISODate(r.date)).filter(Boolean);
+    const latest = dates.length ? new Date(Math.max(...dates.map(d => d.getTime()))) : null;
+    statusCard.style.display = "none";
+    document.getElementById("subtitle").textContent =
+      `Bulk-buy suggestions for stockable items` +
+      (latest ? ` · latest receipt: ${latest.toISOString().slice(0, 10)}` : "");
+
+    document.getElementById("shoppingCard").style.display = "";
+    document.getElementById("controlsCard").style.display = "";
+    document.getElementById("allProductsCard").style.display = "";
+
+    ["windowSelect", "bufferSelect", "sortSelect"].forEach(id =>
+      document.getElementById(id).addEventListener("change", render)
+    );
+
+    render();
+  } catch (err) {
+    statusCard.innerHTML = `<div class="error">Failed to load data: ${esc(err.message)}. Check the GITHUB_USER / GITHUB_REPO / paths at the top of this file, and that items.csv has been pushed.</div>`;
+  }
+}
+
+init();
+</script>
+
+</body>
+</html>
