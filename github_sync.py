@@ -54,6 +54,18 @@ def push_to_github(commit_message: str = "update grocer data") -> bool:
         if commit.returncode != 0 and "nothing to commit" not in (commit.stdout + commit.stderr).lower():
             print(f"[github_sync] commit warning: {commit.stderr.strip()}")
 
+        # Reconcile with remote first — e.g. if index.html was edited via the
+        # GitHub web UI since our last push, a plain `git push` would be
+        # rejected as non-fast-forward. --autostash protects any uncommitted
+        # local changes that aren't part of SYNCED_PATHS.
+        pull = subprocess.run(
+            ["git", "pull", "--no-rebase", "--no-edit", "--autostash"],
+            cwd=BASE_DIR, capture_output=True, text=True,
+        )
+        if pull.returncode != 0:
+            print(f"[github_sync] pull failed (possible merge conflict, resolve manually): {pull.stderr.strip()}")
+            return False
+
         push = subprocess.run(
             ["git", "push"],
             cwd=BASE_DIR, capture_output=True, text=True,
