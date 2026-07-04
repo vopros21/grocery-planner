@@ -123,12 +123,14 @@
 const GITHUB_USER   = "vopros21";
 const GITHUB_REPO   = "grocery-planner";
 const GITHUB_BRANCH = "main";
-const ITEMS_CSV_PATH        = "data/items.csv";
-const OVERRIDES_JSON_PATH   = "data/stockable_overrides.json";
+const ITEMS_CSV_PATH          = "data/items.csv";
+const OVERRIDES_JSON_PATH     = "data/stockable_overrides.json";
+const CATEGORY_JSON_PATH      = "data/category_overrides.json";
 
 const RAW_BASE = `https://raw.githubusercontent.com/${GITHUB_USER}/${GITHUB_REPO}/${GITHUB_BRANCH}/`;
-const ITEMS_URL     = RAW_BASE + ITEMS_CSV_PATH;
-const OVERRIDES_URL = RAW_BASE + OVERRIDES_JSON_PATH;
+const ITEMS_URL         = RAW_BASE + ITEMS_CSV_PATH;
+const OVERRIDES_URL     = RAW_BASE + OVERRIDES_JSON_PATH;
+const CATEGORY_URL      = RAW_BASE + CATEGORY_JSON_PATH;
 
 // ---------------------------------------------------------------------------
 // Ported from analysis.py — same logic, same constants
@@ -199,7 +201,8 @@ function loadItemsFromParsed(parsedRows) {
   return parsedRows.filter(row => !CORRUPTED_NAME_RE.test((row.name || "").trim()));
 }
 
-function computeProductStats(rows, overrides, bufferMonths, windowMonths) {
+function computeProductStats(rows, overrides, categoryOverrides, bufferMonths, windowMonths) {
+  categoryOverrides = categoryOverrides || {};
   const groups = new Map();
   for (const r of rows) {
     const key = normalizeName(r.name);
@@ -235,9 +238,16 @@ function computeProductStats(rows, overrides, bufferMonths, windowMonths) {
 
     const totalUnits = items.reduce((s, r) => s + unitsFor(r), 0);
     const totalSpend = items.reduce((s, r) => s + toFloat(r.total_price), 0);
-    const categories = items.map(r => r.category).filter(Boolean);
-    const category = categories.length ? mode(categories) : "";
     const displayName = items.reduce((a, r) => (r.name && r.name.length > a.length ? r.name : a), items[0].name || "");
+
+    const categoryOverride = categoryOverrides[key];
+    let category;
+    if (categoryOverride) {
+      category = categoryOverride;
+    } else {
+      const categories = items.map(r => r.category).filter(Boolean);
+      category = categories.length ? mode(categories) : "";
+    }
 
     const enoughHistory = purchaseDatesCount >= MIN_PURCHASE_DATES && overallSpanDays >= MIN_SPAN_DAYS;
 
@@ -291,13 +301,15 @@ function computeProductStats(rows, overrides, bufferMonths, windowMonths) {
   return products;
 }
 
-function computeMonthlyCategorySpend(rows) {
+function computeMonthlyCategorySpend(rows, categoryOverrides) {
+  categoryOverrides = categoryOverrides || {};
   const monthly = new Map();
   for (const r of rows) {
     const d = parseISODate(r.date);
     if (!d) continue;
     const monthKey = `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, "0")}`;
-    const cat = r.category || "(uncategorized)";
+    const override = categoryOverrides[normalizeName(r.name)];
+    const cat = override || r.category || "(uncategorized)";
     if (!monthly.has(monthKey)) monthly.set(monthKey, new Map());
     const catMap = monthly.get(monthKey);
     catMap.set(cat, (catMap.get(cat) || 0) + toFloat(r.total_price));
@@ -310,6 +322,7 @@ function computeMonthlyCategorySpend(rows) {
 // ---------------------------------------------------------------------------
 let ALL_ROWS = [];
 let OVERRIDES = {};
+let CATEGORY_OVERRIDES = {};
 let chartInstance = null;
 
 function esc(s) {
@@ -321,8 +334,8 @@ function render() {
   const windowMonths = parseFloat(document.getElementById("windowSelect").value);
   const sortBy = document.getElementById("sortSelect").value;
 
-  const products = computeProductStats(ALL_ROWS, OVERRIDES, bufferMonths, windowMonths);
-  const monthlySpend = computeMonthlyCategorySpend(ALL_ROWS);
+  const products = computeProductStats(ALL_ROWS, OVERRIDES, CATEGORY_OVERRIDES, bufferMonths, windowMonths);
+  const monthlySpend = computeMonthlyCategorySpend(ALL_ROWS, CATEGORY_OVERRIDES);
 
   // Shopping list
   const shoppingList = products
@@ -405,9 +418,9 @@ function render() {
   }
 }
 
-async function fetchOverrides() {
+async function fetchJson(url) {
   try {
-    const res = await fetch(OVERRIDES_URL, { cache: "no-store" });
+    const res = await fetch(url, { cache: "no-store" });
     if (!res.ok) return {};
     return await res.json();
   } catch {
@@ -418,15 +431,17 @@ async function fetchOverrides() {
 async function init() {
   const statusCard = document.getElementById("statusCard");
   try {
-    const [itemsRes, overrides] = await Promise.all([
+    const [itemsRes, overrides, categoryOverrides] = await Promise.all([
       fetch(ITEMS_URL, { cache: "no-store" }),
-      fetchOverrides(),
+      fetchJson(OVERRIDES_URL),
+      fetchJson(CATEGORY_URL),
     ]);
     if (!itemsRes.ok) throw new Error(`Could not fetch items.csv (HTTP ${itemsRes.status})`);
     const csvText = await itemsRes.text();
     const parsed = Papa.parse(csvText, { header: true, skipEmptyLines: true });
     ALL_ROWS = loadItemsFromParsed(parsed.data);
     OVERRIDES = overrides;
+    CATEGORY_OVERRIDES = categoryOverrides;
 
     const dates = ALL_ROWS.map(r => parseISODate(r.date)).filter(Boolean);
     const latest = dates.length ? new Date(Math.max(...dates.map(d => d.getTime()))) : null;

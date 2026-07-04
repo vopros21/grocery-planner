@@ -11,9 +11,15 @@ import json
 from pathlib import Path
 from flask import Flask, render_template_string, request, redirect, url_for, jsonify
 
-from store import load_pending, confirm_receipt, remove_pending
+from store import load_pending, confirm_receipt, remove_pending, load_items
 
-from analysis import planner_bp
+from analysis import (
+    planner_bp,
+    normalize_name,
+    load_category_overrides,
+    save_category_overrides,
+    get_known_categories,
+)
 
 app = Flask(__name__)
 app.register_blueprint(planner_bp)
@@ -58,6 +64,9 @@ HTML = """
 
   .cat-badge { font-size: 11px; background: #e8e8ed; border-radius: 4px;
                padding: 2px 6px; color: #3a3a3c; white-space: nowrap; }
+  input[type=text].cat-input { width: 140px; padding: 4px 6px; border: 1px solid #c7c7cc;
+                       border-radius: 6px; font-size: 13px; }
+  input[type=text].cat-input:focus { outline: 2px solid #007aff; border-color: transparent; }
   .flag { font-size: 11px; background: #ff9f0a22; color: #b25000;
           border-radius: 4px; padding: 2px 6px; white-space: nowrap; }
 
@@ -84,6 +93,12 @@ HTML = """
 </style>
 </head>
 <body>
+
+<datalist id="categoryOptions">
+  {% for c in known_categories %}
+  <option value="{{ c }}">
+  {% endfor %}
+</datalist>
 
 <header>
   <h1>🛒 Grocer Review</h1>
@@ -136,7 +151,15 @@ HTML = """
             <br><span class="discount">-€{{ "%.2f"|format(item.discount) }} saved</span>
             {% endif %}
           </td>
-          <td><span class="cat-badge">{{ item.category }}</span></td>
+          <td>
+            {% if item.category %}
+            <span class="cat-badge">{{ item.category }}</span>
+            {% else %}
+            <input type="text" class="cat-input" name="category_{{ loop.index0 }}"
+                   list="categoryOptions" placeholder="uncategorized"
+                   value="{{ item.suggested_category or '' }}">
+            {% endif %}
+          </td>
           <td style="text-align:center">{{ item.qty|int if item.qty == item.qty|int else item.qty }}</td>
           <td class="price">{{ "%.2f"|format(item.unit_price) }}</td>
           <td class="price">{{ "%.2f"|format(item.total_price) }}</td>
@@ -198,7 +221,20 @@ setInterval(() => {
 @app.route("/")
 def index():
     receipts = load_pending()
-    return render_template_string(HTML, receipts=receipts)
+    category_overrides = load_category_overrides()
+
+    # Pre-fill a category guess for any item that arrived with a blank
+    # category (always Lidl) if we've already categorized this same
+    # product before — still editable, just saves re-typing every time.
+    for receipt in receipts.values():
+        for item in receipt["rows"]:
+            if not item.get("category"):
+                item["suggested_category"] = category_overrides.get(
+                    normalize_name(item.get("name", "")), ""
+                )
+
+    known_categories = get_known_categories(load_items(), category_overrides)
+    return render_template_string(HTML, receipts=receipts, known_categories=known_categories)
 
 
 @app.route("/confirm/<receipt_id>", methods=["POST"])
@@ -220,6 +256,24 @@ def confirm(receipt_id):
                 item["weight_kg"] = ""
         else:
             item["weight_kg"] = ""
+
+    # Merge submitted category values back into items (only items that
+    # arrived with a blank category, i.e. Lidl, show this field at all)
+    # and remember each choice permanently, keyed by product name, so
+    # future receipts for the same product don't need re-categorizing.
+    new_overrides = {}
+    for i, item in enumerate(items):
+        if item.get("category"):
+            continue
+        cat_val = request.form.get(f"category_{i}", "").strip()
+        if cat_val:
+            item["category"] = cat_val
+            new_overrides[normalize_name(item.get("name", ""))] = cat_val
+
+    if new_overrides:
+        overrides = load_category_overrides()
+        overrides.update(new_overrides)
+        save_category_overrides(overrides)
 
     confirm_receipt(receipt_id, items)
     return redirect(url_for("index"))

@@ -31,6 +31,7 @@ from github_sync import push_to_github
 BASE_DIR = Path(__file__).resolve().parent
 ITEMS_CSV = BASE_DIR / "data" / "items.csv"
 STOCKABLE_CONFIG = BASE_DIR / "data" / "stockable_overrides.json"
+CATEGORY_CONFIG = BASE_DIR / "data" / "category_overrides.json"
 
 # Matches the known %IVA-table parsing artifact rows (e.g. "23,00% 11,34 2,61")
 # so they're excluded from the averages without needing the cleanup script run first.
@@ -110,6 +111,34 @@ def save_overrides(overrides):
     STOCKABLE_CONFIG.write_text(json.dumps(overrides, ensure_ascii=False, indent=2), encoding="utf-8")
 
 
+# ── Category overrides ──────────────────────────────────────────────
+# Same pattern as stockable overrides above: {normalized_name: category}.
+# Lets you assign a Continente-style category to a Lidl item (whose
+# receipts never print one) once, permanently — every past and future
+# row for that product picks it up at read time, no CSV rewrite needed.
+
+def load_category_overrides():
+    if CATEGORY_CONFIG.exists():
+        return json.loads(CATEGORY_CONFIG.read_text(encoding="utf-8"))
+    return {}
+
+
+def save_category_overrides(overrides):
+    CATEGORY_CONFIG.parent.mkdir(parents=True, exist_ok=True)
+    CATEGORY_CONFIG.write_text(json.dumps(overrides, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
+def get_known_categories(rows, category_overrides=None):
+    """Distinct category names seen in items.csv, unioned with any values
+    already used in category_overrides.json — for the dropdown/datalist so
+    it always matches Continente's real category vocabulary."""
+    cats = {(r.get("category") or "").strip() for r in rows}
+    if category_overrides:
+        cats.update(v.strip() for v in category_overrides.values())
+    cats.discard("")
+    return sorted(cats)
+
+
 def _to_float(s):
     try:
         return float(s)
@@ -127,7 +156,7 @@ MIN_SPAN_DAYS = 14
 DAYS_PER_MONTH = 30.44
 
 
-def compute_product_stats(rows, overrides, buffer_months=2.0, window_months=3.0):
+def compute_product_stats(rows, overrides, category_overrides=None, buffer_months=2.0, window_months=3.0):
     """Group rows by normalized product name; estimate a rolling-window monthly
     consumption rate and suggested buy qty.
 
@@ -137,6 +166,8 @@ def compute_product_stats(rows, overrides, buffer_months=2.0, window_months=3.0)
     time 5 weeks ago), we average over however much history actually exists
     instead of diluting against a window that hasn't happened yet.
     """
+    category_overrides = category_overrides or {}
+
     groups = defaultdict(list)
     for r in rows:
         key = normalize_name(r.get("name", ""))
@@ -178,9 +209,14 @@ def compute_product_stats(rows, overrides, buffer_months=2.0, window_months=3.0)
         total_units = sum(units_for(r) for r in items)
         total_spend = sum(_to_float(r.get("total_price")) for r in items)
 
-        categories = [r.get("category", "") for r in items if r.get("category")]
-        category = max(set(categories), key=categories.count) if categories else ""
         display_name = max((r["name"] for r in items), key=len)
+
+        category_override = category_overrides.get(key)
+        if category_override:
+            category = category_override
+        else:
+            categories = [r.get("category", "") for r in items if r.get("category")]
+            category = max(set(categories), key=categories.count) if categories else ""
 
         enough_history = purchase_dates_count >= MIN_PURCHASE_DATES and overall_span_days >= MIN_SPAN_DAYS
 
@@ -236,7 +272,8 @@ def compute_product_stats(rows, overrides, buffer_months=2.0, window_months=3.0)
     return products
 
 
-def compute_monthly_category_spend(rows):
+def compute_monthly_category_spend(rows, category_overrides=None):
+    category_overrides = category_overrides or {}
     monthly = defaultdict(lambda: defaultdict(float))
     for r in rows:
         try:
@@ -244,7 +281,8 @@ def compute_monthly_category_spend(rows):
         except (ValueError, KeyError):
             continue
         month_key = f"{d.year}-{d.month:02d}"
-        cat = r.get("category") or "(uncategorized)"
+        override = category_overrides.get(normalize_name(r.get("name", "")))
+        cat = override or r.get("category") or "(uncategorized)"
         monthly[month_key][cat] += _to_float(r.get("total_price"))
     return monthly
 
@@ -260,8 +298,10 @@ def planner():
 
     rows = load_items()
     overrides = load_overrides()
-    products = compute_product_stats(rows, overrides, buffer_months, window_months)
-    monthly_spend = compute_monthly_category_spend(rows)
+    category_overrides = load_category_overrides()
+    known_categories = get_known_categories(rows, category_overrides)
+    products = compute_product_stats(rows, overrides, category_overrides, buffer_months, window_months)
+    monthly_spend = compute_monthly_category_spend(rows, category_overrides)
 
     months_sorted = sorted(monthly_spend.keys())
     all_categories = sorted({cat for m in monthly_spend.values() for cat in m.keys()})
@@ -292,6 +332,7 @@ def planner():
         chart_categories=all_categories,
         chart_series=chart_series,
         sort_by=sort_by,
+        known_categories=known_categories,
     )
 
 
@@ -303,6 +344,27 @@ def toggle_stockable():
     overrides[key] = new_value
     save_overrides(overrides)
     push_to_github(f"toggle stockable: {key} -> {new_value}")
+    return redirect(url_for(
+        "planner.planner",
+        buffer=request.form.get("buffer", 2.0),
+        window=request.form.get("window", 3.0),
+        sort=request.form.get("sort", "category"),
+    ))
+
+
+@planner_bp.route("/planner/set-category", methods=["POST"])
+def set_category():
+    key = request.form["key"]
+    category = request.form.get("category", "").strip()
+    overrides = load_category_overrides()
+    if category:
+        overrides[key] = category
+    else:
+        # blank submission clears the override, falling back to the
+        # receipt-derived guess (or "(uncategorized — Lidl)") again
+        overrides.pop(key, None)
+    save_category_overrides(overrides)
+    push_to_github(f"set category: {key} -> {category or '(cleared)'}")
     return redirect(url_for(
         "planner.planner",
         buffer=request.form.get("buffer", 2.0),

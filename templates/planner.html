@@ -52,11 +52,22 @@
     padding: 3px 8px; font-size: 12px; cursor: pointer; color: var(--text);
   }
   .toggle-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
+  .cat-input {
+    width: 150px; padding: 3px 6px; border: 1px solid var(--border); border-radius: 6px;
+    font-size: 13px; background: white; color: var(--text);
+  }
+  .cat-input:focus { outline: 2px solid var(--accent); border-color: transparent; }
   canvas { max-height: 320px; }
   .empty { color: var(--muted); font-size: 13px; padding: 12px 0; }
 </style>
 </head>
 <body>
+
+<datalist id="categoryOptions">
+  {% for c in known_categories %}
+  <option value="{{ c }}">
+  {% endfor %}
+</datalist>
 
 <h1>Shopping Planner</h1>
 <div class="subtitle">Bulk-buy suggestions for stockable items (meat, frozen, canned/dry goods) — buffer target: {{ buffer_months }} month(s)</div>
@@ -141,7 +152,17 @@
     {% for p in products %}
     <tr class="{{ 'running-low' if p.running_low else '' }}">
       <td>{{ p.name }}</td>
-      <td>{{ p.category }}</td>
+      <td>
+        <form class="toggle-form" method="post" action="{{ url_for('planner.set_category') }}">
+          <input type="hidden" name="key" value="{{ p.key }}">
+          <input type="hidden" name="buffer" value="{{ buffer_months }}">
+          <input type="hidden" name="window" value="{{ window_months }}">
+          <input type="hidden" name="sort" value="{{ sort_by }}">
+          <input type="text" name="category" list="categoryOptions" class="cat-input"
+                 value="{{ '' if p.category == '(uncategorized — Lidl)' else p.category }}"
+                 placeholder="uncategorized" onblur="if(this.value!==this.defaultValue)this.form.requestSubmit()">
+        </form>
+      </td>
       <td class="muted">{{ p.stores_seen | join(', ') }}</td>
       <td>{{ p.purchase_dates_count }}</td>
       <td>&euro;{{ '%.2f' | format(p.total_spend) }}</td>
