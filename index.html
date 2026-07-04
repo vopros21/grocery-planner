@@ -60,7 +60,6 @@
   details summary::-webkit-details-marker { display: none; }
   details summary::after { content: " ▾"; }
   details[open] summary::after { content: " ▴"; }
-  .table-wrap { overflow-x: auto; overflow-y: auto; max-height: 60vh; }
   .stale { color: var(--low); font-size: 12px; }
 </style>
 </head>
@@ -112,7 +111,7 @@
 <div class="card" id="allProductsCard" style="display:none">
   <details>
     <summary>All products</summary>
-    <div class="table-wrap" id="allProductsBody" style="margin-top:12px"></div>
+    <div id="allProductsBody" style="margin-top:12px"></div>
   </details>
 </div>
 
