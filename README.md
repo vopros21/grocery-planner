@@ -8,7 +8,6 @@ Automatically extracts grocery items from Continente PDF receipts into a flat CS
 pip install pdfplumber watchdog flask
 ```
 
-
 ## File layout
 
 ```
