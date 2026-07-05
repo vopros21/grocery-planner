@@ -246,3 +246,31 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-07-05,Lidl,Congelados,GELADO SANDWICH,2.0,,3.19,6.38,0.0,A
 2026-07-05,Lidl,Soft Drinks,Bourbon Cola 5%,2.0,,1.49,2.98,0.0,A
 2026-07-05,Lidl,Frutas e Legumes,CEREJA,1.0,,5.49,5.49,0.0,B
+2026-07-05,Continente,Mercearia Salgada,ERVILHAS BONDUELLE S/AD ACUCAR,1.0,,2.59,2.59,1.4,C
+2026-07-05,Continente,Mercearia Salgada,MILHO DOCE CONTINENTE 3*140G,1.0,,1.99,1.99,0.0,C
+2026-07-05,Continente,Mercearia Salgada,COG. LAMINADOS CNT POUPANCA 420,1.0,,2.19,2.19,0.0,C
+2026-07-05,Continente,Soft Drinks,COCA COLA ORIGINAL 4X1L,1.0,,4.75,4.75,1.21,C
+2026-07-05,Continente,Soft Drinks,REF C/ GAS ZERO BAUNILHA COCACO,1.0,,1.19,1.19,0.2,C
+2026-07-05,Continente,Laticinios/Beb. Veg.,IOG PROTEICO SOLIDO MORANGO LIM,2.0,,1.09,2.18,1.22,A
+2026-07-05,Continente,Laticinios/Beb. Veg.,IOG SOL PROTEICO FRAMBOESA LIND,1.0,,1.09,1.09,0.61,A
+2026-07-05,Continente,Laticinios/Beb. Veg.,IOG PROTEICO SOLIDO STRACCIATEL,4.0,,1.19,4.76,2.04,A
+2026-07-05,Continente,Laticinios/Beb. Veg.,LINDAHLS SOL ANANAS COCO 1X160G,1.0,,1.09,1.09,0.61,A
+2026-07-05,Continente,Laticinios/Beb. Veg.,BEBIDA COCO ALPRO 1L,1.0,,2.59,2.59,0.0,A
+2026-07-05,Continente,Talho,MIX SAL PORCO CHUR LUSITANO CNT,1.0,,3.21,3.21,0.0,A
+2026-07-05,Continente,Talho,MIX SAL PORCO CHUR LUSITANO CNT,1.0,,2.13,2.13,0.0,A
+2026-07-05,Continente,Pequeno Almoco,CAF BRAS CAFE DELTA BRASILDELTA,1.0,,3.89,3.89,2.1,C
+2026-07-05,Continente,Pequeno Almoco,CAFE DELTA COLOMBIA UNIVER 220G,1.0,,3.89,3.89,2.1,C
+2026-07-05,Continente,Pequeno Almoco,CAF TIMO DELTACAFE DELTA TIMOR,1.0,,3.89,3.89,2.1,C
+2026-07-05,Continente,Frutas e Legumes,BETERRABA SEM RAMA,1.0,,0.6,0.6,0.0,A
+2026-07-05,Continente,Frutas e Legumes,TOMATE CNT KG,1.0,0.8,1.59,1.59,0.0,A
+2026-07-05,Continente,Frutas e Legumes,PIMENTO VERMELHO CNT KG,1.0,0.254,0.76,0.76,0.0,A
+2026-07-05,Continente,Frutas e Legumes,CEBOLA ROXA,1.0,,0.62,0.62,0.0,A
+2026-07-05,Continente,Frutas e Legumes,MELAO BRANCO FRAC,1.0,1.268,1.89,1.89,0.0,A
+2026-07-05,Continente,Frutas e Legumes,SALADA CAMPONESA CNT 250GR,1.0,,1.29,1.29,0.0,A
+2026-07-05,Continente,Padaria,PK POUPANCA MERENDA MISTA(AB),1.0,,3.35,3.35,0.0,C
+2026-07-05,Continente,Vinho e Espirituosas,LECOQ BLUE LAGOON 33CL,1.0,,1.99,1.99,0.0,C
+2026-07-05,Continente,Vinho e Espirituosas,LECOQ COCKT MARGARITA 33CL,1.0,,1.99,1.99,0.0,C
+2026-07-05,Continente,Vinho e Espirituosas,VT VALE DE MONCORVO DOURO,1.0,,2.99,2.99,7.0,B
+2026-07-05,Continente,Take Away,PIZZA BARBECUE CNT 400G,2.0,,2.89,5.78,0.0,B
+2026-07-05,Continente,Casa-Cozinha/Lavand,GARRAFA PLAST/S,1.0,,6.0,6.0,0.0,C
+2026-07-05,Continente,Brand Marketing,"FRASCO TERMICO DUPLO 500ML 4,99",1.0,,4.99,4.99,0.0,C
