@@ -139,7 +139,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-06-26,Lidl,,BEBIDAS BAHAMAS,1.0,,1.49,1.49,0.0,A
 2026-06-26,Lidl,,SteamBrew Cerveja Artesanal,1.0,,0.99,0.99,0.0,A
 2026-06-26,Lidl,,Strongbeer,1.0,,0.99,0.99,0.0,A
-2026-06-26,Lidl,,"Bourbon Cola 5% 1,49 x 2",1.0,,2.98,2.98,0.0,A
+2026-06-26,Lidl,Soft Drinks,Bourbon Cola 5%,2.0,,1.49,2.98,0.0,A
 2026-06-26,Lidl,,BACON FATIADO FAMILIAR,1.0,,2.79,2.79,0.0,A
 2026-06-26,Lidl,,SALADA CAMPONESA,1.0,,1.19,1.19,0.0,B
 2026-06-26,Lidl,,TOMATE REDONDO,1.0,,1.67,1.67,0.0,B
