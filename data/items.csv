@@ -241,3 +241,8 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-06-19,Lidl,Frutas e Legumes,BANANA,1.0,,1.09,1.09,0.0,B
 2026-06-19,Lidl,Mercearia Salgada,MASSA FOLHADA FORMA RECTAN.,1.0,,0.99,0.99,0.0,A
 2026-06-19,Lidl,Frutas e Legumes,BATATA CONSER VERMELHA 5 KG,1.0,,5.39,5.39,0.0,B
+2026-07-05,Lidl,Soft Drinks,BEBIDAS BAHAMAS,1.0,,1.49,1.49,0.0,A
+2026-07-05,Lidl,Soft Drinks,COMPAL CLASS.LARANJ ALGARVE,1.0,,1.99,1.99,0.0,B
+2026-07-05,Lidl,Congelados,GELADO SANDWICH,2.0,,3.19,6.38,0.0,A
+2026-07-05,Lidl,Soft Drinks,Bourbon Cola 5%,2.0,,1.49,2.98,0.0,A
+2026-07-05,Lidl,Frutas e Legumes,CEREJA,1.0,,5.49,5.49,0.0,B
