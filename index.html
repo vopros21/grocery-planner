@@ -100,6 +100,14 @@
         <option value="last">Longest since last bought</option>
       </select>
     </label>
+    <label>Hide if not bought in
+      <select id="staleSelect">
+        <option value="3">3 months</option>
+        <option value="6" selected>6 months</option>
+        <option value="12">12 months</option>
+        <option value="9999">Never (show everything)</option>
+      </select>
+    </label>
   </div>
 </div>
 
@@ -156,6 +164,10 @@ const MIN_PURCHASE_DATES = 2;
 const MIN_SPAN_DAYS = 14;
 const DAYS_PER_MONTH = 30.44;
 
+// A product with no purchase in this many months is considered "stale" —
+// hidden from the planner by default (toggle-able), never deleted from the CSV.
+const STALE_MONTHS_DEFAULT = 6;
+
 function normalizeName(name) {
   return (name || "").trim().toLowerCase().replace(/\s+/g, " ");
 }
@@ -200,8 +212,9 @@ function loadItemsFromParsed(parsedRows) {
   return parsedRows.filter(row => !CORRUPTED_NAME_RE.test((row.name || "").trim()));
 }
 
-function computeProductStats(rows, overrides, categoryOverrides, bufferMonths, windowMonths) {
+function computeProductStats(rows, overrides, categoryOverrides, bufferMonths, windowMonths, staleMonths) {
   categoryOverrides = categoryOverrides || {};
+  staleMonths = staleMonths == null ? STALE_MONTHS_DEFAULT : staleMonths;
   const groups = new Map();
   for (const r of rows) {
     const key = normalizeName(r.name);
@@ -212,6 +225,7 @@ function computeProductStats(rows, overrides, categoryOverrides, bufferMonths, w
 
   const today = utcToday();
   const windowDays = windowMonths * DAYS_PER_MONTH;
+  const staleCutoffDays = staleMonths * DAYS_PER_MONTH;
   const products = [];
 
   for (const [key, items] of groups) {
@@ -277,6 +291,8 @@ function computeProductStats(rows, overrides, categoryOverrides, bufferMonths, w
       runningLow = daysSinceLast >= expectedCycleDays;
     }
 
+    const stale = daysSinceLast > staleCutoffDays;
+
     products.push({
       key,
       name: displayName,
@@ -294,6 +310,7 @@ function computeProductStats(rows, overrides, categoryOverrides, bufferMonths, w
       stockable,
       suggestedBuy,
       runningLow,
+      stale,
     });
   }
 
@@ -332,8 +349,11 @@ function render() {
   const bufferMonths = parseFloat(document.getElementById("bufferSelect").value);
   const windowMonths = parseFloat(document.getElementById("windowSelect").value);
   const sortBy = document.getElementById("sortSelect").value;
+  const staleMonths = parseFloat(document.getElementById("staleSelect").value);
 
-  const products = computeProductStats(ALL_ROWS, OVERRIDES, CATEGORY_OVERRIDES, bufferMonths, windowMonths);
+  const allProducts = computeProductStats(ALL_ROWS, OVERRIDES, CATEGORY_OVERRIDES, bufferMonths, windowMonths, staleMonths);
+  const staleCount = allProducts.filter(p => p.stale).length;
+  const products = allProducts.filter(p => !p.stale);
   const monthlySpend = computeMonthlyCategorySpend(ALL_ROWS, CATEGORY_OVERRIDES);
 
   // Shopping list
@@ -386,6 +406,9 @@ function render() {
     </tr>`;
   }
   allHtml += "</table>";
+  if (staleCount > 0) {
+    allHtml += `<div class="muted" style="margin-top:8px">${staleCount} product${staleCount === 1 ? "" : "s"} hidden — not bought in over ${staleMonths} months. Set "Hide if not bought in" to "Never" to see them.</div>`;
+  }
   document.getElementById("allProductsBody").innerHTML = allHtml;
 
   // Chart
@@ -453,7 +476,7 @@ async function init() {
     document.getElementById("controlsCard").style.display = "";
     document.getElementById("allProductsCard").style.display = "";
 
-    ["windowSelect", "bufferSelect", "sortSelect"].forEach(id =>
+    ["windowSelect", "bufferSelect", "sortSelect", "staleSelect"].forEach(id =>
       document.getElementById(id).addEventListener("change", render)
     );
 

@@ -155,8 +155,14 @@ MIN_SPAN_DAYS = 14
 
 DAYS_PER_MONTH = 30.44
 
+# A product with no purchase in this many months is considered "stale" —
+# you've likely switched to a different brand/item. Hidden from the planner
+# by default (toggle-able), but never deleted from items.csv itself.
+STALE_MONTHS_DEFAULT = 6.0
 
-def compute_product_stats(rows, overrides, category_overrides=None, buffer_months=2.0, window_months=3.0):
+
+def compute_product_stats(rows, overrides, category_overrides=None, buffer_months=2.0, window_months=3.0,
+                           stale_months=STALE_MONTHS_DEFAULT):
     """Group rows by normalized product name; estimate a rolling-window monthly
     consumption rate and suggested buy qty.
 
@@ -177,6 +183,7 @@ def compute_product_stats(rows, overrides, category_overrides=None, buffer_month
 
     today = date.today()
     window_days = window_months * DAYS_PER_MONTH
+    stale_cutoff_days = stale_months * DAYS_PER_MONTH
     products = []
 
     for key, items in groups.items():
@@ -250,6 +257,8 @@ def compute_product_stats(rows, overrides, category_overrides=None, buffer_month
             expected_cycle_days = overall_span_days / (purchase_dates_count - 1)
             running_low = days_since_last >= expected_cycle_days
 
+        stale = days_since_last > stale_cutoff_days
+
         products.append({
             "key": key,
             "name": display_name,
@@ -267,6 +276,7 @@ def compute_product_stats(rows, overrides, category_overrides=None, buffer_month
             "stockable": stockable,
             "suggested_buy": suggested_buy,
             "running_low": running_low,
+            "stale": stale,
         })
 
     return products
@@ -294,14 +304,20 @@ planner_bp = Blueprint("planner", __name__, template_folder="templates")
 def planner():
     buffer_months = float(request.args.get("buffer", 2.0))
     window_months = float(request.args.get("window", 3.0))
+    stale_months = float(request.args.get("stale", STALE_MONTHS_DEFAULT))
+    show_stale = request.args.get("show_stale") == "true"
     sort_by = request.args.get("sort", "category")
 
     rows = load_items()
     overrides = load_overrides()
     category_overrides = load_category_overrides()
     known_categories = get_known_categories(rows, category_overrides)
-    products = compute_product_stats(rows, overrides, category_overrides, buffer_months, window_months)
+    all_products = compute_product_stats(rows, overrides, category_overrides, buffer_months, window_months,
+                                          stale_months)
     monthly_spend = compute_monthly_category_spend(rows, category_overrides)
+
+    stale_count = sum(1 for p in all_products if p["stale"])
+    products = all_products if show_stale else [p for p in all_products if not p["stale"]]
 
     months_sorted = sorted(monthly_spend.keys())
     all_categories = sorted({cat for m in monthly_spend.values() for cat in m.keys()})
@@ -328,6 +344,9 @@ def planner():
         shopping_list=shopping_list,
         buffer_months=buffer_months,
         window_months=window_months,
+        stale_months=stale_months,
+        show_stale=show_stale,
+        stale_count=stale_count,
         months=months_sorted,
         chart_categories=all_categories,
         chart_series=chart_series,
@@ -348,6 +367,8 @@ def toggle_stockable():
         "planner.planner",
         buffer=request.form.get("buffer", 2.0),
         window=request.form.get("window", 3.0),
+        stale=request.form.get("stale", STALE_MONTHS_DEFAULT),
+        show_stale=request.form.get("show_stale", "false"),
         sort=request.form.get("sort", "category"),
     ))
 
@@ -369,5 +390,7 @@ def set_category():
         "planner.planner",
         buffer=request.form.get("buffer", 2.0),
         window=request.form.get("window", 3.0),
+        stale=request.form.get("stale", STALE_MONTHS_DEFAULT),
+        show_stale=request.form.get("show_stale", "false"),
         sort=request.form.get("sort", "category"),
     ))

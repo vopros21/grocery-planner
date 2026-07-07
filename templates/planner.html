@@ -135,6 +135,17 @@
         <option value="last" {{ 'selected' if sort_by == 'last' else '' }}>Longest since last bought</option>
       </select>
     </label>
+    <label>Hide if not bought in
+      <select name="stale" onchange="this.form.submit()">
+        {% for s in [3.0, 6.0, 12.0] %}
+        <option value="{{ s }}" {{ 'selected' if stale_months == s else '' }}>{{ s|int }} month(s)</option>
+        {% endfor %}
+      </select>
+    </label>
+    <label>
+      <input type="checkbox" name="show_stale" value="true" onchange="this.form.submit()" {{ 'checked' if show_stale else '' }}>
+      Show discontinued items{% if stale_count %} ({{ stale_count }} hidden){% endif %}
+    </label>
   </form>
 
   <h2>All products</h2>
@@ -158,6 +169,8 @@
           <input type="hidden" name="buffer" value="{{ buffer_months }}">
           <input type="hidden" name="window" value="{{ window_months }}">
           <input type="hidden" name="sort" value="{{ sort_by }}">
+          <input type="hidden" name="stale" value="{{ stale_months }}">
+          <input type="hidden" name="show_stale" value="{{ 'true' if show_stale else 'false' }}">
           <input type="text" name="category" list="categoryOptions" class="cat-input"
                  value="{{ '' if p.category == '(uncategorized — Lidl)' else p.category }}"
                  placeholder="uncategorized" onblur="if(this.value!==this.defaultValue)this.form.requestSubmit()">
@@ -175,6 +188,8 @@
           <input type="hidden" name="buffer" value="{{ buffer_months }}">
           <input type="hidden" name="window" value="{{ window_months }}">
           <input type="hidden" name="sort" value="{{ sort_by }}">
+          <input type="hidden" name="stale" value="{{ stale_months }}">
+          <input type="hidden" name="show_stale" value="{{ 'true' if show_stale else 'false' }}">
           <button type="submit" class="toggle-btn {{ 'active' if p.stockable else '' }}">
             {{ 'stockable' if p.stockable else 'not stockable' }}
           </button>
