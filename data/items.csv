@@ -292,3 +292,6 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-07-08,Lidl,Charcutaria&Queijos,QUEIJO MOZZARELLA RALADO,1.0,,3.89,3.89,0.0,B
 2026-07-08,Lidl,Charcutaria&Queijos,Queijo Fatiado Burguer,1.0,,1.29,1.29,0.0,B
 2026-07-09,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,,1.89,1.89,0.0,B
+2026-07-09,Lidl,Soft Drinks,BEBIDAS BAHAMAS,1.0,,1.49,1.49,0.0,A
+2026-07-09,Lidl,Soft Drinks,"SteamBrew Cerveja Arte0s,a9n9al x 2",1.0,,1.98,1.98,0.0,A
+2026-07-09,Lidl,Mercearia Salgada,BATATAS FRITAS MEL MOSTARDA,1.0,,1.49,1.49,0.0,A
