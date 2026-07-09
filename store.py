@@ -32,7 +32,9 @@ def append_items(items: list[dict]):
     """Append a list of confirmed item dicts to items.csv."""
     write_header = not ITEMS_CSV.exists() or ITEMS_CSV.stat().st_size == 0
     with open(ITEMS_CSV, "a", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=FIELDNAMES, extrasaction="ignore")
+	writer = csv.DictWriter(
+    		f, fieldnames=FIELDNAMES, extrasaction="ignore", lineterminator="\n"
+	)        
         if write_header:
             writer.writeheader()
         for item in items:
