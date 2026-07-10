@@ -295,3 +295,5 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-07-09,Lidl,Soft Drinks,BEBIDAS BAHAMAS,1.0,,1.49,1.49,0.0,A
 2026-07-09,Lidl,Soft Drinks,SteamBrew Cerveja Artesanal,2.0,,0.99,1.98,0.0,A
 2026-07-09,Lidl,Mercearia Salgada,BATATAS FRITAS MEL MOSTARDA,1.0,,1.49,1.49,0.0,A
+2026-07-10,Lidl,Soft Drinks,BEBIDAS BAHAMAS,1.0,,1.49,1.49,0.0,A
+2026-07-10,Lidl,Frutas e Legumes,CEBOLA ROXA,1.0,,2.16,2.16,0.0,B
