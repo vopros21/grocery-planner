@@ -314,3 +314,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-07-11,Lidl,Mercearia Salgada,PEPINOS AGRIDOCE,1.0,,1.49,1.49,0.0,A
 2026-07-11,Lidl,Soft Drinks,"SteamBrew Cerveja Arte0s,a9n9al x 2",1.0,,1.98,1.98,0.0,A
 2026-07-11,Lidl,Mercearia Salgada,BATATAS FRITAS MEL MOSTARDA,1.0,,1.49,1.49,0.0,A
+2026-07-11,Continente,Mercearia Salgada,SALSICHA HOT DOG IZIDORO FR 8UN,1.0,,3.99,3.99,3.3,C
+2026-07-11,Continente,Mercearia Salgada,MOSTARDA TOP DOWN CALVE 257G,1.0,,1.68,1.68,0.91,C
+2026-07-11,Continente,Soft Drinks,CERVEJA CORONA 0.0% 33CL,2.0,,1.49,2.98,0.36,C
+2026-07-11,Continente,Padaria,PAO HOT DOG BRIOCHE ST PIERRE 2,2.0,,2.49,4.98,1.0,C
