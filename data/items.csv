@@ -144,7 +144,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-06-26,Lidl,,SALADA CAMPONESA,1.0,,1.19,1.19,0.0,B
 2026-06-26,Lidl,,TOMATE REDONDO,1.0,,1.67,1.67,0.0,B
 2026-06-26,Lidl,,BATATAS FRITAS MEL MOSTARDA,1.0,,1.49,1.49,0.0,A
-2026-06-24,Lidl,,"Pizza Barbecue 2,89 x 2",1.0,,5.78,5.78,0.0,A
+2026-06-24,Lidl,Take Away,Pizza Barbecue,2.0,,2.89,5.78,0.0,A
 2026-06-24,Lidl,,BEBIDAS BAHAMAS,1.0,,1.49,1.49,0.0,A
 2026-06-24,Lidl,,IOGURTE GREGO MORANGO,1.0,,2.35,2.35,0.0,B
 2026-06-24,Lidl,,GELADO TRES SABORES,1.0,,3.69,3.69,0.0,A
