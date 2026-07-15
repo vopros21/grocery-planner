@@ -333,3 +333,10 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-07-14,Continente,Padaria,TOSTAS TOMATE PRESUNTO 110G,1.0,,1.89,1.89,0.0,C
 2026-07-15,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,0.3,1.89,1.89,0.0,
 2026-07-15,Lidl,Padaria,EMPANADA FRANGO E COGUMELOS,1.0,,3.59,3.59,0.0,
+2026-07-15,Lidl,,BEBIDAS BAHAMAS,1.0,,1.49,1.49,0.0,A
+2026-07-15,Lidl,,SteamBrew Cerveja Artesanal,1.0,,0.79,0.79,0.20,A
+2026-07-15,Lidl,,Deposito 0.10,1.0,,0.10,0.10,0.0,F
+2026-07-15,Lidl,,Queijo Fatiado Burgu,2.0,,1.29,2.58,0.0,B
+2026-07-15,Lidl,,MORTADELA FATIADA,1.0,,0.99,0.99,0.0,A
+2026-07-15,Lidl,,SALAME EXTRA FATIADO,1.0,,1.39,1.39,0.0,A
+2026-07-15,Lidl,,MAXI WRAPS,1.0,,2.99,2.99,0.0,A
