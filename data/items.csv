@@ -128,7 +128,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-07-03,Lidl,,BEBIDAS BAHAMAS,1.0,,1.49,1.49,0.0,A
 2026-07-03,Lidl,,CEBOLA 2 KG,1.0,,2.45,2.45,0.0,B
 2026-07-03,Lidl,,GELADO SANDWICH,1.0,,3.19,3.19,0.0,A
-2026-07-03,Lidl,,PAO DE CHIA E QUINOA,1.0,,1.89,1.89,0.0,B
+2026-07-03,Lidl,,PAO DE CHIA E QUINOA,1.0,0.3,1.89,1.89,0.0,B
 2026-07-03,Lidl,,"CROQUETE DE CARNE 0,85 x 4",1.0,,3.4,3.4,0.0,A
 2026-07-01,Lidl,,SALSICHAS FRESCAS DE PORCO,1.0,,2.79,2.79,0.71,A
 2026-07-01,Lidl,,BEBIDAS BAHAMAS,1.0,,1.49,1.49,0.0,A
@@ -233,7 +233,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-07-04,Lidl,Congelados,DOCHI COCO,1.0,,3.59,3.59,0.0,A
 2026-07-04,Lidl,Soft Drinks,BEBIDAS BAHAMAS,1.0,,1.49,1.49,0.0,A
 2026-07-04,Lidl,Soft Drinks,Coca Cola Regular 1l,1.0,,1.49,1.49,0.0,A
-2026-06-19,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,,1.89,1.89,0.0,B
+2026-06-19,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,0.3,1.89,1.89,0.0,B
 2026-06-19,Lidl,Peixaria,Lombos de Salmao,1.0,,6.9,6.9,0.0,B
 2026-06-19,Lidl,Soft Drinks,COCA COLA ZERO BAUNILHA,1.0,,4.49,4.49,0.0,A
 2026-06-19,Lidl,Padaria,MINI BOLA BERLIM COM CREME,1.0,,2.99,2.99,0.0,A
@@ -274,7 +274,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-07-05,Continente,Take Away,PIZZA BARBECUE CNT 400G,2.0,,2.89,5.78,0.0,B
 2026-07-05,Continente,Casa-Cozinha/Lavand,GARRAFA PLAST/S,1.0,,6.0,6.0,0.0,C
 2026-07-05,Continente,Brand Marketing,"FRASCO TERMICO DUPLO 500ML 4,99",1.0,,4.99,4.99,0.0,C
-2026-07-06,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,,1.89,1.89,0.0,B
+2026-07-06,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,0.3,1.89,1.89,0.0,B
 2026-07-06,Lidl,Soft Drinks,Bourbon Cola 5%,2.0,,1.49,2.98,0.0,A
 2026-07-06,Lidl,Charcutaria&Queijos,FIAMBRE DA PA,1.0,,1.59,1.59,0.0,A
 2026-07-06,Lidl,Charcutaria&Queijos,MORTADELA FATIADA,1.0,,0.99,0.99,0.0,A
@@ -291,7 +291,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-07-08,Lidl,Charcutaria&Queijos,PAIO YORK FATIADO,1.0,,1.69,1.69,0.0,A
 2026-07-08,Lidl,Charcutaria&Queijos,QUEIJO MOZZARELLA RALADO,1.0,,3.89,3.89,0.0,B
 2026-07-08,Lidl,Charcutaria&Queijos,Queijo Fatiado Burguer,1.0,,1.29,1.29,0.0,B
-2026-07-09,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,,1.89,1.89,0.0,B
+2026-07-09,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,0.3,1.89,1.89,0.0,B
 2026-07-09,Lidl,Soft Drinks,BEBIDAS BAHAMAS,1.0,,1.49,1.49,0.0,A
 2026-07-09,Lidl,Soft Drinks,SteamBrew Cerveja Artesanal,2.0,,0.99,1.98,0.0,A
 2026-07-09,Lidl,Mercearia Salgada,BATATAS FRITAS MEL MOSTARDA,1.0,,1.49,1.49,0.0,A
@@ -320,7 +320,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-07-11,Continente,Padaria,PAO HOT DOG BRIOCHE ST PIERRE 2,2.0,,2.49,4.98,1.0,C
 2026-07-12,Lidl,Laticinios/Beb. Veg.,IOGURTE GREGO NATURAL,1.0,,2.25,2.25,0.0,B
 2026-07-12,Lidl,Soft Drinks,SteamBrew Cerveja Artesanal,2.0,,0.99,1.98,0.0,A
-2026-07-12,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,,1.89,1.89,0.0,B
+2026-07-12,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,0.3,1.89,1.89,0.0,B
 2026-07-12,Lidl,Charcutaria&Queijos,MORTADELA FATIADA,1.0,,0.99,0.99,0.0,A
 2026-07-12,Lidl,Charcutaria&Queijos,SALAME EXTRA FATIADO,1.0,,1.39,1.39,0.0,A
 2026-07-12,Lidl,Mercearia Salgada,LONGCHIPS SNACK BAT NA1T,2.0,,1.19,2.38,0.0,A
@@ -333,10 +333,9 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-07-14,Continente,Padaria,TOSTAS TOMATE PRESUNTO 110G,1.0,,1.89,1.89,0.0,C
 2026-07-15,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,0.3,1.89,1.89,0.0,
 2026-07-15,Lidl,Padaria,EMPANADA FRANGO E COGUMELOS,1.0,,3.59,3.59,0.0,
-2026-07-15,Lidl,,BEBIDAS BAHAMAS,1.0,,1.49,1.49,0.0,A
-2026-07-15,Lidl,,SteamBrew Cerveja Artesanal,1.0,,0.79,0.79,0.20,A
-2026-07-15,Lidl,,Deposito 0.10,1.0,,0.10,0.10,0.0,F
-2026-07-15,Lidl,,Queijo Fatiado Burgu,2.0,,1.29,2.58,0.0,B
-2026-07-15,Lidl,,MORTADELA FATIADA,1.0,,0.99,0.99,0.0,A
-2026-07-15,Lidl,,SALAME EXTRA FATIADO,1.0,,1.39,1.39,0.0,A
-2026-07-15,Lidl,,MAXI WRAPS,1.0,,2.99,2.99,0.0,A
+2026-07-15,Lidl,Soft Drinks,BEBIDAS BAHAMAS,1.0,,1.49,1.49,0.0,A
+2026-07-15,Lidl,Soft Drinks,SteamBrew Cerveja Artesanal,1.0,,0.79,0.79,0.20,A
+2026-07-15,Lidl,Charcutaria&Queijos,Queijo Fatiado Burguer,2.0,,1.29,2.58,0.0,B
+2026-07-15,Lidl,Charcutaria&Queijos,MORTADELA FATIADA,1.0,,0.99,0.99,0.0,A
+2026-07-15,Lidl,Charcutaria&Queijos,SALAME EXTRA FATIADO,1.0,,1.39,1.39,0.0,A
+2026-07-15,Lidl,Mercearia Salgada,MAXI WRAPS,1.0,,2.99,2.99,0.0,A
