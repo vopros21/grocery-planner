@@ -1,3 +1,5 @@
 Flask
 pdfplumber
 watchdog
+pyobjc-framework-Vision
+pyobjc-framework-Quartz

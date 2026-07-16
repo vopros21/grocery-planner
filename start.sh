@@ -36,7 +36,7 @@ echo "  Ctrl+C to stop"
 echo ""
 
 # Run watcher in background
-"$PY" watcher.py &
+"$PY" -u watcher.py &
 WATCHER_PID=$!
 
 # Make sure the watcher is killed no matter how this script exits
@@ -52,4 +52,4 @@ if [ -z "$GROCER_NO_AUTOOPEN" ]; then
 fi
 
 # Run UI (blocking)
-"$PY" ui.py
+"$PY" -u ui.py

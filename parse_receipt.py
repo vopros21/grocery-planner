@@ -111,7 +111,7 @@ def _detect_date(lines: list[str]) -> str:
 #   - No SUBTOTAL line; item list ends at "Total    10,19"
 
 LIDL_ITEM_RE = re.compile(
-    r"^(.+?)\s+([\d]+[,.][\d]{2})\s+([ABC])$"
+    r"^(.+?)\s+([\d]+[,.][\d]{2})\s+([A-Z])$"
 )
 
 # Multi-unit line: "CROQUETE DE CARNE 0,85 x 4    3,40 A"
@@ -121,7 +121,7 @@ LIDL_ITEM_RE = re.compile(
 # on the final PRICE + BAND at end of line), leaving qty stuck at 1.0 and
 # unit_price wrongly equal to total_price.
 LIDL_MULTI_UNIT_RE = re.compile(
-    r"^(.+?)\s+([\d]+[,.][\d]{2})\s+[Xx]\s+(\d+)\s+([\d]+[,.][\d]{2})\s+([ABC])$"
+    r"^(.+?)\s+([\d]+[,.][\d]{2})\s+[Xx]\s+(\d+)\s+([\d]+[,.][\d]{2})\s+([A-Z])$"
 )
 
 LIDL_WEIGHT_RE = re.compile(
@@ -131,6 +131,18 @@ LIDL_WEIGHT_RE = re.compile(
 LIDL_DISCOUNT_RE = re.compile(
     r"^DESCONTO\s+\d+%\s+-?([\d]+[,.][\d]{2})$", re.I
 )
+
+# App/photo receipts (e.g. LidlPlus digital receipt) use a plain "Promoção"
+# line instead of PDF receipts' "DESCONTO N%" — same meaning (amount to
+# subtract from the item just above), different wording/no percent shown.
+LIDL_PROMOCAO_RE = re.compile(
+    r"^Promo[cç][aã]o\s+-?([\d]+[,.][\d]{2})$", re.I
+)
+
+# Bottle/can deposit ("Depósito 0.10") — the 0,10€ is refundable via the
+# in-store return machine, not money actually spent on groceries. Excluded
+# from the item list entirely rather than categorised, per Mike.
+LIDL_DEPOSIT_RE = re.compile(r"^Dep[oó]sito\b", re.I)
 
 # End-of-items marker: "Total    10,19" — must NOT match "Total Poupança"
 # (the savings-summary line further down), so it requires a number right
@@ -168,6 +180,20 @@ def parse_lidl(lines: list[str], store: str, date: str) -> list[dict]:
                 items[-1]["discount"] += discount
                 items[-1]["total_price"] -= discount
                 items[-1]["unit_price"] = items[-1]["total_price"]
+            continue
+
+        # ── Promoção line (app/photo receipts) — same handling as DESCONTO ──
+        m = LIDL_PROMOCAO_RE.match(line)
+        if m:
+            discount = _parse_price(m.group(1))
+            if items:
+                items[-1]["discount"] += discount
+                items[-1]["total_price"] -= discount
+                items[-1]["unit_price"] = items[-1]["total_price"]
+            continue
+
+        # ── Bottle/can deposit — not a purchase, skip entirely ─────────
+        if LIDL_DEPOSIT_RE.match(line):
             continue
 
         # ── Multi-unit item line: "NAME  UNIT_PRICE x QTY  TOTAL_PRICE  BAND" ──
@@ -319,6 +345,98 @@ def parse_continente(lines: list[str], store: str, date: str) -> list[dict]:
 
 
 # -------------------------------------------------------------------
+# Image OCR (macOS Vision — the same engine behind Live Text / Preview)
+# -------------------------------------------------------------------
+# Deliberately NOT tesseract: no `brew install` needed (Vision.framework
+# ships with every Mac), and it's noticeably better on real-world photos/
+# app-screenshots — exactly the LidlPlus-app-receipt case that motivated
+# this. Requires `pip install pyobjc-framework-Vision pyobjc-framework-Quartz`
+# (pure pip, no system package). macOS-only — will raise ImportError on
+# Linux/Windows.
+
+def extract_text_from_image(path: str) -> list[str]:
+    """Run macOS Vision text recognition on an image and return lines,
+    ordered top-to-bottom, left-to-right the way the receipt reads.
+
+    Vision returns each detected text region as a separate observation —
+    on a receipt with columns (item name on the left, price+band on the
+    right), that means the name and its price come back as TWO separate
+    observations even though they're one printed line. A naive sort by
+    y-coordinate alone doesn't merge them back together (and small y
+    jitter between columns can even reorder same-row items). So instead:
+    cluster observations into rows by y-proximity, then within each row
+    sort left-to-right by x and join with a space. That reconstructs each
+    line the way a human reads it — no regex changes needed downstream.
+    """
+    import Quartz
+    import Vision
+    from Foundation import NSURL
+
+    url = NSURL.fileURLWithPath_(path)
+    image_source = Quartz.CGImageSourceCreateWithURL(url, None)
+    cg_image = Quartz.CGImageSourceCreateImageAtIndex(image_source, 0, None)
+
+    results = []  # (bounding_box, text)
+
+    def handler(request, error):
+        if error is not None:
+            return
+        for observation in request.results():
+            candidate = observation.topCandidates_(1)[0]
+            results.append((observation.boundingBox(), candidate.string()))
+
+    request = Vision.VNRecognizeTextRequest.alloc().initWithCompletionHandler_(handler)
+    request.setRecognitionLevel_(Vision.VNRequestTextRecognitionLevelAccurate)
+    request.setRecognitionLanguages_(["pt-PT", "en-US"])
+    request.setUsesLanguageCorrection_(True)
+
+    req_handler = Vision.VNImageRequestHandler.alloc().initWithCGImage_options_(cg_image, {})
+    success, error = req_handler.performRequests_error_([request], None)
+    if not success:
+        raise RuntimeError(f"Vision OCR failed: {error}")
+
+    # Vision's boundingBox origin is bottom-left, normalized 0..1.
+    # Sort top-to-bottom first so rows get built in reading order.
+    results.sort(key=lambda r: -(r[0].origin.y + r[0].size.height / 2))
+
+    rows = []  # each: {"y": float, "height": float, "items": [(x, text), ...]}
+    for bbox, text in results:
+        y_center = bbox.origin.y + bbox.size.height / 2
+        height = bbox.size.height
+        placed = False
+        for row in rows:
+            # Same row if the vertical centers are within ~60% of a
+            # text-line height of each other — tight enough to keep
+            # genuinely separate lines apart, loose enough to absorb
+            # the column-to-column jitter that caused issues above.
+            if abs(row["y"] - y_center) < max(height, row["height"]) * 0.6:
+                row["items"].append((bbox.origin.x, text))
+                placed = True
+                break
+        if not placed:
+            rows.append({"y": y_center, "height": height, "items": [(bbox.origin.x, text)]})
+
+    lines = []
+    for row in rows:
+        ordered = sorted(row["items"], key=lambda t: t[0])
+        lines.append(" ".join(t[1] for t in ordered))
+    return lines
+
+
+def parse_image(path: str) -> list[dict]:
+    lines = extract_text_from_image(path)
+    store = _detect_store(lines)
+    date = _detect_date(lines)
+
+    if store == "Continente":
+        return parse_continente(lines, store, date)
+    if store == "Lidl":
+        return parse_lidl(lines, store, date)
+
+    raise NotImplementedError(f"Parser not yet implemented for store: {store}")
+
+
+# -------------------------------------------------------------------
 # Entry point
 # -------------------------------------------------------------------
 
@@ -341,7 +459,19 @@ def parse_pdf(path: str) -> list[dict]:
     raise NotImplementedError(f"Parser not yet implemented for store: {store}")
 
 
+IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg"}
+
+
+def parse_receipt(path: str) -> list[dict]:
+    """Unified entry point — dispatches on extension. Use this from
+    watcher.py instead of calling parse_pdf/parse_image directly."""
+    ext = path.lower().rsplit(".", 1)[-1]
+    if f".{ext}" in IMAGE_EXTENSIONS:
+        return parse_image(path)
+    return parse_pdf(path)
+
+
 if __name__ == "__main__":
     import sys, json
-    items = parse_pdf(sys.argv[1])
+    items = parse_receipt(sys.argv[1])
     print(json.dumps(items, indent=2, ensure_ascii=False))

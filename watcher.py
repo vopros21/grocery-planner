@@ -1,12 +1,13 @@
 """
-watcher.py — watch inbox/ for new PDFs and queue them for review.
+watcher.py — watch inbox/ for new receipts (PDF or image) and queue them for review.
 
 Usage:
     python3 watcher.py
 
-Drop any Continente (or future Lidl) PDF into the inbox/ folder.
-The watcher parses it immediately, moves it to processed/, and adds
-it to data/pending.json for review in the web UI.
+Drop any Continente/Lidl PDF, or a photo/screenshot of a Lidl receipt
+(PNG/JPG), into the inbox/ folder. The watcher parses it immediately,
+moves it to processed/, and adds it to data/pending.json for review
+in the web UI.
 """
 
 import os
@@ -21,7 +22,7 @@ from datetime import datetime
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 
-from parse_receipt import parse_pdf
+from parse_receipt import parse_receipt
 from store import add_pending_receipt
 
 BASE      = Path(__file__).parent
@@ -34,6 +35,8 @@ PROCESSED.mkdir(exist_ok=True)
 UI_PORT = os.environ.get("GROCER_UI_PORT", "5001")
 UI_URL  = f"http://localhost:{UI_PORT}"
 
+RECEIPT_EXTENSIONS = {".pdf", ".png", ".jpg", ".jpeg"}
+
 
 def link(url: str, text: str | None = None) -> str:
     """Wrap a URL in an OSC 8 hyperlink escape sequence so it renders as
@@ -42,7 +45,7 @@ def link(url: str, text: str | None = None) -> str:
     return f"\033]8;;{url}\033\\{text}\033]8;;\033\\"
 
 
-def process_pdf(path: Path):
+def process_receipt(path: Path):
     # macOS can fire multiple filesystem events for a single drop/move.
     # If a prior event already moved this file to processed/, bail out
     # quietly instead of failing on a missing file.
@@ -51,7 +54,7 @@ def process_pdf(path: Path):
 
     print(f"[{datetime.now():%H:%M:%S}] Processing: {path.name}")
     try:
-        items = parse_pdf(str(path))
+        items = parse_receipt(str(path))
     except Exception as e:
         print(f"  ✗ Parse failed: {e}")
         return
@@ -93,33 +96,33 @@ class InboxHandler(FileSystemEventHandler):
         if event.is_directory:
             return
         path = Path(event.src_path)
-        if path.suffix.lower() == ".pdf":
+        if path.suffix.lower() in RECEIPT_EXTENSIONS:
             # Small delay — wait for file to finish copying
             time.sleep(0.5)
-            process_pdf(path)
+            process_receipt(path)
 
     def on_moved(self, event):
         # Handles drag-and-drop on macOS which fires moved, not created
         if event.is_directory:
             return
         path = Path(event.dest_path)
-        if path.suffix.lower() == ".pdf":
+        if path.suffix.lower() in RECEIPT_EXTENSIONS:
             time.sleep(0.5)
-            process_pdf(path)
+            process_receipt(path)
 
 
 def main():
-    # Also process any PDFs already sitting in inbox (e.g. on restart)
-    existing = list(INBOX.glob("*.pdf"))
+    # Also process any receipts already sitting in inbox (e.g. on restart)
+    existing = [p for p in INBOX.iterdir() if p.suffix.lower() in RECEIPT_EXTENSIONS]
     if existing:
-        print(f"Found {len(existing)} existing PDF(s) in inbox — processing...")
-        for pdf in existing:
-            process_pdf(pdf)
+        print(f"Found {len(existing)} existing receipt(s) in inbox — processing...")
+        for receipt in existing:
+            process_receipt(receipt)
 
     observer = Observer()
     observer.schedule(InboxHandler(), str(INBOX), recursive=False)
     observer.start()
-    print(f"Watching {INBOX} for new PDFs… (Ctrl+C to stop)")
+    print(f"Watching {INBOX} for new receipts (PDF/PNG/JPG)… (Ctrl+C to stop)")
     try:
         while True:
             time.sleep(1)
