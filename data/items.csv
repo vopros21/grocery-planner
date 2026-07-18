@@ -349,3 +349,6 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-07-17,Continente,Mercearia Salgada,COGUMELOS INTEIROS CNT 185G,3.0,,1.25,3.75,0.0,C
 2026-07-18,Lidl,Mercearia Doce,Morangos com Acucar,1.0,,1.65,1.65,0.0,A
 2026-07-18,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,0.3,1.89,1.89,0.0,B
+2026-07-18,Lidl,Soft Drinks,SteamBrew Cerveja Artesanal,1.0,0.5,0.79,0.79,0.2,A
+2026-07-18,Lidl,Soft Drinks,Bourbon Cola 5%,2.0,0.66,1.49,2.98,0.0,A
+2026-07-18,Lidl,Mercearia Salgada,PRINGLES NATAS&CEBOLA 165G,1.0,0.165,2.35,2.35,0.0,A
