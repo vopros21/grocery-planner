@@ -360,7 +360,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-07-19,Lidl,Soft Drinks,HEINEKEN LATA,2.0,,1.39,2.78,0.0,A
 2026-07-22,Lidl,Congelados,GELADO SANDWICH,2.0,,3.19,6.38,0.0,A
 2026-07-22,Lidl,Congelados,Gelado Morango com Chocolat,1.0,,3.59,3.59,0.0,A
-2026-07-22,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,,1.89,1.89,0.0,B
+2026-07-22,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,0.3,1.89,1.89,0.0,B
 2026-07-22,Lidl,Congelados,DOCHI COCO,1.0,,3.59,3.59,0.0,A
 2026-07-23,Continente,Mercearia Doce,CHOCOLATE PO CONTINENTE 125G,1.0,,0.99,0.99,0.0,C
 2026-07-23,Continente,Mercearia Doce,CACAU PO CNT EQ MAGRO 125G,1.0,,1.99,1.99,0.0,C
