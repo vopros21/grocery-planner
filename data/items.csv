@@ -370,3 +370,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-07-23,Continente,Laticinios/Beb. Veg.,OVOS M DONA GEMA 2DZ,1.0,,5.99,5.99,0.0,A
 2026-07-23,Continente,Vinho e Espirituosas,VT PEDRA CAVADA TN RES DOU,1.0,,4.49,4.49,4.5,B
 2026-07-23,Continente,Casa-Cozinha/Lavand,SACO PLAS RE CNT,1.0,,0.1,0.1,0.0,C
+2026-07-24,Lidl,Charcutaria&Queijos,FUET EXTRA,1.0,,2.19,2.19,0.0,A
+2026-07-24,Lidl,Soft Drinks,SteamBrew Cerveja Artesanal,3.0,,0.79,2.37,0.6,A
+2026-07-24,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,0.3,1.89,1.89,0.0,B
+2026-07-24,Lidl,Charcutaria&Queijos,Queijo Fatiado Burguer,1.0,,1.29,1.29,0.0,B
