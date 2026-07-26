@@ -385,11 +385,11 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-07-26,Continente,Mercearia Salgada,WRAPS MEXIFOODS 6 UN 370G,1.0,,2.19,2.19,0.7,C
 2026-07-26,Continente,Soft Drinks,MONSTER VIKING BERRY LT 50CL SD,1.0,,1.39,1.39,0.35,C
 2026-07-26,Continente,Soft Drinks,"SIDRA SOMERS MOR/LIM 0,0% LAT 3",1.0,,0.99,0.99,0.25,C
-2026-07-26,Continente,Frutas e Legumes,CURGETE VERDE,1.0,,1.4,1.4,0.0,A
-2026-07-26,Continente,Frutas e Legumes,PEPINO CNT KG,1.0,,1.17,1.17,0.0,A
+2026-07-26,Continente,Frutas e Legumes,CURGETE VERDE,1.0,0.974,1.4,1.4,0.0,A
+2026-07-26,Continente,Frutas e Legumes,PEPINO CNT KG,1.0,0.912,1.17,1.17,0.0,A
 2026-07-26,Continente,Frutas e Legumes,BANANA,1.0,1.338,1.73,1.73,0.0,A
 2026-07-26,Continente,Frutas e Legumes,TOMATE KUMATO,1.0,0.33,0.99,0.99,0.0,A
-2026-07-26,Continente,Frutas e Legumes,PAPAIA FRACIONADA KG,1.0,,1.4,1.4,0.0,A
+2026-07-26,Continente,Frutas e Legumes,PAPAIA FRACIONADA KG,1.0,0.336,1.4,1.4,0.0,A
 2026-07-26,Continente,Frutas e Legumes,MELAO BRANCO FRAC,1.0,2.082,2.47,2.47,0.0,A
 2026-07-26,Continente,Frutas e Legumes,SEMENTES CHIA CEMPORCENTO 150G,1.0,,2.29,2.29,0.0,A
 2026-07-26,Continente,Padaria,PK POUPANCA MERENDA MISTA(AB),1.0,,3.35,3.35,0.0,C
