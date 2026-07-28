@@ -396,3 +396,9 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-07-26,Continente,Casa-Cozinha/Lavand,SACO PLAS RE CNT,2.0,,0.1,0.2,0.0,C
 2026-07-26,Lidl,Vinho e Espirituosas,ARMILAR PORTO WHITE,1.0,,4.49,4.49,0.0,A
 2026-07-26,Lidl,Soft Drinks,SCHWEPPES AGUA TONICA,1.0,,2.15,2.15,0.0,A
+2026-07-27,Lidl,Congelados,GELADO SANDWICH,1.0,,3.19,3.19,0.0,A
+2026-07-27,Lidl,Soft Drinks,NECTAR DE PERA,1.0,,0.89,0.89,0.1,B
+2026-07-27,Lidl,Soft Drinks,NECTAR DE PESSEGO,1.0,,0.89,0.89,0.0,B
+2026-07-27,Lidl,Casa-Cozinha/Lavand,SACOS LIXO 30 L C/ATILHO,1.0,,1.75,1.75,0.0,A
+2026-07-27,Lidl,Charcutaria&Queijos,MORTADELA FATIADA,1.0,,0.99,0.99,0.0,A
+2026-07-27,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,,1.89,1.89,0.0,B
