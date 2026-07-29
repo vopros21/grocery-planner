@@ -408,3 +408,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-07-28,Lidl,Congelados,GELADO SANDWICH,1.0,,3.19,3.19,0.0,A
 2026-07-28,Lidl,Charcutaria&Queijos,Queijo Fatiado Burguer,1.0,,1.29,1.29,0.0,B
 2026-07-28,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,,1.89,1.89,0.0,B
+2026-07-29,Lidl,Soft Drinks,SCHWEPPES AGUA TONICA,1.0,,2.15,2.15,0.0,A
+2026-07-29,Lidl,Mercearia Salgada,MAXI WRAPS,1.0,,2.99,2.99,0.0,A
+2026-07-29,Lidl,Soft Drinks,AGUA S/GAS MONCHIQUE 5L,1.0,,1.65,1.65,0.0,C
+2026-07-29,Lidl,Vinho e Espirituosas,ARMILAR PORTO WHITE,1.0,,4.49,4.49,0.0,A
