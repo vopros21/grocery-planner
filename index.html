@@ -419,12 +419,44 @@ function render() {
   const chartCard = document.getElementById("chartCard");
   if (months.length) {
     chartCard.style.display = "";
-    const palette = ["#0071e3", "#d0451f", "#1f7a34", "#a259d9", "#e0a800", "#767678", "#00a3a3", "#c2185b"];
+    // One distinct color per category (golden-angle hue rotation) instead of a
+    // short fixed palette — see planner.html for why this matters once there
+    // are more categories than palette entries.
+    const colorForIndex = (i) => {
+      const hue = (i * 137.508) % 360;
+      const sat = 55 + (i % 3) * 12;
+      const light = 45 + (i % 2) * 8;
+      return `hsl(${hue.toFixed(1)}, ${sat}%, ${light}%)`;
+    };
     const datasets = allCategories.map((cat, i) => ({
       label: cat,
       data: months.map(m => roundTo((monthlySpend.get(m) || new Map()).get(cat) || 0, 2)),
-      backgroundColor: palette[i % palette.length],
+      backgroundColor: colorForIndex(i),
     }));
+
+    // Precompute each month's total for the "above bar" label and tooltip footer
+    const monthTotals = months.map((m, i) =>
+      datasets.reduce((sum, ds) => sum + (ds.data[i] || 0), 0)
+    );
+
+    const totalsLabelPlugin = {
+      id: "totalsLabel",
+      afterDatasetsDraw(chart) {
+        const { ctx, scales: { x, y } } = chart;
+        ctx.save();
+        ctx.font = '600 12px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+        ctx.fillStyle = "#1d1d1f";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "bottom";
+        months.forEach((month, i) => {
+          const xPos = x.getPixelForValue(i);
+          const yPos = y.getPixelForValue(monthTotals[i]);
+          ctx.fillText("\u20ac" + monthTotals[i].toFixed(2), xPos, yPos - 6);
+        });
+        ctx.restore();
+      },
+    };
+
     if (chartInstance) chartInstance.destroy();
     chartInstance = new Chart(document.getElementById("spendChart"), {
       type: "bar",
@@ -432,8 +464,22 @@ function render() {
       options: {
         responsive: true,
         scales: { x: { stacked: true }, y: { stacked: true, title: { display: true, text: "EUR" } } },
-        plugins: { legend: { position: "bottom", labels: { boxWidth: 12, font: { size: 11 } } } },
+        plugins: {
+          legend: { position: "bottom", labels: { boxWidth: 12, font: { size: 11 } } },
+          tooltip: {
+            mode: "point",
+            intersect: true,
+            callbacks: {
+              footer: (items) => {
+                if (!items.length) return "";
+                return "Month total: \u20ac" + monthTotals[items[0].dataIndex].toFixed(2);
+              },
+            },
+            footerFont: { weight: "700" },
+          },
+        },
       },
+      plugins: [totalsLabelPlugin],
     });
   } else {
     chartCard.style.display = "none";
