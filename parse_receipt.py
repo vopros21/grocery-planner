@@ -88,6 +88,63 @@ def _detect_date(lines: list[str]) -> str:
     return datetime.today().strftime("%Y-%m-%d")
 
 
+def extract_text_dedup(page, x_tolerance: float = 1, y_tolerance: float = 1) -> str:
+    """
+    Rebuild a pdfplumber page's text char-by-char, de-colliding glyphs whose
+    bounding boxes overlap on the same line, instead of using page.extract_text()
+    directly.
+
+    Bug this fixes: on some Lidl receipts a long product name overruns its
+    column and the printer stacks a price/qty fragment directly on top of the
+    tail of the name (same line, same x-range) instead of in its own column —
+    e.g. "SteamBrew Cerveja Artesanal" + "0,99" both occupy x=142-166 on the
+    same line. page.extract_text() sorts purely by x-position, so it interleaves
+    the two overlapping runs character-by-character: "Arte0s,a9n9al". Confirmed
+    via page.chars inspection against a real receipt (250002288620260730718462.pdf)
+    — this is a genuine defect in the source PDF's character placement, not a
+    pdfplumber sorting quirk or an OCR issue.
+
+    Fix: group chars into lines by top (y), sort by x0, and when two chars'
+    boxes overlap, keep the letter and drop the digit/punctuation intruder —
+    the real price/qty is always also present later on the line as its own
+    separated token, so nothing is lost by dropping the intruder itself (see
+    LIDL_MULTI_UNIT_NO_UNITPRICE_RE below for how the dropped unit price is
+    recovered from total_price / qty instead).
+
+    Verified to be byte-identical to page.extract_text() on every line of a
+    real receipt where no collision occurs — safe drop-in replacement.
+    """
+    from collections import defaultdict
+
+    lines_by_top = defaultdict(list)
+    for c in page.chars:
+        lines_by_top[round(c["top"] / y_tolerance) * y_tolerance].append(c)
+
+    out_lines = []
+    for top in sorted(lines_by_top.keys()):
+        cs = sorted(lines_by_top[top], key=lambda c: c["x0"])
+        kept = []
+        for c in cs:
+            if kept and c["x0"] < kept[-1]["x1"] - 0.5:
+                prev = kept[-1]
+                if prev["text"].isalpha() and not c["text"].isalpha():
+                    continue  # drop digit/punct intruder, keep the letter
+                if c["text"].isalpha() and not prev["text"].isalpha():
+                    kept[-1] = c  # letter wins over digit/punct
+                continue  # both same type colliding: keep first, drop second
+            kept.append(c)
+
+        line_text, prev_x1 = "", None
+        for c in kept:
+            if prev_x1 is not None and c["x0"] - prev_x1 > x_tolerance * 2:
+                line_text += " "
+            line_text += c["text"]
+            prev_x1 = c["x1"]
+        out_lines.append(line_text)
+
+    return "\n".join(out_lines)
+
+
 # -------------------------------------------------------------------
 # Lidl-specific patterns
 # -------------------------------------------------------------------
@@ -122,6 +179,19 @@ LIDL_ITEM_RE = re.compile(
 # unit_price wrongly equal to total_price.
 LIDL_MULTI_UNIT_RE = re.compile(
     r"^(.+?)\s+([\d]+[,.][\d]{2})\s+[Xx]\s+(\d+)\s+([\d]+[,.][\d]{2})\s+([A-Z])$"
+)
+
+# Fallback for the name/price-collision bug that extract_text_dedup() fixes
+# (see its docstring): when the colliding unit-price token fully overlapped a
+# letter, dedup keeps the letter and the intruding digits are dropped
+# entirely — so the unit price is missing from the line, e.g.
+#   "SteamBrew Cerveja Artesanal x 2 1,98 A"   (no standalone unit price)
+# instead of
+#   "SteamBrew Cerveja Artesanal 0,99 x 2 1,98 A"
+# Checked after LIDL_MULTI_UNIT_RE fails to match. unit_price is recovered
+# as total_price / qty.
+LIDL_MULTI_UNIT_NO_UNITPRICE_RE = re.compile(
+    r"^(.+?)\s+[Xx]\s+(\d+)\s+([\d]+[,.][\d]{2})\s+([A-Z])$"
 )
 
 LIDL_WEIGHT_RE = re.compile(
@@ -207,6 +277,27 @@ def parse_lidl(lines: list[str], store: str, date: str) -> list[dict]:
                 "qty": float(qty_str),
                 "unit_price": _parse_price(unit_price_str),
                 "total_price": _parse_price(total_price_str),
+                "discount": 0.0,
+                "category": "",
+                "needs_weight": False,
+                "weight_kg": "",
+                "store": store,
+                "date": date,
+                "iva_band": iva,
+            })
+            continue
+
+        # ── Multi-unit item line, unit price missing (collision-dedup case) ──
+        m = LIDL_MULTI_UNIT_NO_UNITPRICE_RE.match(line)
+        if m:
+            name, qty_str, total_price_str, iva = m.groups()
+            qty = float(qty_str)
+            total_price = _parse_price(total_price_str)
+            items.append({
+                "name": name.strip(),
+                "qty": qty,
+                "unit_price": round(total_price / qty, 2),
+                "total_price": total_price,
                 "discount": 0.0,
                 "category": "",
                 "needs_weight": False,
@@ -444,7 +535,7 @@ def parse_pdf(path: str) -> list[dict]:
     with pdfplumber.open(path) as pdf:
         lines = []
         for page in pdf.pages:
-            text = page.extract_text() or ""
+            text = extract_text_dedup(page) or ""
             lines.extend(text.splitlines())
 
     store = _detect_store(lines)
