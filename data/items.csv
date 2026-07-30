@@ -420,3 +420,5 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-07-30,Lidl,Charcutaria&Queijos,MORTADELA FATIADA,1.0,,0.99,0.99,0.0,A
 2026-07-30,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,,1.89,1.89,0.0,B
 2026-07-30,Lidl,Mercearia Salgada,BATATAS FRITAS CAMPONESAS,1.0,,1.19,1.19,0.2,A
+2026-07-30,Lidl,Soft Drinks,MonsterUltraWhite SemAcucar,1.0,,1.74,1.74,0.0,A
+2026-07-30,Lidl,Soft Drinks,SCHWEPPES AGUA TONICA,1.0,,2.15,2.15,0.0,A
