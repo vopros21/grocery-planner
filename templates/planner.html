@@ -206,12 +206,42 @@
   const series = {{ chart_series | tojson }};
 
   if (months.length) {
-    const palette = ['#0071e3', '#d0451f', '#1f7a34', '#a259d9', '#e0a800', '#767678', '#00a3a3', '#c2185b'];
+    // Generate one visually distinct color per category (golden-angle hue rotation)
+    // instead of cycling a short fixed palette, which caused color collisions once
+    // there were more categories than palette entries (adjacent same-color segments
+    // visually merge, distorting the apparent size of each category).
+    const n = categories.length;
+    const colorForIndex = (i) => {
+      const hue = (i * 137.508) % 360; // golden angle for maximal hue spread
+      const sat = 55 + (i % 3) * 12;   // slight variation so cycles don't look identical
+      const light = 45 + (i % 2) * 8;
+      return `hsl(${hue.toFixed(1)}, ${sat}%, ${light}%)`;
+    };
     const datasets = categories.map((cat, i) => ({
       label: cat,
       data: series[cat],
-      backgroundColor: palette[i % palette.length],
+      backgroundColor: colorForIndex(i),
     }));
+
+    // Plugin: draw the monthly total above each stacked bar
+    const totalsLabelPlugin = {
+      id: 'totalsLabel',
+      afterDatasetsDraw(chart) {
+        const { ctx, scales: { x, y } } = chart;
+        ctx.save();
+        ctx.font = '600 12px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+        ctx.fillStyle = '#1d1d1f';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'bottom';
+        months.forEach((month, i) => {
+          const total = categories.reduce((sum, cat) => sum + (series[cat][i] || 0), 0);
+          const xPos = x.getPixelForValue(i);
+          const yPos = y.getPixelForValue(total);
+          ctx.fillText('\u20ac' + total.toFixed(2), xPos, yPos - 6);
+        });
+        ctx.restore();
+      },
+    };
 
     new Chart(document.getElementById('spendChart'), {
       type: 'bar',
@@ -219,8 +249,24 @@
       options: {
         responsive: true,
         scales: { x: { stacked: true }, y: { stacked: true, title: { display: true, text: 'EUR' } } },
-        plugins: { legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } } },
+        plugins: {
+          legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } },
+          tooltip: {
+            mode: 'point',
+            intersect: true,
+            callbacks: {
+              footer: (items) => {
+                if (!items.length) return '';
+                const dataIndex = items[0].dataIndex;
+                const total = categories.reduce((sum, cat) => sum + (series[cat][dataIndex] || 0), 0);
+                return 'Month total: \u20ac' + total.toFixed(2);
+              },
+            },
+            footerFont: { weight: '700' },
+          },
+        },
       },
+      plugins: [totalsLabelPlugin],
     });
   }
 </script>
