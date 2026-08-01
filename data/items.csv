@@ -430,3 +430,44 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-07-31,Lidl,Frutas e Legumes,ALFACE FRISADA,1.0,,0.59,0.59,0.0,B
 2026-07-31,Lidl,Casa-Cozinha/Lavand,PAPEL VEGETAL,1.0,,1.25,1.25,0.0,A
 2026-07-31,Lidl,Mercearia Salgada,MAXI WRAPS,1.0,,2.99,2.99,0.0,A
+2026-08-01,Continente,Mercearia Salgada,MILHO DOCE BONDUELLE 3*140G,1.0,,2.59,2.59,1.4,C
+2026-08-01,Continente,Mercearia Salgada,TORTILHA TRIGO WRAP CNT 370G,2.0,,1.59,3.18,0.0,C
+2026-08-01,Continente,Soft Drinks,MONSTER VIKING BERRY LT 50CL,1.0,,1.74,1.74,0.0,C
+2026-08-01,Continente,Soft Drinks,AGUA S/GAS MONCHIQUE 5L,5.0,,1.65,8.25,0.0,B
+2026-08-01,Continente,Higiene,PASTA AQUA WH REVER 7 5ML,1.0,,1.98,1.98,0.67,C
+2026-08-01,Continente,Higiene,GEL DE BANHO 2EM1 400ML,1.0,,1.39,1.39,0.0,C
+2026-08-01,Continente,Higiene,GEL DE BANHO 2EM1 400ML,1.0,,1.39,1.39,0.0,C
+2026-08-01,Continente,Higiene,P. HIG. AUSONIA AIRDRY NOIT.8UN,1.0,,2.29,2.29,0.0,A
+2026-08-01,Continente,Higiene,GB PALMOLIVE AROMA RELAX 500ML,1.0,,2.99,2.99,2.0,C
+2026-08-01,Continente,Higiene,PASTA COLGATE MA* WHITE 75ML,1.0,,2.16,2.16,0.93,C
+2026-08-01,Continente,Congelados,GEL BAUN/MORA E CONTINENTE 2LT,2.0,,3.29,6.58,0.0,C
+2026-08-01,Continente,Congelados,GEL BAUNA/CHOCO E CONTINENTE 2L,2.0,,3.29,6.58,0.0,C
+2026-08-01,Continente,Congelados,GEL COCOS CNT 2X180ML,1.0,,2.79,2.79,0.0,C
+2026-08-01,Continente,Laticinios/Beb. Veg.,LEIT UHT INTEIRO CNT 1L,6.0,,0.99,5.94,0.0,A
+2026-08-01,Continente,Beleza,CH.TRESEMME BIOTIN REPAIR 685ML,1.0,,5.99,5.99,2.0,C
+2026-08-01,Continente,Bens Essenciais,ACUCAR MASCAVADO CONTINENTE 1KG,1.0,,1.95,1.95,0.0,C
+2026-08-01,Continente,Bens Essenciais,AZEITE VE PORCA MURCA 0.5L,1.0,,6.5,6.5,0.0,A
+2026-08-01,Continente,Talho,PORCO TIRAS VAO INT. CNT. KG LS,1.0,1.304,9.11,9.11,0.0,A
+2026-08-01,Continente,Talho,PORCO TIRAS VAO INT. CNT. KG LS,1.0,1.166,8.15,8.15,0.0,A
+2026-08-01,Continente,Talho,MINI SALSICHAS PORCO CONTINENTE,1.0,,3.49,3.49,0.0,A
+2026-08-01,Continente,Talho,SALSICHAS FRESCAS CNT 500G,1.0,,2.99,2.99,0.0,A
+2026-08-01,Continente,Charcutaria&Queijos,QJ VACA QUE RI 24 PORCOES 375G,1.0,,4.49,4.49,0.0,A
+2026-08-01,Continente,Charcutaria&Queijos,PATE C/ CEBOLA CARAM. CAPDEVIL,1.0,,0.99,0.99,0.2,C
+2026-08-01,Continente,Charcutaria&Queijos,PATE PATO C/PORTO CAPDEVILA 55G,1.0,,0.99,0.99,0.2,C
+2026-08-01,Continente,Charcutaria&Queijos,PATE C/ERVAS FINAS CAPDEVILA 55,1.0,,0.99,0.99,0.2,C
+2026-08-01,Continente,Charcutaria&Queijos,PATE DE COGUMELOS MORTIER 150G,1.0,,1.94,1.94,0.0,C
+2026-08-01,Continente,Pequeno Almoco,INFUSAO LIPTON CAMOMILA 20PYR,1.0,,2.47,2.47,0.0,A
+2026-08-01,Continente,Frutas e Legumes,PEPINO CNT KG,1.0,0.86,1.28,1.28,0.0,A
+2026-08-01,Continente,Frutas e Legumes,LIMAO,1.0,0.55,1.53,1.53,0.0,A
+2026-08-01,Continente,Frutas e Legumes,MELAO BRANCO,1.0,,4.87,4.87,0.0,A
+2026-08-01,Continente,Frutas e Legumes,PIMENTO VERMELHO CNT KG,1.0,1.036,3.41,3.41,0.0,A
+2026-08-01,Continente,Frutas e Legumes,CENOURA KG,1.0,0.764,0.83,0.83,0.0,A
+2026-08-01,Continente,Frutas e Legumes,MELANCIA P/ SEM FRAC KG,1.0,4.182,4.14,4.14,0.0,A
+2026-08-01,Continente,Frutas e Legumes,"CEBOLA CNT EMB. 1,5 KG",1.0,1.5,2.79,2.79,0.0,A
+2026-08-01,Continente,Frutas e Legumes,CEBOLA ROXA CNT EMB.500GR,1.0,0.5,1.99,1.99,0.0,A
+2026-08-01,Continente,Frutas e Legumes,BATATA ASSAR EMB. 2 KG,1.0,2,2.79,2.79,0.0,A
+2026-08-01,Continente,Frutas e Legumes,BATATA VERMELHA EMB:. 5 KG,1.0,5,5.49,5.49,0.0,A
+2026-08-01,Continente,Padaria,CROUTONS C.AZ/ALHO/SALSA CONTIN,2.0,,0.78,1.56,0.0,A
+2026-08-01,Continente,Vinho e Espirituosas,VB CAPOTE VELHO PREM LISB 7,1.0,,4.19,4.19,6.4,B
+2026-08-01,Continente,Vinho e Espirituosas,VB COTTO PREMIU,1.0,,3.99,3.99,9.5,B
+2026-08-01,Continente,Casa-Mesa/Mobiliario,PARAVENTO 5 PAUS AM,1.0,,20.0,20.0,0.0,C
