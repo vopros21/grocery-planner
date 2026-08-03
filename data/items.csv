@@ -479,3 +479,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-08-02,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,,1.89,1.89,0.0,B
 2026-08-02,Lidl,Soft Drinks,Coca Cola Regular 1l,1.0,,1.49,1.49,0.0,A
 2026-08-03,Lidl,Padaria,ARGOLA CHOCOLATE BRANCO,3.0,,0.69,2.07,0.0,A
+2026-08-03,Lidl,Charcutaria&Queijos,SALSICHAS ESTALADICAS,1.0,,3.59,3.59,1.4,A
+2026-08-03,Lidl,Charcutaria&Queijos,QUEIJO MOZZARELLA RALADO,1.0,,3.79,3.79,0.1,B
+2026-08-03,Lidl,Mercearia Salgada,RAMEN NOODLES VACA,1.0,,0.89,0.89,0.0,A
+2026-08-03,Lidl,Mercearia Salgada,"MASSA INS EST ASIATIC 0G,A5L9IN x 2",2.0,,0.59,1.18,0.0,A
