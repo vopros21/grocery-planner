@@ -1,6 +1,6 @@
 # grocer.py — receipt → CSV pipeline
 
-Automatically extracts grocery items from Continente PDF receipts into a flat CSV for analysis.
+Automatically extracts grocery items from Continente/Lidl PDF/PNG receipts into a flat CSV for analysis.
 
 ## Setup (once)
 
