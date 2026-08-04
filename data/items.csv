@@ -487,3 +487,5 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-08-04,Lidl,Pequeno Almoco,DELTA CAFE MOAGEM UNIVERSAL,1.0,,5.49,5.49,0.0,A
 2026-08-04,Lidl,Padaria,FOLHADO DE CARNE MISTO,1.0,,0.99,0.99,0.0,A
 2026-08-04,Lidl,Mercearia Doce,GOMAS COOL MIX,1.0,,1.65,1.65,0.0,A
+2026-08-04,Lidl,Mercearia Salgada,CONCENTRADO DE TOMATE,1.0,,1.09,1.09,0.0,A
+2026-08-04,Lidl,Frutas e Legumes,ALHO SECO NACIONAL,1.0,0.202,1.35,1.35,0.0,B
