@@ -483,3 +483,6 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-08-03,Lidl,Charcutaria&Queijos,QUEIJO MOZZARELLA RALADO,1.0,,3.79,3.79,0.1,B
 2026-08-03,Lidl,Mercearia Salgada,RAMEN NOODLES VACA,1.0,,0.89,0.89,0.0,A
 2026-08-03,Lidl,Mercearia Salgada,MASSA INS EST ASIATIC GALIN,2.0,,0.59,1.18,0.0,A
+2026-08-04,Lidl,Padaria,DELICIA DE MACA,3.0,,0.75,2.25,0.0,A
+2026-08-04,Lidl,Pequeno Almoco,DELTA CAFE MOAGEM UNIVERSAL,1.0,,5.49,5.49,0.0,A
+2026-08-04,Lidl,Padaria,FOLHADO DE CARNE MISTO,1.0,,0.99,0.99,0.0,A
