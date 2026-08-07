@@ -498,3 +498,6 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-08-07,Lidl,Congelados,GELADO SANDWICH,2.0,,3.19,6.38,0.0,A
 2026-08-07,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,,1.89,1.89,0.0,B
 2026-08-07,Lidl,Casa-Cozinha/Lavand,Saco de Papel,1.0,,0.15,0.15,0.0,A
+2026-08-07,Lidl,Laticinios/Beb. Veg.,IOGURTE GREGO NATURAL,1.0,,2.25,2.25,0.0,B
+2026-08-07,Lidl,Soft Drinks,SteamBrew Cerveja Artesanal,1.0,,0.99,0.99,0.0,A
+2026-08-07,Lidl,Mercearia Salgada,BATATAS FRITAS OBATZADA,1.0,,1.38,1.38,0.61,A
