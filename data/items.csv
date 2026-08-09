@@ -504,3 +504,34 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-08-08,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,,1.89,1.89,0.0,B
 2026-08-08,Lidl,Soft Drinks,SUMOL LARANJA,1.0,,1.29,1.29,0.0,A
 2026-08-08,Lidl,Soft Drinks,MonsterUltraWhite SemAcucar,1.0,,1.74,1.74,0.0,A
+2026-08-09,Continente,Mercearia Salgada,ALHO MOIDO MARGAO SAQ 80G,1.0,,1.49,1.49,0.5,C
+2026-08-09,Continente,Mercearia Salgada,POLPA DE TOMATE CONTINENTE 500G,1.0,,0.99,0.99,0.0,C
+2026-08-09,Continente,Mercearia Salgada,MILHO DOCE CONTINENTE 3*140G,2.0,,1.99,3.98,0.0,C
+2026-08-09,Continente,Mercearia Salgada,SARDINHA EM AZEITE CNT 85G,1.0,,1.29,1.29,0.0,A
+2026-08-09,Continente,Mercearia Salgada,SARDINHA OLEO VEGETAL CNT 85G,3.0,,1.19,3.57,0.0,A
+2026-08-09,Continente,Mercearia Salgada,COG. LAMINADOS CNT POUPANCA 420,1.0,,2.19,2.19,0.0,C
+2026-08-09,Continente,Mercearia Doce,PAST TRIDEN LONG LAST STRAWB 68,1.0,,3.49,3.49,0.0,C
+2026-08-09,Continente,Laticinios/Beb. Veg.,MANTEIGA S/ SAL CNT 250G,1.0,,1.99,1.99,0.0,A
+2026-08-09,Continente,Laticinios/Beb. Veg.,NATA UHT PARMALAT 3 QUEIJ 200ML,1.0,,1.38,1.38,0.0,A
+2026-08-09,Continente,Bens Essenciais,MASSA COTOVELINHOS CNT 500G,1.0,,0.79,0.79,0.0,A
+2026-08-09,Continente,Bens Essenciais,MASSA ESPIRAIS CONTINENTE 500G,1.0,,0.69,0.69,0.0,A
+2026-08-09,Continente,Bens Essenciais,MASS COTOVELOS GR RISC CNT 500G,1.0,,0.79,0.79,0.0,A
+2026-08-09,Continente,Bens Essenciais,ESPIRAIS CNT PACK POUPANCA 1KG,1.0,,1.29,1.29,0.0,A
+2026-08-09,Continente,Charcutaria&Queijos,FIAMBRE PA FAT PACK FAM CNT 2X2,1.0,,3.09,3.09,0.0,C
+2026-08-09,Continente,Charcutaria&Queijos,REQUEIJAO LIGHT SALOIO 170G,1.0,,1.79,1.79,0.0,A
+2026-08-09,Continente,Charcutaria&Queijos,QJ FRES P/BAR S/LACT PHILAD 150,1.0,,2.49,2.49,0.0,A
+2026-08-09,Continente,Pequeno Almoco,CAFE DELTA COLOMBIA UNIVER 220G,1.0,,3.89,3.89,2.1,C
+2026-08-09,Continente,Frutas e Legumes,PAPAIA,1.0,,5.32,5.32,0.0,A
+2026-08-09,Continente,Frutas e Legumes,MANGA,1.0,,2.03,2.03,0.0,A
+2026-08-09,Continente,Frutas e Legumes,PEPINO CNT KG,1.0,1.19,1.54,1.54,0.0,A
+2026-08-09,Continente,Frutas e Legumes,TOMATE CNT KG,1.0,1.018,1.42,1.42,0.0,A
+2026-08-09,Continente,Frutas e Legumes,MELANCIA RISC P/ SEM FRAC KG,1.0,3.994,4.75,4.75,0.0,A
+2026-08-09,Continente,Frutas e Legumes,MELAO BRANCO FRAC,1.0,1.756,2.44,2.44,0.0,A
+2026-08-09,Continente,Frutas e Legumes,NECTARINA,1.0,,1.82,1.82,0.0,A
+2026-08-09,Continente,Frutas e Legumes,SALADA CAMPONESA CNT 250GR,1.0,,1.39,1.39,0.0,A
+2026-08-09,Continente,Padaria,CROUTONS C.AZ/ALHO/SALSA CONTIN,2.0,,0.78,1.56,0.0,A
+2026-08-09,Continente,Vinho e Espirituosas,RUM BREEZER LARANJA 27.5CL,1.0,,1.99,1.99,0.5,C
+2026-08-09,Continente,Vinho e Espirituosas,RUM BREEZER MELANCIA 27.5CL,1.0,,1.99,1.99,0.5,C
+2026-08-09,Continente,Vinho e Espirituosas,VT ROVISCO PAIS,1.0,,4.19,4.19,9.8,B
+2026-08-09,Continente,Take Away,PIZZA BARBECUE CNT 400G,4.0,,2.89,11.56,0.0,B
+2026-08-09,Continente,Take Away,PIZZA PEPPERONI CNT 410G,4.0,,2.89,11.56,0.0,B
