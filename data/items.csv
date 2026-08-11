@@ -540,3 +540,14 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-08-10,Lidl,Mercearia Salgada,BATATA FRITA OND KETCHUP,1.0,,1.29,1.29,0.0,A
 2026-08-10,Lidl,Soft Drinks,NECTAR DE LARANJA,1.0,,0.89,0.89,0.2,B
 2026-08-11,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,,1.89,1.89,0.0,B
+2026-08-11,Lidl,Soft Drinks,SUMO DE LARANJA,1.0,,1.99,1.99,0.0,B
+2026-08-11,Lidl,Soft Drinks,STEAM BREW CRAFT BIER IPA9,2.0,,1.58,1.58,0.4,A
+2026-08-11,Lidl,Soft Drinks,Bourbon Cola 5%,2.0,,1.49,2.98,0.0,A
+2026-08-11,Lidl,Congelados,GELADO SANDWICH,1.0,,3.19,3.19,0.0,A
+2026-08-11,Lidl,Congelados,MOCHI COCO,1.0,,2.89,2.89,0.06,A
+2026-08-11,Lidl,Charcutaria&Queijos,FUET EXTRA,1.0,,2.19,2.19,0.0,A
+2026-08-11,Lidl,Charcutaria&Queijos,SALAME EXTRA FATIADO,1.0,,1.39,1.39,0.0,A
+2026-08-11,Lidl,Charcutaria&Queijos,MORTADELA FATIADA,1.0,,0.99,0.99,0.0,A
+2026-08-11,Lidl,Charcutaria&Queijos,Queijo Fatiado Burguer,1.0,,1.29,1.29,0.0,B
+2026-08-11,Lidl,Charcutaria&Queijos,QUEIJO MOZZARELLA RALADO,1.0,,3.79,3.79,0.1,B
+2026-08-11,Lidl,Frutas e Legumes,ALFACE FRISADA,1.0,0.258,0.44,0.44,0.0,B
