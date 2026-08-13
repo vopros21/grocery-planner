@@ -552,3 +552,4 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-08-11,Lidl,Charcutaria&Queijos,QUEIJO MOZZARELLA RALADO,1.0,,3.79,3.79,0.1,B
 2026-08-11,Lidl,Frutas e Legumes,ALFACE FRISADA,1.0,0.258,0.44,0.44,0.0,B
 2026-08-12,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,0,3,1.89,1.89,0.0,B
+2026-08-12,Lidl,Soft Drinks,MonsterUltraWhite SemAcucar,1.0,,1.74,1.74,0.0,A
