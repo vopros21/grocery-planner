@@ -569,3 +569,16 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-08-14,Lidl,Congelados,MOCHI COCO,1.0,,2.89,2.89,0.06,A
 2026-08-14,Lidl,Soft Drinks,Bourbon Cola 5%,1.0,,1.49,1.49,0.0,A
 2026-08-14,Lidl,Congelados,GELADO MINI MIX AMENDOA,1.0,,4.59,4.59,0.0,A
+2026-08-15,Continente,Mercearia Salgada,SAL MESA SALEIRO TRAD CNT 250G,1.0,,0.29,0.29,0.0,A
+2026-08-15,Continente,Mercearia Salgada,KETCHUP PICANTE CONTINENTE 560G,1.0,,1.49,1.49,0.0,C
+2026-08-15,Continente,Mercearia Doce,ACUCAR BAUNILHADO RUF10X8G,1.0,,0.84,0.84,0.0,C
+2026-08-15,Continente,Mercearia Doce,GELATINA PO GLOBO NEUTRA 70G,1.0,,1.69,1.69,0.0,C
+2026-08-15,Continente,Congelados,GEL COCOS CNT 2X180ML,1.0,,2.79,2.79,0.0,C
+2026-08-15,Continente,Laticinios/Beb. Veg.,LEIT UHT INTEIRO CNT 1L,2.0,,0.99,1.98,0.0,A
+2026-08-15,Continente,Laticinios/Beb. Veg.,MANTEIGA S/ SAL CNT 250G,2.0,,1.99,3.98,0.0,A
+2026-08-15,Continente,Bens Essenciais,FARINHA TRIGO S/F CNT T55 1KG,1.0,,0.59,0.59,0.0,A
+2026-08-15,Continente,Bens Essenciais,ACUCAR MASCAVADO CONTINENTE 1KG,1.0,,2.39,2.39,0.0,C
+2026-08-15,Continente,Pequeno Almoco,CAFE DELTA PORTUGAL MU 220G,1.0,,3.54,3.54,1.95,C
+2026-08-15,Continente,Frutas e Legumes,BANANA,1.0,0.706,0.91,0.91,0.0,A
+2026-08-15,Continente,Padaria,CROUTONS C.AZ/ALHO/SALSA CONTIN,2.0,,0.78,1.56,0.0,A
+2026-08-15,Continente,Vinho e Espirituosas,VB VALDEUS PREMIUM LISBOA,1.0,,2.99,2.99,7.0,B
