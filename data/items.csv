@@ -588,3 +588,5 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-08-16,Lidl,Congelados,MOCHI COCO,1.0,,2.89,2.89,0.06,A
 2026-08-16,Lidl,Congelados,GELADO SANDWICH,1.0,,3.19,3.19,0.0,A
 2026-08-16,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,,1.89,1.89,0.0,B
+2026-08-17,Continente,Congelados,GEL BAUN/MORA E CONTINENTE 2LT,1.0,,3.29,3.29,0.0,C
+2026-08-17,Continente,Casa-Cozinha/Lavand,SACO PLAS RE CNT,1.0,,0.1,0.1,0.0,C
