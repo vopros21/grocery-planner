@@ -607,3 +607,6 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-08-19,Lidl,Soft Drinks,Bourbon Cola 5%,2.0,,1.49,2.98,0.0,A
 2026-08-19,Lidl,Congelados,GELADO SANDWICH,1.0,,3.19,3.19,0.0,A
 2026-08-19,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,,1.89,1.89,0.0,B
+2026-08-19,Lidl,Padaria,BAGUETE RUSTICA,1.0,,0.59,0.59,0.0,B
+2026-08-19,Lidl,Mercearia Salgada,CHEESEBURGUER DE PORCO,1.0,,2.79,2.79,0.0,A
+2026-08-19,Lidl,Soft Drinks,MONCHIQUE AGUA ALCALINA,1.0,,1.65,1.65,0.0,C
