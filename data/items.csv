@@ -600,3 +600,10 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-08-18,Lidl,Frutas e Legumes,TOMATE REDONDO,1.0,0.358,0.68,0.68,0.0,B
 2026-08-18,Lidl,Frutas e Legumes,AMEIXA AMARELA,1.0,0.562,1.68,1.68,0.0,B
 2026-08-18,Lidl,Soft Drinks,Bourbon Cola 5%,1.0,,2.98,2.98,0.0,A
+2026-08-19,Lidl,Soft Drinks,MONCHIQUE AGUA ALCALINA,1.0,,1.65,1.65,0.0,C
+2026-08-19,Lidl,Soft Drinks,FRANZISKANER CERVEJA BRANCA,2.0,,1.99,3.98,0.0,A
+2026-08-19,Lidl,Congelados,Gelado Class.Choco Baunilha,1.0,,3.39,3.39,0.0,A
+2026-08-19,Lidl,Soft Drinks,BEBIDAS BAHAMAS,1.0,,1.49,1.49,0.0,A
+2026-08-19,Lidl,Soft Drinks,Bourbon Cola 5%,2.0,,1.49,2.98,0.0,A
+2026-08-19,Lidl,Congelados,GELADO SANDWICH,1.0,,3.19,3.19,0.0,A
+2026-08-19,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,,1.89,1.89,0.0,B
