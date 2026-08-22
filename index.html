@@ -49,7 +49,9 @@
   .tag.low { background: var(--low); color: white; }
   .tag.ok { background: #e9f5ea; color: #1f7a34; }
   .muted { color: var(--muted); }
-  canvas { max-height: 280px; }
+  canvas { }
+  .chart-container { position: relative; height: 310px; width: 100%; }
+  .chart-card { overflow: visible; }
   .empty { color: var(--muted); font-size: 13px; padding: 8px 0; }
   .loading { color: var(--muted); font-size: 13px; }
   .error { color: var(--low); font-size: 13px; }
@@ -111,9 +113,9 @@
   </div>
 </div>
 
-<div class="card" id="chartCard" style="display:none">
+<div class="card chart-card" id="chartCard" style="display:none">
   <h2>Monthly spend by category</h2>
-  <canvas id="spendChart"></canvas>
+  <div class="chart-container"><canvas id="spendChart"></canvas></div>
 </div>
 
 <div class="card" id="allProductsCard" style="display:none">
@@ -439,6 +441,13 @@ function render() {
       datasets.reduce((sum, ds) => sum + (ds.data[i] || 0), 0)
     );
 
+    // Chart.js auto-scales the y-axis max to a "nice" tick right above the
+    // highest total, which can leave almost no headroom for that bar's label
+    // (e.g. total 682 vs auto max 700) and clip it against the canvas edge.
+    // Pad the axis max ourselves so there's always room above the tallest bar.
+    const maxTotal = Math.max(...monthTotals, 0);
+    const yMax = maxTotal > 0 ? Math.ceil((maxTotal * 1.15) / 10) * 10 : undefined;
+
     const totalsLabelPlugin = {
       id: "totalsLabel",
       afterDatasetsDraw(chart) {
@@ -463,7 +472,16 @@ function render() {
       data: { labels: months, datasets },
       options: {
         responsive: true,
-        scales: { x: { stacked: true }, y: { stacked: true, title: { display: true, text: "EUR" } } },
+        maintainAspectRatio: false,
+        layout: { padding: { top: 32 } },
+        scales: {
+          x: { stacked: true },
+          y: {
+            stacked: true,
+            title: { display: true, text: "EUR" },
+            max: yMax,
+          },
+        },
         plugins: {
           legend: { position: "bottom", labels: { boxWidth: 12, font: { size: 11 } } },
           tooltip: {
