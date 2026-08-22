@@ -52,6 +52,12 @@
   canvas { }
   .chart-container { position: relative; height: 310px; width: 100%; }
   .chart-card { overflow: visible; }
+  .version-tag {
+    position: fixed; bottom: 10px; right: 12px; z-index: 999;
+    font-size: 11px; color: var(--muted); background: var(--card);
+    border: 1px solid var(--border); border-radius: 6px; padding: 3px 8px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
   .empty { color: var(--muted); font-size: 13px; padding: 8px 0; }
   .loading { color: var(--muted); font-size: 13px; }
   .error { color: var(--low); font-size: 13px; }
@@ -66,6 +72,7 @@
 </style>
 </head>
 <body>
+<div class="version-tag">v20260822-1</div>
 
 <h1>Shopping Planner</h1>
 <div class="subtitle" id="subtitle">Bulk-buy suggestions for stockable items — read-only, synced from GitHub</div>
