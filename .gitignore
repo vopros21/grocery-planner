@@ -3,5 +3,6 @@ venv/
 data/pending.json
 inbox/*
 processed/*
+screenshots/
 !inbox/.gitkeep
 !processed/.gitkeep
