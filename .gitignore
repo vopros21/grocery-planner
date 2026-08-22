@@ -4,5 +4,6 @@ data/pending.json
 inbox/*
 processed/*
 screenshots/
+Shopping Planner.html
 !inbox/.gitkeep
 !processed/.gitkeep
