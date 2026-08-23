@@ -650,3 +650,13 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-08-23,Lidl,Soft Drinks,SteamBrew Cerveja Artesanal,1.0,,0.99,0.99,0.0,A
 2026-08-23,Lidl,Soft Drinks,PATRONUS DE TRIGO,1.0,,0.79,0.79,0.1,A
 2026-08-23,Lidl,Mercearia Salgada,SNACK BATATA NATAS E CEBOLA,1.0,,1.99,1.99,0.0,A
+2026-08-23,Lidl,Soft Drinks,PATRONUS DE TRIGO,2.0,,1.58,1.58,0.2,A
+2026-08-23,Lidl,Soft Drinks,Bourbon Cola 5%,2.0,,1.49,2.98,0.0,A
+2026-08-23,Lidl,Soft Drinks,SUMO DE LARANJA,1.0,,1.99,1.99,0.0,B
+2026-08-23,Lidl,Congelados,GELADO MAXI MIX XXL,1.0,,4.69,4.69,0.0,A
+2026-08-23,Lidl,Mercearia Salgada,MAIONESE TOP DOWN,1.0,,1.89,1.89,0.0,A
+2026-08-23,Lidl,Laticinios/Beb. Veg.,IOGURTE DE MORANGO,1.0,,1.09,1.09,0.0,B
+2026-08-23,Lidl,Laticinios/Beb. Veg.,Iogurte Liq. Frutas Morango,1.0,,1.29,1.29,0.06,B
+2026-08-23,Lidl,Frutas e Legumes,PEPINO,1.0,1.066,1.59,1.59,0.0,B
+2026-08-23,Lidl,Charcutaria&Queijos,BACON EM PEDACOS,1.0,,2.19,2.19,0.0,A
+2026-08-23,Lidl,Frutas e Legumes,BATATA CONSERVACAO VERMELHA,1.0,2.426,2.16,2.16,1.21,B
