@@ -647,3 +647,6 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-08-21,Lidl,Soft Drinks,SteamBrew Cerveja Artesanal,2.0,,0.99,1.98,0.0,A
 2026-08-21,Lidl,Laticinios/Beb. Veg.,IOGURTE LIQ. MORANGO,1.0,,1.55,1.55,0.0,B
 2026-08-21,Lidl,Congelados,MOCHI COCO,1.0,,2.89,2.89,0.0,A
+2026-08-23,Lidl,Soft Drinks,SteamBrew Cerveja Artesanal,1.0,,0.99,0.99,0.0,A
+2026-08-23,Lidl,Soft Drinks,PATRONUS DE TRIGO,1.0,,0.79,0.79,0.1,A
+2026-08-23,Lidl,Mercearia Salgada,SNACK BATATA NATAS E CEBOLA,1.0,,1.99,1.99,0.0,A
