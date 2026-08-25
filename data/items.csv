@@ -674,3 +674,9 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-08-24,Lidl,Frutas e Legumes,ALFACE FRISADA,1.0,0.51,0.86,0.86,0.0,B
 2026-08-25,Lidl,Mercearia Salgada,SNACK BATATA NATAS E CEBOLA,1.0,,1.99,1.99,0.0,A
 2026-08-25,Lidl,Soft Drinks,SUMOL ANANAS,1.0,,2.89,2.89,0.0,A
+2026-08-25,Lidl,Casa-Cozinha/Lavand,Saco de Papel,1.0,,0.15,0.15,0.0,A
+2026-08-25,Lidl,Laticinios/Beb. Veg.,Iogurte Liq. Frutas Morango,1.0,,1.29,1.29,0.06,B
+2026-08-25,Lidl,Laticinios/Beb. Veg.,IOGURTE LIQ. MORANGO,1.0,,1.55,1.55,0.0,B
+2026-08-25,Lidl,Laticinios/Beb. Veg.,IOGURTE GREGO NATURAL,1.0,,2.25,2.25,0.0,B
+2026-08-25,Lidl,Congelados,MOCHI COCO,1.0,,2.39,2.39,0.5,A
+2026-08-25,Lidl,Soft Drinks,Strongbeer,1.0,,0.89,0.89,0.1,A
