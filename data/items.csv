@@ -666,3 +666,9 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-08-23,Continente,Charcutaria&Queijos,MORTADELA PRC FAT CNT 200G,1.0,,0.99,0.99,0.0,C
 2026-08-23,Continente,Pequeno Almoco,CAFE DELTA PORTUGAL MU 220G,1.0,,5.49,5.49,0.0,C
 2026-08-23,Continente,Casa-Cozinha/Lavand,SACO PLAS RE CNT,1.0,,0.1,0.1,0.0,C
+2026-08-24,Lidl,Charcutaria&Queijos,CHOURICAO EXTRA FATIADO PIC,1.0,,2.15,2.15,0.0,A
+2026-08-24,Lidl,Soft Drinks,Strongbeer,1.0,,0.89,0.89,0.1,A
+2026-08-24,Lidl,Frutas e Legumes,BATATA CONSERVACAO VERMELHA,1.0,2.188,1.95,1.95,1.09,B
+2026-08-24,Lidl,Laticinios/Beb. Veg.,OVOS GALINHAS CRIADAS AR LI,1.0,,3.45,3.45,0.1,B
+2026-08-24,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,,1.89,1.89,0.0,B
+2026-08-24,Lidl,Frutas e Legumes,ALFACE FRISADA,1.0,0.51,0.86,0.86,0.0,B
