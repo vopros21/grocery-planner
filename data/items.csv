@@ -683,3 +683,22 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-08-27,Lidl,Padaria,ARGOLAS CHOCOLATE,5.0,,0.45,2.25,0.0,A
 2026-08-27,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,0.3,1.89,1.89,0.0,B
 2026-08-27,Lidl,Padaria,DELICIA DE MACA,2.0,,0.75,1.5,0.0,A
+2026-08-27,Continente,Mercearia Salgada,ATUM C/FEIJAO FRADE RAMIREZ 120,1.0,,1.24,1.24,0.5,C
+2026-08-27,Continente,Mercearia Salgada,ATUM AZ BAIXO TEOR SAL RAMIRE 8,1.0,,1.64,1.64,0.9,A
+2026-08-27,Continente,Mercearia Salgada,ATUM ACORES POSTA OLEO CNT SEL,1.0,,1.19,1.19,0.0,A
+2026-08-27,Continente,Mercearia Salgada,BATATAS FRITAS RUFFLE PRESUNTO,1.0,,2.49,2.49,0.0,C
+2026-08-27,Continente,Mercearia Salgada,HUMMUS LA PIARA 200G,1.0,,2.24,2.24,0.75,C
+2026-08-27,Continente,Soft Drinks,CERV C/ALC LAT ERDING BR 50CL,1.0,,2.99,2.99,0.3,C
+2026-08-27,Continente,Soft Drinks,CERVEJA SAN MIGUEL LATA 50C,1.0,,0.89,0.89,0.7,C
+2026-08-27,Continente,Congelados,GEL COCOS CNT 2X180ML,1.0,,2.79,2.79,0.0,C
+2026-08-27,Continente,Laticinios/Beb. Veg.,IOG AROMA MULTISAB CNT 16*125G,1.0,,2.49,2.49,0.0,A
+2026-08-27,Continente,Laticinios/Beb. Veg.,OVOS M DONA GEMA 2DZ,1.0,,5.99,5.99,0.0,A
+2026-08-27,Continente,Charcutaria&Queijos,QUEIJO BRIE PRESIDENT KG,1.0,0.234,4.4,4.4,0.0,A
+2026-08-27,Continente,Pequeno Almoco,CAFE DELTA PORTUGAL MU 220G,1.0,,3.55,3.55,1.94,C
+2026-08-27,Continente,Pequeno Almoco,MEL DE FLORES TOP DOWN CNT 500G,1.0,,3.09,3.09,0.0,A
+2026-08-27,Continente,Frutas e Legumes,COUVE CORACAO,1.0,0.782,1.32,1.32,0.0,A
+2026-08-27,Continente,Frutas e Legumes,PEPINO CNT KG,1.0,1.164,1.73,1.73,0.0,A
+2026-08-27,Continente,Frutas e Legumes,TOMATE CNT KG,1.0,1.14,2.04,2.04,0.0,A
+2026-08-27,Continente,Frutas e Legumes,PESSEGO POLPA BRANCA KG,1.0,0.914,2.28,2.28,0.0,A
+2026-08-27,Continente,Take Away,HAMB. PORCO C/ QJ GOUDA,1.0,,2.49,2.49,0.0,B
+2026-08-27,Continente,Casa-Cozinha/Lavand,SACO PLAS RE CNT,1.0,,0.1,0.1,0.0,C
