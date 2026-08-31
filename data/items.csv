@@ -727,3 +727,11 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-08-30,Lidl,Bens Essenciais,ACUCAR MASCAVADO,1.0,,2.29,2.29,0.0,A
 2026-08-30,Lidl,Mercearia Doce,CHOCOLATE DE LEITE,2.0,,0.95,1.9,0.0,A
 2026-08-31,Lidl,Soft Drinks,MonsterUltraWhite SemAcucar,1.0,,1.74,1.74,0.0,A
+2026-08-31,Lidl,Charcutaria&Queijos,SALSICHAS ESTALADICAS,1.0,,2.49,2.49,2.5,A
+2026-08-31,Lidl,Congelados,GELADO TRES SABORES,1.0,,3.69,3.69,0.0,A
+2026-08-31,Lidl,Frutas e Legumes,CEBOLA ROXA,1.0,0.588,1.46,1.46,0.0,B
+2026-08-31,Lidl,Laticinios/Beb. Veg.,MANTEIGA SEM SAL,2.0,,2.98,2.98,1.0,B
+2026-08-31,Lidl,Frutas e Legumes,BATATA BRANCA PARA ASSAR,1.0,,2.59,2.59,0.0,B
+2026-08-31,Lidl,Frutas e Legumes,BANANA,1.0,1.278,1.27,1.27,0.25,B
+2026-08-31,Lidl,Mercearia Doce,CHOCOLATE DE LEITE,2.0,,0.95,1.9,0.0,A
+2026-08-31,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,,1.89,1.89,0.0,B
