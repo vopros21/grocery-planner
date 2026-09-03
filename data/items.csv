@@ -734,7 +734,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-08-31,Lidl,Frutas e Legumes,BATATA BRANCA PARA ASSAR,1.0,,2.59,2.59,0.0,B
 2026-08-31,Lidl,Frutas e Legumes,BANANA,1.0,1.278,1.27,1.27,0.25,B
 2026-08-31,Lidl,Mercearia Doce,CHOCOLATE DE LEITE,2.0,,0.95,1.9,0.0,A
-2026-08-31,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,,1.89,1.89,0.0,B
+2026-08-31,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,0.3,1.89,1.89,0.0,B
 2026-09-01,Lidl,Soft Drinks,Coca Cola Regular 1l,1.0,,1.49,1.49,0.0,A
 2026-09-01,Continente,Pequeno Almoco,INFUSAO LIPTON CAMOMILA 20PYR,1.0,,1.69,1.69,0.78,A
 2026-09-01,Continente,Frutas e Legumes,LIMAO,1.0,0.624,1.23,1.23,0.0,A
@@ -745,7 +745,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-09-01,Continente,Casa-Cozinha/Lavand,SACO PLAS RE CNT,1.0,,0.1,0.1,0.0,C
 2026-09-02,Lidl,Charcutaria&Queijos,QUEIJO EMMENTAL,1.0,,3.39,3.39,0.0,B
 2026-09-02,Lidl,Soft Drinks,SCHWEPPES AGUA TONICA,1.0,,1.49,1.49,0.06,A
-2026-09-02,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,,1.89,1.89,0.0,B
+2026-09-02,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,0.3,1.89,1.89,0.0,B
 2026-09-02,Lidl,Mercearia Doce,CHOCOLATE NEO,1.0,,3.89,3.89,0.1,A
 2026-09-02,Lidl,Charcutaria&Queijos,MORTADELA FATIADA,1.0,,0.99,0.99,0.0,A
 2026-09-02,Lidl,Soft Drinks,Coca Cola Regular,1.0,,4.29,4.29,0.0,A
