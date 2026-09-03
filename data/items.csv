@@ -749,3 +749,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-09-02,Lidl,Mercearia Doce,CHOCOLATE NEO,1.0,,3.89,3.89,0.1,A
 2026-09-02,Lidl,Charcutaria&Queijos,MORTADELA FATIADA,1.0,,0.99,0.99,0.0,A
 2026-09-02,Lidl,Soft Drinks,Coca Cola Regular,1.0,,4.29,4.29,0.0,A
+2026-09-03,Lidl,Congelados,GELADO TRES SABORES,1.0,,3.69,3.69,0.0,A
+2026-09-03,Lidl,Mercearia Doce,AMENDOINS FRITOS MEL,2.0,,1.15,2.3,0.0,A
+2026-09-03,Lidl,Mercearia Salgada,BATATAS FRITAS CAMPONESAS,1.0,,1.39,1.39,0.0,A
+2026-09-03,Lidl,Laticinios/Beb. Veg.,IOGURTE GREGO NATURAL,1.0,,2.25,2.25,0.0,B
