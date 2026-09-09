@@ -539,7 +539,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-08-09,Lidl,Soft Drinks,NECTAR LARANJA ALGARVE,1.0,,1.29,1.29,0.0,B
 2026-08-10,Lidl,Mercearia Salgada,BATATA FRITA OND KETCHUP,1.0,,1.29,1.29,0.0,A
 2026-08-10,Lidl,Soft Drinks,NECTAR DE LARANJA,1.0,,0.89,0.89,0.2,B
-2026-08-11,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,0,3,1.89,1.89,0.0,B
+2026-08-11,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,0.3,1.89,1.89,0.0,B
 2026-08-11,Lidl,Soft Drinks,SUMO DE LARANJA,1.0,,1.99,1.99,0.0,B
 2026-08-11,Lidl,Soft Drinks,STEAM BREW CRAFT BIER IPA9,2.0,,1.58,1.58,0.4,A
 2026-08-11,Lidl,Soft Drinks,Bourbon Cola 5%,2.0,,1.49,2.98,0.0,A
@@ -551,7 +551,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-08-11,Lidl,Charcutaria&Queijos,Queijo Fatiado Burguer,1.0,,1.29,1.29,0.0,B
 2026-08-11,Lidl,Charcutaria&Queijos,QUEIJO MOZZARELLA RALADO,1.0,,3.79,3.79,0.1,B
 2026-08-11,Lidl,Frutas e Legumes,ALFACE FRISADA,1.0,0.258,0.44,0.44,0.0,B
-2026-08-12,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,0,3,1.89,1.89,0.0,B
+2026-08-12,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,0.3,1.89,1.89,0.0,B
 2026-08-12,Lidl,Soft Drinks,MonsterUltraWhite SemAcucar,1.0,,1.74,1.74,0.0,A
 2026-08-13,Lidl,Charcutaria&Queijos,BACON FATIADO FAMILIAR,1.0,,2.79,2.79,0.0,A
 2026-08-13,Lidl,Laticinios/Beb. Veg.,IOG LIQ ANANAS COCO,1.0,,1.55,1.55,0.0,B
@@ -560,7 +560,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-08-13,Lidl,Congelados,GELADO SANDWICH,1.0,,3.19,3.19,0.0,A
 2026-08-13,Lidl,Laticinios/Beb. Veg.,IOGURTE GREGO NATURAL,1.0,,2.25,2.25,0.0,B
 2026-08-13,Lidl,Soft Drinks,PATRONUS DE TRIGO,2.0,,0.89,1.78,0.0,A
-2026-08-13,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,,1.89,1.89,0.0,B
+2026-08-13,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,0.3,1.89,1.89,0.0,B
 2026-08-13,Lidl,Casa-Cozinha/Lavand,Saco de Papel,1.0,,0.15,0.15,0.0,A
 2026-08-13,Lidl,Mercearia Salgada,BATATA FRITA EM AZEITE,1.0,,1.45,1.45,0.0,A
 2026-08-13,Lidl,Mercearia Salgada,BATATAS FRITAS MEL MOSTARDA,1.0,,1.49,1.49,0.0,A
@@ -587,7 +587,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-08-16,Lidl,Congelados,GELADO CHUPA CHUPA COLA,1.0,,3.69,3.69,0.0,A
 2026-08-16,Lidl,Congelados,MOCHI COCO,1.0,,2.89,2.89,0.06,A
 2026-08-16,Lidl,Congelados,GELADO SANDWICH,1.0,,3.19,3.19,0.0,A
-2026-08-16,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,,1.89,1.89,0.0,B
+2026-08-16,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,0.3,1.89,1.89,0.0,B
 2026-08-17,Continente,Congelados,GEL BAUN/MORA E CONTINENTE 2LT,1.0,,3.29,3.29,0.0,C
 2026-08-17,Continente,Casa-Cozinha/Lavand,SACO PLAS RE CNT,1.0,,0.1,0.1,0.0,C
 2026-08-18,Lidl,Soft Drinks,MonsterUltraWhite SemAcucar,1.0,,3.48,3.48,0.0,A
@@ -606,7 +606,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-08-19,Lidl,Soft Drinks,BEBIDAS BAHAMAS,1.0,,1.49,1.49,0.0,A
 2026-08-19,Lidl,Soft Drinks,Bourbon Cola 5%,2.0,,1.49,2.98,0.0,A
 2026-08-19,Lidl,Congelados,GELADO SANDWICH,1.0,,3.19,3.19,0.0,A
-2026-08-19,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,,1.89,1.89,0.0,B
+2026-08-19,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,0.3,1.89,1.89,0.0,B
 2026-08-19,Lidl,Padaria,BAGUETE RUSTICA,1.0,,0.59,0.59,0.0,B
 2026-08-19,Lidl,Mercearia Salgada,CHEESEBURGUER DE PORCO,1.0,,2.79,2.79,0.0,A
 2026-08-19,Lidl,Soft Drinks,MONCHIQUE AGUA ALCALINA,1.0,,1.65,1.65,0.0,C
@@ -641,7 +641,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-08-20,Continente,Brand Marketing,"GARRAFA XL 980ML 3,99+25S",1.0,,3.99,3.99,0.0,C
 2026-08-21,Lidl,Mercearia Doce,JELLY BEANS DOCES,1.0,,1.69,1.69,0.0,A
 2026-08-21,Lidl,Soft Drinks,MonsterUltraWhite SemAcucar,1.0,,1.74,1.74,0.0,A
-2026-08-21,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,,1.89,1.89,0.0,B
+2026-08-21,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,0.3,1.89,1.89,0.0,B
 2026-08-21,Lidl,Mercearia Salgada,PRINGLES NATAS&CEBOLA 165G,1.0,,2.35,2.35,0.0,A
 2026-08-21,Lidl,Soft Drinks,AGUA COM GAS,1.0,,1.69,1.69,0.0,C
 2026-08-21,Lidl,Soft Drinks,SteamBrew Cerveja Artesanal,2.0,,0.99,1.98,0.0,A
@@ -670,7 +670,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-08-24,Lidl,Soft Drinks,Strongbeer,1.0,,0.89,0.89,0.1,A
 2026-08-24,Lidl,Frutas e Legumes,BATATA CONSERVACAO VERMELHA,1.0,2.188,1.95,1.95,1.09,B
 2026-08-24,Lidl,Laticinios/Beb. Veg.,OVOS GALINHAS CRIADAS AR LI,1.0,,3.45,3.45,0.1,B
-2026-08-24,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,,1.89,1.89,0.0,B
+2026-08-24,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,0.3,1.89,1.89,0.0,B
 2026-08-24,Lidl,Frutas e Legumes,ALFACE FRISADA,1.0,0.51,0.86,0.86,0.0,B
 2026-08-25,Lidl,Mercearia Salgada,SNACK BATATA NATAS E CEBOLA,1.0,,1.99,1.99,0.0,A
 2026-08-25,Lidl,Soft Drinks,SUMOL ANANAS,1.0,,2.89,2.89,0.0,A
@@ -807,9 +807,9 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-09-05,Lidl,Congelados,GELADO TRES SABORES,1.0,,3.69,3.69,0.0,A
 2026-09-05,Lidl,Soft Drinks,PATRONUS DE TRIGO,1.0,,0.89,0.89,0.0,A
 2026-09-05,Lidl,Casa-Cozinha/Lavand,SACOS LIXO 30 L C/ATILHO,1.0,,1.75,1.75,0.0,A
-2026-09-05,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,,1.89,1.89,0.0,B
+2026-09-05,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,0.3,1.89,1.89,0.0,B
 2026-09-05,Lidl,Soft Drinks,Coca Cola Regular,1.0,,4.29,4.29,0.0,A
-2026-09-07,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,,1.89,1.89,0.0,B
+2026-09-07,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,0.3,1.89,1.89,0.0,B
 2026-09-07,Lidl,Soft Drinks,SteamBrew Cerveja Artesanal,1.0,,0.99,0.99,0.0,A
 2026-09-07,Lidl,Congelados,MOCHI COCO,1.0,,2.89,2.89,0.0,A
 2026-09-07,Lidl,Charcutaria&Queijos,FUET EXTRA,1.0,,2.19,2.19,0.0,A
