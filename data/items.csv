@@ -826,3 +826,6 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-09-09,Lidl,Mercearia Salgada,PRINGLES NATAS&CEBOLA 165G,1.0,,2.35,2.35,0.0,A
 2026-09-09,Lidl,Laticinios/Beb. Veg.,IOGURTE LIQ. MORANGO,1.0,,1.55,1.55,0.0,B
 2026-09-09,Lidl,Mercearia Salgada,BATATAS FRITAS MEL MOSTARDA,1.0,,1.49,1.49,0.0,A
+2026-09-10,Lidl,Soft Drinks,MonsterUltraWhite SemAcucar,1.0,,1.74,1.74,0.0,A
+2026-09-10,Lidl,Frutas e Legumes,BATATA CONS VERMELHA 4.5 KG,1.0,4.5,4.59,4.59,0.0,B
+2026-09-10,Lidl,Frutas e Legumes,CENOURA 1 KG,1.0,1,1.09,1.09,0.0,B
