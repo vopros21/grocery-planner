@@ -838,3 +838,5 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-09-10,Lidl,Mercearia Salgada,BATATA FRITA PRESUNTO,1.0,,1.29,1.29,0.0,A
 2026-09-11,Lidl,Soft Drinks,MONSTER RIO PUNCH,1.0,,1.39,1.39,0.0,A
 2026-09-11,Lidl,Mercearia Salgada,Cocktail Mix,1.0,,1.99,1.99,0.0,A
+2026-09-11,Lidl,,BEBIDA ISOTONICA,1.0,,0.89,0.89,0.0,A
+2026-09-11,Lidl,,7UP REGULAR,1.0,,1.79,1.79,0.0,A
