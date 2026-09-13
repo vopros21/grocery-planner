@@ -858,3 +858,5 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-09-12,Lidl,Mercearia Salgada,MASSA FOLHADA REDONDA,1.0,,0.95,0.95,0.0,A
 2026-09-12,Lidl,Mercearia Salgada,Cocktail Mix,1.0,,1.99,1.99,0.0,A
 2026-09-12,Lidl,Charcutaria&Queijos,QUEIJO MOZZARELLA RALADO,1.0,,2.89,2.89,0.9,B
+2026-09-13,Lidl,Soft Drinks,SteamBrew Cerveja Artesanal,2.0,,0.99,1.98,0.0,A
+2026-09-13,Lidl,Soft Drinks,Bourbon Cola 5%,2.0,,1.49,2.98,0.0,A
