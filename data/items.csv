@@ -910,3 +910,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-09-18,Lidl,Mercearia Salgada,BATATAS FRITAS CAMPONESAS,1.0,,1.35,1.35,0.04,A
 2026-09-18,Lidl,Mercearia Salgada,CIGALA BANZAI NOODLES CARNE,2.0,,1.15,2.3,0.2,A
 2026-09-18,Lidl,Mercearia Salgada,CIGALA BANZAI NOODLES GALI.,1.0,,1.15,1.15,0.1,A
+2026-09-19,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,,1.89,1.89,0.0,B
+2026-09-19,Lidl,Padaria,HOT DOG,1.0,,1.59,1.59,0.0,A
+2026-09-19,Lidl,Padaria,FOLHADO DE CARNE MISTO,1.0,,0.99,0.99,0.0,A
+2026-09-19,Lidl,Padaria,DELICIA DE MACA,1.0,,0.75,0.75,0.0,A
