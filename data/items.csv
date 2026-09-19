@@ -927,3 +927,6 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-09-19,Continente,Frutas e Legumes,RUCULA FLORETTE 100G,1.0,,1.99,1.99,0.0,A
 2026-09-19,Continente,Vinho e Espirituosas,VT CASTELINHO RES DOU 75CL,1.0,,3.59,3.59,5.4,B
 2026-09-19,Continente,Casa-Cozinha/Lavand,SACO PLAS RE CNT,2.0,,0.1,0.2,0.0,C
+2026-09-19,Lidl,Soft Drinks,"Coca Cola Regular Lata0,90",2.0,,0.9,1.8,0.0,A
+2026-09-19,Lidl,Soft Drinks,AGUA COM GAS,1.0,,1.69,1.69,0.0,C
+2026-09-19,Lidl,Padaria,PASTEL DE NATA 58GR,4.0,,0.39,1.56,0.0,A
