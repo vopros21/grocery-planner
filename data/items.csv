@@ -931,3 +931,6 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-09-19,Lidl,Soft Drinks,AGUA COM GAS,1.0,,1.69,1.69,0.0,C
 2026-09-19,Lidl,Padaria,PASTEL DE NATA 58GR,4.0,,0.39,1.56,0.0,A
 2026-09-19,Lidl,Soft Drinks,Coca Cola Regular 1l,1.0,,1.49,1.49,0.0,A
+2026-09-20,Lidl,Soft Drinks,Coca Cola Zero,1.0,,3.69,3.69,0.0,A
+2026-09-20,Lidl,Mercearia Doce,DRAGEIAS DE FRUTA ACIDAS,1.0,,1.59,1.59,0.0,A
+2026-09-20,Lidl,Mercearia Doce,MILKA MORANGO 100G,1.0,,1.59,1.59,0.0,A
