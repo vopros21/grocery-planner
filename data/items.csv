@@ -949,3 +949,9 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-09-21,Lidl,Soft Drinks,SteamBrew Cerveja Artesanal,1.0,,0.99,0.99,0.0,
 2026-09-21,Lidl,Soft Drinks,Bourbon Cola 5%,2.0,,1.49,2.98,0.0,
 2026-09-21,Lidl,Padaria,PIZZA FIAMBRE E QUEIJO,2.0,,1.49,2.98,0.0,A
+2026-09-23,Lidl,Soft Drinks,Strongbeer,1.0,,0.99,0.99,0.0,A
+2026-09-23,Lidl,Soft Drinks,PATRONUS DE TRIGO,1.0,,0.89,0.89,0.0,A
+2026-09-23,Lidl,Charcutaria&Queijos,Queijo Fatiado Burguer,1.0,,1.29,1.29,0.0,B
+2026-09-23,Lidl,Mercearia Doce,CHOCOLATE DE LEITE,2.0,,0.95,1.9,0.0,A
+2026-09-23,Lidl,Frutas e Legumes,Salada Essencia,1.0,,1.29,1.29,0.0,B
+2026-09-23,Lidl,Mercearia Salgada,Maxi Wraps,1.0,,2.99,2.99,0.0,A
