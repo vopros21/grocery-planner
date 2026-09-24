@@ -957,3 +957,4 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-09-23,Lidl,Mercearia Salgada,Maxi Wraps,1.0,,2.99,2.99,0.0,A
 2026-09-24,Lidl,Frutas e Legumes,BATATA BRANCA PARA ASSAR,1.0,,2.59,2.59,0.0,B
 2026-09-24,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,,1.89,1.89,0.0,B
+2026-09-24,Lidl,Soft Drinks,SteamBrew Cerveja Artesanal,2.0,,0.99,1.98,0.0,A
