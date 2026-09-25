@@ -960,3 +960,8 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-09-24,Lidl,Soft Drinks,SteamBrew Cerveja Artesanal,2.0,,0.99,1.98,0.0,A
 2026-09-24,Lidl,Soft Drinks,MonsterUltraWhite SemAcucar,1.0,,1.39,1.39,0.35,A
 2026-09-24,Lidl,Soft Drinks,Coca Cola Regular 1l,1.0,,1.49,1.49,0.0,A
+2026-09-25,Lidl,Bens Essenciais,ARROZ BASMATI,1.0,,1.89,1.89,0.0,B
+2026-09-25,Lidl,Laticinios/Beb. Veg.,IOGURTE GREGO NATURAL,1.0,,2.25,2.25,0.0,B
+2026-09-25,Lidl,Mercearia Salgada,MAIONESE ERVAS REMOULADE,1.0,,1.89,1.89,0.0,A
+2026-09-25,Lidl,Soft Drinks,Bourbon Cola 5%,2.0,,1.49,2.98,0.0,A
+2026-09-25,Lidl,Frutas e Legumes,CEBOLA,1.0,0.984,1.47,1.47,0.0,B
