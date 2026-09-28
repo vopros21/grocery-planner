@@ -974,3 +974,6 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-09-26,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,,1.89,1.89,0.0,B
 2026-09-26,Lidl,Padaria,CROISSANT AMENDOA E OVO,1.0,,0.85,0.85,0.0,A
 2026-09-26,Lidl,Padaria,PIZZA FIAMBRE E QUEIJO,1.0,,1.49,1.49,0.0,A
+2026-09-27,Lidl,Mercearia Doce,TRAVESSEIRO DE CACAU,2.0,,0.8,0.8,0.18,A
+2026-09-27,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,,1.89,1.89,0.0,B
+2026-09-27,Lidl,Padaria,PIZZA FIAMBRE E QUEIJO,1.0,,1.49,1.49,0.0,A
