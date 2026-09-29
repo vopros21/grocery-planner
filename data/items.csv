@@ -484,7 +484,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-08-03,Lidl,Mercearia Salgada,RAMEN NOODLES VACA,1.0,,0.89,0.89,0.0,A
 2026-08-03,Lidl,Mercearia Salgada,MASSA INS EST ASIATIC GALIN,2.0,,0.59,1.18,0.0,A
 2026-08-04,Lidl,Padaria,DELICIA DE MACA,3.0,,0.75,2.25,0.0,A
-2026-08-04,Lidl,Pequeno Almoco,DELTA CAFE MOAGEM UNIVERSAL,1.0,,5.49,5.49,0.0,A
+2026-08-04,Lidl,Pequeno Almoco,CAFE DELTA PORTUGAL MU 220G,1.0,,5.49,5.49,0.0,A
 2026-08-04,Lidl,Padaria,FOLHADO DE CARNE MISTO,1.0,,0.99,0.99,0.0,A
 2026-08-04,Lidl,Mercearia Doce,GOMAS COOL MIX,1.0,,1.65,1.65,0.0,A
 2026-08-04,Lidl,Mercearia Salgada,CONCENTRADO DE TOMATE,1.0,,1.09,1.09,0.0,A
@@ -978,7 +978,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-09-27,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,,1.89,1.89,0.0,B
 2026-09-27,Lidl,Padaria,PIZZA FIAMBRE E QUEIJO,1.0,,1.49,1.49,0.0,A
 2026-09-28,Lidl,Soft Drinks,SteamBrew Cerveja Artesanal,2.0,,0.99,1.98,0.0,A
-2026-09-28,Lidl,Pequeno Almoco,DELTA CAFE MOAGEM UNIVERSAL,1.0,,3.59,3.59,1.9,A
+2026-09-28,Lidl,Pequeno Almoco,CAFE DELTA PORTUGAL MU 220G,1.0,,3.59,3.59,1.9,A
 2026-09-28,Lidl,Padaria,DELICIA DE MACA,2.0,,0.75,1.5,0.0,A
 2026-09-28,Lidl,Bens Essenciais,SAL GROSSO,1.0,,0.29,0.29,0.0,B
 2026-09-28,Lidl,Mercearia Salgada,KETCHUP PICANTE,1.0,,1.49,1.49,0.0,A
