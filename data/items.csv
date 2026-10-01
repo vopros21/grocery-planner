@@ -1016,3 +1016,4 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-10-01,Lidl,Peixaria,SALMAO FUMADO,1.0,,5.99,5.99,0.0,A
 2026-10-01,Lidl,Mercearia Doce,NESTLE CHOCAPIC BARRA CEREA,1.0,,1.99,1.99,0.0,A
 2026-10-01,Lidl,Padaria,CROISSANT DE MANTEIGA,2.0,,0.78,0.78,0.06,A
+2026-10-01,Continente,Take Away,MENU SALSICHA + ARROZ DE CENOUR,1.0,,3.19,3.19,0.0,B
