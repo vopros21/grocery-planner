@@ -1013,3 +1013,6 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-09-30,Continente,Take Away,SALSICHA CHURRASCO UN,2.0,,0.99,1.98,0.0,B
 2026-10-01,Lidl,Charcutaria&Queijos,PATE MISTO,1.0,,1.19,1.19,0.0,B
 2026-10-01,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,,1.89,1.89,0.0,B
+2026-10-01,Lidl,Peixaria,SALMAO FUMADO,1.0,,5.99,5.99,0.0,A
+2026-10-01,Lidl,Mercearia Doce,NESTLE CHOCAPIC BARRA CEREA,1.0,,1.99,1.99,0.0,A
+2026-10-01,Lidl,Padaria,CROISSANT DE MANTEIGA,2.0,,0.78,0.78,0.06,A
