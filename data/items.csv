@@ -88,7 +88,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-06-27,Continente,Charcutaria&Queijos,QJ VACA AMANTEIGADO CNT UN,1.0,,4.49,4.49,0.0,A
 2026-06-27,Continente,Charcutaria&Queijos,QJ COTTAGE PHILADELPHIA 175G,1.0,,1.89,1.89,0.0,A
 2026-06-27,Continente,Pequeno Almoco,CEREAIS MUESLI CNT FRUTOS 500G,1.0,,2.29,2.29,0.0,C
-2026-06-27,Continente,Frutas e Legumes,PEPINO CNT KG,1.0,0.5,0.96,1.76,0.0,A
+2026-06-27,Continente,Frutas e Legumes,PEPINO CNT KG,1.0,0.5,0.96,0.96,0.0,A
 2026-06-27,Continente,Frutas e Legumes,MELAO BRANCO,1.0,,7.59,7.59,0.0,A
 2026-06-27,Continente,Padaria,CROUTONS C.AZ/ALHO/SALSA CONTIN,3.0,,0.78,2.34,0.0,A
 2026-06-27,Continente,Vinho e Espirituosas,CREME DE PASTEL DE NATA 35 70CL,1.0,,13.19,13.19,1.0,C
@@ -650,7 +650,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-08-23,Lidl,Soft Drinks,SteamBrew Cerveja Artesanal,1.0,,0.99,0.99,0.0,A
 2026-08-23,Lidl,Soft Drinks,PATRONUS DE TRIGO,1.0,,0.79,0.79,0.1,A
 2026-08-23,Lidl,Mercearia Salgada,SNACK BATATA NATAS E CEBOLA,1.0,,1.99,1.99,0.0,A
-2026-08-23,Lidl,Soft Drinks,PATRONUS DE TRIGO,2.0,,1.58,1.58,0.2,A
+2026-08-23,Lidl,Soft Drinks,PATRONUS DE TRIGO,2.0,,0.79,1.58,0.2,A
 2026-08-23,Lidl,Soft Drinks,Bourbon Cola 5%,2.0,,1.49,2.98,0.0,A
 2026-08-23,Lidl,Soft Drinks,SUMO DE LARANJA,1.0,,1.99,1.99,0.0,B
 2026-08-23,Lidl,Congelados,GELADO MAXI MIX XXL,1.0,,4.69,4.69,0.0,A
@@ -707,7 +707,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-08-28,Lidl,Casa-Cozinha/Lavand,Saco de Papel,1.0,,0.15,0.15,0.0,A
 2026-08-28,Lidl,Bens Essenciais,FARINHA DE TRIGO,1.0,,0.59,0.59,0.0,B
 2026-08-28,Lidl,Soft Drinks,Bourbon Cola 5%,2.0,,1.49,2.98,0.0,A
-2026-08-28,Lidl,Soft Drinks,PATRONUS DE TRIGO,2.0,,1.58,1.58,0.2,A
+2026-08-28,Lidl,Soft Drinks,PATRONUS DE TRIGO,2.0,,0.79,1.58,0.2,A
 2026-08-28,Lidl,Soft Drinks,Cerveja Perlenbacher,1.0,,0.69,0.69,0.1,A
 2026-08-28,Lidl,Charcutaria&Queijos,FUET EXTRA,1.0,,2.19,2.19,0.0,A
 2026-08-28,Lidl,Mercearia Doce,WAFERS COM COCO,1.0,,3.19,3.19,0.0,A
@@ -722,7 +722,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-08-30,Lidl,Casa-Cozinha/Lavand,Silicone Anti Fungos B-0514973,1.0,,2.39,2.39,0.6,A
 2026-08-30,Lidl,Casa-Cozinha/Lavand,Camisola Inter M Cinz-0494864,1.0,,4.53,4.53,4.46,A
 2026-08-30,Lidl,Frutas e Legumes,ALHO SECO NACIONAL,1.0,0.172,1.15,1.15,0.0,B
-2026-08-30,Lidl,Soft Drinks,PATRONUS DE TRIGO,2.0,,1.58,1.58,0.2,A
+2026-08-30,Lidl,Soft Drinks,PATRONUS DE TRIGO,2.0,,0.79,1.58,0.2,A
 2026-08-30,Lidl,Soft Drinks,CERVEJA MEXICANA,6.0,,4.74,4.74,1.2,A
 2026-08-30,Lidl,Bens Essenciais,ACUCAR MASCAVADO,1.0,,2.29,2.29,0.0,A
 2026-08-30,Lidl,Mercearia Doce,CHOCOLATE DE LEITE,2.0,,0.95,1.9,0.0,A
