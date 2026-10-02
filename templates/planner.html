@@ -43,16 +43,19 @@
   th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); }
   th { color: var(--muted); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.02em; position: sticky; top: 0; background: var(--card); z-index: 1; box-shadow: 0 1px 0 var(--border); }
   tr.running-low { background: var(--low-bg); }
-  /* Table wrappers. Desktop: not a scroll box, so sticky <th> pins to the page.
-     Phones: the wrapper scrolls (sideways for wide tables, at most 70vh tall) and
+  /* Table wrappers. Wide windows: not a scroll box, so sticky <th> pins to the page.
+     Narrower: the wrapper scrolls (sideways for wide tables, at most 70vh tall) and
      the header sticks inside it, so the page itself never scrolls sideways.
+     Breakpoint is 960px here (768px in index.html): "All products" with its
+     category inputs needs ~907px, so 768-959px windows would scroll sideways.
+     The pop-up's own 768px breakpoint (historyDesktop) is separate.
      The history pop-up's table never gets its own scroll box: its header sticks
      to the dialog's scroll instead. */
   .table-wrap { max-width: 100%; }
-  @media (max-width: 767px) {
+  @media (max-width: 959px) {
     .table-wrap { overflow: auto; max-height: 70vh; -webkit-overflow-scrolling: touch; }
   }
-  @media (min-width: 768px) {
+  @media (min-width: 960px) {
     .table-wrap { overflow: visible; }
   }
   dialog.history .table-wrap { overflow: visible; max-height: none; }
@@ -117,7 +120,7 @@
 </style>
 </head>
 <body>
-<div class="version-tag">v20261002-2</div>
+<div class="version-tag">v20261002-3</div>
 
 <datalist id="categoryOptions">
   {% for c in known_categories %}
