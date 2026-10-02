@@ -43,8 +43,19 @@
   th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); }
   th { color: var(--muted); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.02em; position: sticky; top: 0; background: var(--card); z-index: 1; box-shadow: 0 1px 0 var(--border); }
   tr.running-low { background: var(--low-bg); }
-  /* Wide tables scroll inside their own box so the page never scrolls sideways */
-  .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; max-width: 100%; }
+  /* Table wrappers. Desktop: not a scroll box, so sticky <th> pins to the page.
+     Phones: the wrapper scrolls (sideways for wide tables, at most 70vh tall) and
+     the header sticks inside it, so the page itself never scrolls sideways.
+     The history pop-up's table never gets its own scroll box: its header sticks
+     to the dialog's scroll instead. */
+  .table-wrap { max-width: 100%; }
+  @media (max-width: 767px) {
+    .table-wrap { overflow: auto; max-height: 70vh; -webkit-overflow-scrolling: touch; }
+  }
+  @media (min-width: 768px) {
+    .table-wrap { overflow: visible; }
+  }
+  dialog.history .table-wrap { overflow: visible; max-height: none; }
   .tag { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 600; }
   .tag.low { background: var(--low); color: white; }
   .tag.ok { background: #e9f5ea; color: #1f7a34; }
@@ -106,7 +117,7 @@
 </style>
 </head>
 <body>
-<div class="version-tag">v20261002-1</div>
+<div class="version-tag">v20261002-2</div>
 
 <datalist id="categoryOptions">
   {% for c in known_categories %}

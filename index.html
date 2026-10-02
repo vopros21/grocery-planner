@@ -45,8 +45,19 @@
   th, td { text-align: left; padding: 7px 8px; border-bottom: 1px solid var(--border); }
   th { color: var(--muted); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.02em; position: sticky; top: 0; background: var(--card); z-index: 1; box-shadow: 0 1px 0 var(--border); }
   tr.running-low { background: var(--low-bg); }
-  /* Wide tables scroll inside their own box so the page never scrolls sideways */
-  .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; max-width: 100%; }
+  /* Table wrappers. Desktop: not a scroll box, so sticky <th> pins to the page.
+     Phones: the wrapper scrolls (sideways for wide tables, at most 70vh tall) and
+     the header sticks inside it, so the page itself never scrolls sideways.
+     The history pop-up's table never gets its own scroll box: its header sticks
+     to the dialog's scroll instead. */
+  .table-wrap { max-width: 100%; }
+  @media (max-width: 767px) {
+    .table-wrap { overflow: auto; max-height: 70vh; -webkit-overflow-scrolling: touch; }
+  }
+  @media (min-width: 768px) {
+    .table-wrap { overflow: visible; }
+  }
+  dialog.history .table-wrap { overflow: visible; max-height: none; }
   .tag { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 600; white-space: nowrap; }
   .tag.low { background: var(--low); color: white; }
   .tag.ok { background: #e9f5ea; color: #1f7a34; }
@@ -92,22 +103,10 @@
   .history-chart { position: relative; height: 240px; width: 100%; margin-bottom: 12px; }
   .history-summary { font-size: 12px; color: var(--muted); margin-top: 10px; }
   .tag.promo { background: #fff4d6; color: #8a5a00; margin-left: 6px; }
-  @media (max-width: 767px) {
-    dialog.history {
-      width: 100vw; max-width: 100vw; height: 92vh; max-height: 92vh;
-      margin: auto 0 0; border-radius: 16px 16px 0 0; border-bottom: 0;
-    }
-    .history-inner { padding: 16px; }
-    .history-chart-wrap { display: none; }
-  }
-  /* Same sheet, applied from JS when the *visual* viewport is narrow (see placeHistorySheet) */
-  dialog.history.sheet { border-radius: 16px 16px 0 0; border-bottom: 0; }
-  dialog.history.sheet .history-inner { padding: 16px; }
-  dialog.history.sheet .history-chart-wrap { display: none; }
 </style>
 </head>
 <body>
-<div class="version-tag">v20261002-1</div>
+<div class="version-tag">v20261002-2</div>
 
 <dialog id="historyDialog" class="history">
   <div class="history-inner">
@@ -485,6 +484,14 @@ function esc(s) {
   return String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 }
 
+// The purchase-history pop-up is desktop-only on this page: phones get the
+// product name as plain text (see the historyDesktop change listener).
+function productNameHtml(p) {
+  return historyDesktop.matches
+    ? `<button type="button" class="link" data-key="${esc(p.key)}">${esc(p.name)}</button>`
+    : esc(p.name);
+}
+
 function render() {
   const bufferMonths = parseFloat(document.getElementById("bufferSelect").value);
   const windowMonths = parseFloat(document.getElementById("windowSelect").value);
@@ -512,7 +519,7 @@ function render() {
     let html = `<div class="table-wrap"><table><tr><th>Product</th><th>Avg/mo</th><th>Buy now (${bufferMonths}mo)</th><th>Last</th><th>Status</th></tr>`;
     for (const p of shoppingList) {
       html += `<tr class="${p.runningLow ? "running-low" : ""}">
-        <td><button type="button" class="link" data-key="${esc(p.key)}">${esc(p.name)}</button><div class="muted" style="font-size:11px">${esc(p.category)}</div></td>
+        <td>${productNameHtml(p)}<div class="muted" style="font-size:11px">${esc(p.category)}</div></td>
         <td>${p.avgUnitsPerMonth} ${esc(p.unitType)}</td>
         <td><strong>${p.suggestedBuy} ${esc(p.unitType)}</strong></td>
         <td class="muted">${p.daysSinceLast}d ago</td>
@@ -535,7 +542,7 @@ function render() {
       ? `${p.avgUnitsPerMonth} ${esc(p.unitType)}`
       : (!p.enoughHistory ? `<span class="muted">need more history</span>` : `<span class="muted">n/a</span>`);
     allHtml += `<tr class="${p.runningLow ? "running-low" : ""}">
-      <td><button type="button" class="link" data-key="${esc(p.key)}">${esc(p.name)}</button></td>
+      <td>${productNameHtml(p)}</td>
       <td>${esc(p.category)}</td>
       <td class="muted">${esc(p.storesSeen.join(", "))}</td>
       <td>${p.purchaseDatesCount}</td>
@@ -662,28 +669,11 @@ function historyCell(tr, text, cls) {
   return td;
 }
 
-// Phones get a bottom sheet pinned to the *visual* viewport. A page that
-// overflows sideways (wide tables) grows the layout viewport, and that is what
-// vh units, media queries and position:fixed measure — the sheet would land
-// off-screen. Returns true when the sheet layout (and no chart) applies.
-function placeHistorySheet() {
-  const vv = window.visualViewport;
-  const narrow = !historyDesktop.matches || (vv ? vv.width : window.innerWidth) < 768;
-  historyDialog.classList.toggle("sheet", narrow);
-  if (!narrow || !vv) { historyDialog.style.cssText = ""; return narrow; }
-  const h = Math.round(vv.height * 0.92);
-  historyDialog.style.cssText =
-    `margin:0;left:${vv.offsetLeft}px;top:${vv.offsetTop + vv.height - h}px;` +
-    `width:${vv.width}px;height:${h}px;max-width:none;max-height:none;`;
-  return narrow;
-}
-
 function fmtEur(x) { return "€" + x.toFixed(2); }
 function fmtNum(x) { return String(+x.toFixed(3)); }
 
 function renderHistory(h) {
   destroyHistoryChart();
-  const narrow = placeHistorySheet();
   document.getElementById("historyTitle").textContent = h.title;
   document.getElementById("historyCategory").textContent = h.category;
 
@@ -726,7 +716,7 @@ function renderHistory(h) {
   const enough = points.length >= 2;
   chartBox.hidden = !enough;
   chartNote.hidden = enough;
-  if (!enough || narrow) return;
+  if (!enough || !historyDesktop.matches) return;
 
   const stores = Array.from(new Set(points.map(r => r.store))).sort();
   const datasets = stores.map((store, i) => {
@@ -768,11 +758,12 @@ function renderHistory(h) {
 }
 
 historyDialog.addEventListener("close", destroyHistoryChart);
-if (window.visualViewport) {
-  const replace = () => { if (historyDialog.open) placeHistorySheet(); };
-  visualViewport.addEventListener("resize", replace);
-  visualViewport.addEventListener("scroll", replace);
-}
+// Desktop-only: crossing 768px (window resize, phone rotation) re-renders the
+// tables so product names switch between links and plain text.
+historyDesktop.addEventListener("change", () => {
+  if (!historyDesktop.matches && historyDialog.open) historyDialog.close();
+  if (ALL_ROWS.length) render();
+});
 historyDialog.querySelector(".history-close").addEventListener("click", () => historyDialog.close());
 // Backdrop click: the dialog itself has no padding, so a click whose target is
 // the <dialog> element can only have landed on the backdrop.
@@ -783,6 +774,7 @@ document.addEventListener("click", (e) => {
 });
 
 function openHistory(key) {
+  if (!historyDesktop.matches) return;
   const h = getProductHistory(ALL_ROWS, key, CATEGORY_OVERRIDES);
   if (!h) return;
   if (!historyDialog.open) historyDialog.showModal();
