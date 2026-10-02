@@ -730,7 +730,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-08-31,Lidl,Charcutaria&Queijos,SALSICHAS ESTALADICAS,1.0,,2.49,2.49,2.5,A
 2026-08-31,Lidl,Congelados,GELADO TRES SABORES,1.0,,3.69,3.69,0.0,A
 2026-08-31,Lidl,Frutas e Legumes,CEBOLA ROXA,1.0,0.588,1.46,1.46,0.0,B
-2026-08-31,Lidl,Laticinios/Beb. Veg.,MANTEIGA SEM SAL,2.0,,2.98,2.98,1.0,B
+2026-08-31,Lidl,Laticinios/Beb. Veg.,MANTEIGA SEM SAL,2.0,,1.49,2.98,1.0,B
 2026-08-31,Lidl,Frutas e Legumes,BATATA BRANCA PARA ASSAR,1.0,,2.59,2.59,0.0,B
 2026-08-31,Lidl,Frutas e Legumes,BANANA,1.0,1.278,1.27,1.27,0.25,B
 2026-08-31,Lidl,Mercearia Doce,CHOCOLATE DE LEITE,2.0,,0.95,1.9,0.0,A
@@ -899,7 +899,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-09-16,Lidl,Mercearia Doce,CHOCOLATE DE LEITE,1.0,,0.95,0.95,0.0,A
 2026-09-16,Lidl,Padaria,PIZZA FIAMBRE E QUEIJO,2.0,,1.49,2.98,0.0,A
 2026-09-18,Lidl,Congelados,CAMARAO 20/30,1.0,1.756,17.54,17.54,0.0,A
-2026-09-18,Lidl,Laticinios/Beb. Veg.,MANTEIGA SEM SAL,2.0,,2.98,2.98,1.0,B
+2026-09-18,Lidl,Laticinios/Beb. Veg.,MANTEIGA SEM SAL,2.0,,1.49,2.98,1.0,B
 2026-09-18,Lidl,Soft Drinks,SteamBrew Cerveja Artesanal,2.0,,0.99,1.98,0.0,A
 2026-09-18,Lidl,Soft Drinks,PATRONUS DE TRIGO,1.0,,0.89,0.89,0.0,A
 2026-09-18,Continente,Soft Drinks,BEB ENER.MONSTER ULTRA WHITE 50,2.0,,1.74,3.48,0.0,C
