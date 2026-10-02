@@ -1020,3 +1020,6 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-10-01,Continente,Congelados,Melties de Ananás,1.0,,3.49,3.49,0.0,
 2026-10-02,Lidl,Mercearia Doce,GOMAS ACIDAS LINGUAS MULTIC,1.0,,0.79,0.79,0.0,A
 2026-10-02,Lidl,Padaria,CROISSANT BRIOCHE,1.0,,0.59,0.59,0.0,A
+2026-10-02,Lidl,DIY,Kit Desmontag Carro-0506386,1.0,,8.99,8.99,0.0,A
+2026-10-02,Lidl,Charcutaria&Queijos,SALSICHAS ESTALADICAS,1.0,,4.99,4.99,0.0,A
+2026-10-02,Lidl,Mercearia Salgada,Maxi Wraps,1.0,,2.99,2.99,0.0,A
