@@ -61,6 +61,39 @@
   .chart-container { position: relative; height: 350px; width: 100%; }
   .chart-card { overflow: visible; }
   .empty { color: var(--muted); font-size: 13px; padding: 12px 0; }
+  button.link {
+    background: none; border: 0; padding: 0; margin: 0; font: inherit; color: var(--accent);
+    cursor: pointer; text-align: left;
+  }
+  button.link:hover { text-decoration: underline; }
+  dialog.history {
+    box-sizing: border-box; border: 1px solid var(--border); border-radius: 12px; padding: 0;
+    width: min(760px, 92vw); max-height: 85vh;
+    background: var(--card); color: var(--text);
+  }
+  dialog.history::backdrop { background: rgba(0, 0, 0, 0.35); }
+  .history-inner { padding: 20px 24px; }
+  .history-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 12px; }
+  .history-head h2 { margin: 0 0 2px; }
+  .history-close {
+    border: 0; background: none; font-size: 18px; line-height: 1; padding: 4px 6px;
+    cursor: pointer; color: var(--muted);
+  }
+  .history-chart { position: relative; height: 240px; width: 100%; margin-bottom: 12px; }
+  .history-summary { font-size: 12px; color: var(--muted); margin-top: 10px; }
+  .tag.promo { background: #fff4d6; color: #8a5a00; margin-left: 6px; }
+  @media (max-width: 767px) {
+    dialog.history {
+      width: 100vw; max-width: 100vw; height: 92vh; max-height: 92vh;
+      margin: auto 0 0; border-radius: 16px 16px 0 0; border-bottom: 0;
+    }
+    .history-inner { padding: 16px; }
+    .history-chart-wrap { display: none; }
+  }
+  /* Same sheet, applied from JS when the *visual* viewport is narrow (see placeHistorySheet) */
+  dialog.history.sheet { border-radius: 16px 16px 0 0; border-bottom: 0; }
+  dialog.history.sheet .history-inner { padding: 16px; }
+  dialog.history.sheet .history-chart-wrap { display: none; }
   .version-tag {
     position: fixed; bottom: 10px; right: 12px; z-index: 999;
     font-size: 11px; color: var(--muted); background: var(--card);
@@ -77,6 +110,24 @@
   <option value="{{ c }}">
   {% endfor %}
 </datalist>
+
+<dialog id="historyDialog" class="history">
+  <div class="history-inner">
+    <div class="history-head">
+      <div>
+        <h2 id="historyTitle"></h2>
+        <div class="muted" id="historyCategory"></div>
+      </div>
+      <button type="button" class="history-close" aria-label="Close">&#x2715;</button>
+    </div>
+    <div class="history-chart-wrap">
+      <div class="history-chart" id="historyChartBox"><canvas id="historyChart"></canvas></div>
+      <div class="empty" id="historyChartNote" hidden>Not enough history for a chart.</div>
+    </div>
+    <div id="historyBody"></div>
+    <div class="history-summary" id="historySummary"></div>
+  </div>
+</dialog>
 
 <h1>Shopping Planner</h1>
 <div class="subtitle">Bulk-buy suggestions for stockable items (meat, frozen, canned/dry goods) — buffer target: {{ buffer_months }} month(s)</div>
@@ -95,7 +146,7 @@
     </tr>
     {% for p in shopping_list %}
     <tr class="{{ 'running-low' if p.running_low else '' }}">
-      <td>{{ p.name }}</td>
+      <td><button type="button" class="link" data-key="{{ p.key }}">{{ p.name }}</button></td>
       <td>{{ p.category }}</td>
       <td>{{ p.avg_units_per_month }} {{ p.unit_type }}</td>
       <td><strong>{{ p.suggested_buy }} {{ p.unit_type }}</strong></td>
@@ -171,7 +222,7 @@
     </tr>
     {% for p in products %}
     <tr class="{{ 'running-low' if p.running_low else '' }}">
-      <td>{{ p.name }}</td>
+      <td><button type="button" class="link" data-key="{{ p.key }}">{{ p.name }}</button></td>
       <td>
         <form class="toggle-form" method="post" action="{{ url_for('planner.set_category') }}">
           <input type="hidden" name="key" value="{{ p.key }}">
@@ -299,6 +350,159 @@
       plugins: [totalsLabelPlugin],
     });
   }
+
+// ---------------------------------------------------------------------------
+// Purchase-history pop-up (product name click). Rendered with textContent
+// only — product names come straight from receipt text.
+// ---------------------------------------------------------------------------
+const historyDialog = document.getElementById("historyDialog");
+const historyDesktop = window.matchMedia("(min-width: 768px)");
+const STORE_COLORS = { Continente: "#d0451f", Lidl: "#0071e3" };
+let historyChart = null;
+
+function destroyHistoryChart() {
+  if (historyChart) { historyChart.destroy(); historyChart = null; }
+}
+
+function historyCell(tr, text, cls) {
+  const td = tr.insertCell();
+  td.textContent = text;
+  if (cls) td.className = cls;
+  return td;
+}
+
+// Phones get a bottom sheet pinned to the *visual* viewport. A page that
+// overflows sideways (wide tables) grows the layout viewport, and that is what
+// vh units, media queries and position:fixed measure — the sheet would land
+// off-screen. Returns true when the sheet layout (and no chart) applies.
+function placeHistorySheet() {
+  const vv = window.visualViewport;
+  const narrow = !historyDesktop.matches || (vv ? vv.width : window.innerWidth) < 768;
+  historyDialog.classList.toggle("sheet", narrow);
+  if (!narrow || !vv) { historyDialog.style.cssText = ""; return narrow; }
+  const h = Math.round(vv.height * 0.92);
+  historyDialog.style.cssText =
+    `margin:0;left:${vv.offsetLeft}px;top:${vv.offsetTop + vv.height - h}px;` +
+    `width:${vv.width}px;height:${h}px;max-width:none;max-height:none;`;
+  return narrow;
+}
+
+function fmtEur(x) { return "€" + x.toFixed(2); }
+function fmtNum(x) { return String(+x.toFixed(3)); }
+
+function renderHistory(h) {
+  destroyHistoryChart();
+  const narrow = placeHistorySheet();
+  document.getElementById("historyTitle").textContent = h.title;
+  document.getElementById("historyCategory").textContent = h.category;
+
+  // Table, newest first (already ordered by getProductHistory)
+  const table = document.createElement("table");
+  const head = table.createTHead().insertRow();
+  ["Date", "Store", "Qty", "Price per item"].forEach(t => {
+    const th = document.createElement("th"); th.textContent = t; head.appendChild(th);
+  });
+  const tbody = table.createTBody();
+  for (const r of h.rows) {
+    const tr = tbody.insertRow();
+    historyCell(tr, r.date, "muted");
+    historyCell(tr, r.store);
+    historyCell(tr, r.is_weight ? `${fmtNum(r.weight_kg)} kg` : fmtNum(r.qty));
+    const priceTd = historyCell(tr, fmtEur(r.price) + (r.is_weight ? "/kg" : ""));
+    if (r.discount > 0) {
+      const tag = document.createElement("span");
+      tag.className = "tag promo";
+      tag.textContent = "promo −" + fmtEur(r.discount);
+      priceTd.appendChild(tag);
+    }
+  }
+  const body = document.getElementById("historyBody");
+  body.replaceChildren(table);
+
+  const s = h.summary;
+  const suffix = s.price_unit === "kg" ? "/kg" : "";
+  document.getElementById("historySummary").textContent =
+    `${s.count} purchase${s.count === 1 ? "" : "s"}` +
+    (s.min == null ? "" : ` · min ${fmtEur(s.min)}${suffix} · max ${fmtEur(s.max)}${suffix} · avg ${fmtEur(s.avg)}${suffix}`) +
+    (s.priced_count < s.count ? ` (prices from the ${s.priced_count} ${s.price_unit === "kg" ? "by-weight" : "per-item"} purchases)` : "");
+
+  // Price chart — desktop only; one line per store, prices in the product's main unit
+  const points = h.rows.filter(r => r.price_unit === s.price_unit);
+  const chartBox = document.getElementById("historyChartBox");
+  const chartNote = document.getElementById("historyChartNote");
+  const enough = points.length >= 2;
+  chartBox.hidden = !enough;
+  chartNote.hidden = enough;
+  if (!enough || narrow) return;
+
+  const stores = Array.from(new Set(points.map(r => r.store))).sort();
+  const datasets = stores.map((store, i) => {
+    const color = STORE_COLORS[store] || `hsl(${((i * 137.508) % 360).toFixed(1)}, 55%, 45%)`;
+    return {
+      label: store || "(unknown store)",
+      data: points
+        .filter(r => r.store === store)
+        .map(r => ({ x: Date.parse(r.date), y: r.price }))
+        .sort((a, b) => a.x - b.x),
+      borderColor: color,
+      backgroundColor: color,
+      tension: 0,
+      pointRadius: 3,
+    };
+  });
+  const fmtDate = (ms) => new Date(ms).toISOString().slice(0, 10);
+  historyChart = new Chart(document.getElementById("historyChart"), {
+    type: "line",
+    data: { datasets },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        x: { type: "linear", ticks: { callback: fmtDate, maxRotation: 0, autoSkipPadding: 16 } },
+        y: { title: { display: true, text: s.price_unit === "kg" ? "EUR / kg" : "EUR / item" } },
+      },
+      plugins: {
+        legend: { position: "bottom", labels: { boxWidth: 12, font: { size: 11 } } },
+        tooltip: {
+          callbacks: {
+            title: (items) => (items.length ? fmtDate(items[0].parsed.x) : ""),
+            label: (item) => `${item.dataset.label}: ${fmtEur(item.parsed.y)}${suffix}`,
+          },
+        },
+      },
+    },
+  });
+}
+
+historyDialog.addEventListener("close", destroyHistoryChart);
+if (window.visualViewport) {
+  const replace = () => { if (historyDialog.open) placeHistorySheet(); };
+  visualViewport.addEventListener("resize", replace);
+  visualViewport.addEventListener("scroll", replace);
+}
+historyDialog.querySelector(".history-close").addEventListener("click", () => historyDialog.close());
+// Backdrop click: the dialog itself has no padding, so a click whose target is
+// the <dialog> element can only have landed on the backdrop.
+historyDialog.addEventListener("click", (e) => { if (e.target === historyDialog) historyDialog.close(); });
+document.addEventListener("click", (e) => {
+  const btn = e.target.closest("button.link[data-key]");
+  if (btn) openHistory(btn.dataset.key);
+});
+
+const HISTORY_URL = {{ url_for('planner.product_history') | tojson }};
+async function openHistory(key) {
+  let h;
+  try {
+    const res = await fetch(HISTORY_URL + "?key=" + encodeURIComponent(key));
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    h = await res.json();
+  } catch (err) {
+    alert("Could not load purchase history: " + err.message);
+    return;
+  }
+  if (!historyDialog.open) historyDialog.showModal();
+  renderHistory(h);
+}
 </script>
 
 </body>

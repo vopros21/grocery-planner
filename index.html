@@ -69,10 +69,61 @@
   details summary::after { content: " ▾"; }
   details[open] summary::after { content: " ▴"; }
   .stale { color: var(--low); font-size: 12px; }
+  button.link {
+    background: none; border: 0; padding: 0; margin: 0; font: inherit; color: var(--accent);
+    cursor: pointer; text-align: left;
+  }
+  button.link:hover { text-decoration: underline; }
+  dialog.history {
+    box-sizing: border-box; border: 1px solid var(--border); border-radius: 12px; padding: 0;
+    width: min(760px, 92vw); max-height: 85vh;
+    background: var(--card); color: var(--text);
+  }
+  dialog.history::backdrop { background: rgba(0, 0, 0, 0.35); }
+  .history-inner { padding: 20px 24px; }
+  .history-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 12px; }
+  .history-head h2 { margin: 0 0 2px; }
+  .history-close {
+    border: 0; background: none; font-size: 18px; line-height: 1; padding: 4px 6px;
+    cursor: pointer; color: var(--muted);
+  }
+  .history-chart { position: relative; height: 240px; width: 100%; margin-bottom: 12px; }
+  .history-summary { font-size: 12px; color: var(--muted); margin-top: 10px; }
+  .tag.promo { background: #fff4d6; color: #8a5a00; margin-left: 6px; }
+  @media (max-width: 767px) {
+    dialog.history {
+      width: 100vw; max-width: 100vw; height: 92vh; max-height: 92vh;
+      margin: auto 0 0; border-radius: 16px 16px 0 0; border-bottom: 0;
+    }
+    .history-inner { padding: 16px; }
+    .history-chart-wrap { display: none; }
+  }
+  /* Same sheet, applied from JS when the *visual* viewport is narrow (see placeHistorySheet) */
+  dialog.history.sheet { border-radius: 16px 16px 0 0; border-bottom: 0; }
+  dialog.history.sheet .history-inner { padding: 16px; }
+  dialog.history.sheet .history-chart-wrap { display: none; }
 </style>
 </head>
 <body>
 <div class="version-tag">v20260822-1</div>
+
+<dialog id="historyDialog" class="history">
+  <div class="history-inner">
+    <div class="history-head">
+      <div>
+        <h2 id="historyTitle"></h2>
+        <div class="muted" id="historyCategory"></div>
+      </div>
+      <button type="button" class="history-close" aria-label="Close">&#x2715;</button>
+    </div>
+    <div class="history-chart-wrap">
+      <div class="history-chart" id="historyChartBox"><canvas id="historyChart"></canvas></div>
+      <div class="empty" id="historyChartNote" hidden>Not enough history for a chart.</div>
+    </div>
+    <div id="historyBody"></div>
+    <div class="history-summary" id="historySummary"></div>
+  </div>
+</dialog>
 
 <h1>Shopping Planner</h1>
 <div class="subtitle" id="subtitle">Bulk-buy suggestions for stockable items — read-only, synced from GitHub</div>
@@ -221,6 +272,15 @@ function loadItemsFromParsed(parsedRows) {
   return parsedRows.filter(row => !CORRUPTED_NAME_RE.test((row.name || "").trim()));
 }
 
+function resolveCategory(key, items, categoryOverrides) {
+  // Override from category_overrides.json, else the most common receipt
+  // category among the product's rows, else "".
+  const categoryOverride = categoryOverrides[key];
+  if (categoryOverride) return categoryOverride;
+  const categories = items.map(r => r.category).filter(Boolean);
+  return categories.length ? mode(categories) : "";
+}
+
 function computeProductStats(rows, overrides, categoryOverrides, bufferMonths, windowMonths, staleMonths) {
   categoryOverrides = categoryOverrides || {};
   staleMonths = staleMonths == null ? STALE_MONTHS_DEFAULT : staleMonths;
@@ -262,14 +322,7 @@ function computeProductStats(rows, overrides, categoryOverrides, bufferMonths, w
     const totalSpend = items.reduce((s, r) => s + toFloat(r.total_price), 0);
     const displayName = items.reduce((a, r) => (r.name && r.name.length > a.length ? r.name : a), items[0].name || "");
 
-    const categoryOverride = categoryOverrides[key];
-    let category;
-    if (categoryOverride) {
-      category = categoryOverride;
-    } else {
-      const categories = items.map(r => r.category).filter(Boolean);
-      category = categories.length ? mode(categories) : "";
-    }
+    const category = resolveCategory(key, items, categoryOverrides);
 
     const enoughHistory = purchaseDatesCount >= MIN_PURCHASE_DATES && overallSpanDays >= MIN_SPAN_DAYS;
 
@@ -342,6 +395,76 @@ function computeMonthlyCategorySpend(rows, categoryOverrides) {
   return monthly;
 }
 
+function getProductHistory(rows, key, categoryOverrides) {
+  // Every purchase row for one product (grouped like computeProductStats:
+  // normalizeName key, corrupted rows dropped, category from resolveCategory),
+  // newest first, plus a price summary.
+  categoryOverrides = categoryOverrides || {};
+
+  const items = [];
+  for (const r of rows) {
+    if (CORRUPTED_NAME_RE.test((r.name || "").trim())) continue;
+    if (normalizeName(r.name) === key) items.push(r);
+  }
+
+  const datedItems = [];
+  for (const r of items) {
+    const d = parseISODate(r.date);
+    if (d) datedItems.push([d, r]);
+  }
+  if (!datedItems.length) return null;
+
+  const unitType = items.some(r => toFloat(r.weight_kg) > 0) ? "kg" : "un";
+
+  // Display name = raw name on the most recent purchase (last row on the latest date).
+  const latestTime = Math.max(...datedItems.map(([d]) => d.getTime()));
+  const atLatest = datedItems.filter(([d]) => d.getTime() === latestTime);
+  const title = atLatest[atLatest.length - 1][1].name;
+
+  const category = resolveCategory(key, items, categoryOverrides);
+
+  // Newest first; stable sort keeps CSV order within the same date.
+  datedItems.sort((a, b) => b[0].getTime() - a[0].getTime());
+
+  const history = [];
+  for (const [d, r] of datedItems) {
+    const weightKg = toFloat(r.weight_kg);
+    const isWeight = weightKg > 0;
+    history.push({
+      date: d.toISOString().slice(0, 10),
+      store: r.store || "",
+      is_weight: isWeight,
+      qty: toFloat(r.qty),
+      weight_kg: isWeight ? weightKg : null,
+      price: isWeight ? toFloat(r.total_price) / weightKg : toFloat(r.unit_price),
+      price_unit: isWeight ? "kg" : "un",
+      discount: toFloat(r.discount),
+    });
+  }
+
+  // Summary/chart unit = the unit most rows were sold in (ties -> kg, like unitType).
+  const kgRows = history.filter(h => h.price_unit === "kg").length;
+  const priceUnit = kgRows * 2 >= history.length ? "kg" : "un";
+  const prices = history.filter(h => h.price_unit === priceUnit).map(h => h.price);
+  const summary = {
+    count: history.length,
+    price_unit: priceUnit,
+    priced_count: prices.length,
+    min: prices.length ? Math.min(...prices) : null,
+    max: prices.length ? Math.max(...prices) : null,
+    avg: prices.length ? prices.reduce((s, p) => s + p, 0) / prices.length : null,
+  };
+
+  return {
+    key,
+    title,
+    category: category || "(uncategorized — Lidl)",
+    unit_type: unitType,
+    rows: history,
+    summary,
+  };
+}
+
 // ---------------------------------------------------------------------------
 // Rendering
 // ---------------------------------------------------------------------------
@@ -381,7 +504,7 @@ function render() {
     let html = `<table><tr><th>Product</th><th>Avg/mo</th><th>Buy now (${bufferMonths}mo)</th><th>Last</th><th>Status</th></tr>`;
     for (const p of shoppingList) {
       html += `<tr class="${p.runningLow ? "running-low" : ""}">
-        <td>${esc(p.name)}<div class="muted" style="font-size:11px">${esc(p.category)}</div></td>
+        <td><button type="button" class="link" data-key="${esc(p.key)}">${esc(p.name)}</button><div class="muted" style="font-size:11px">${esc(p.category)}</div></td>
         <td>${p.avgUnitsPerMonth} ${esc(p.unitType)}</td>
         <td><strong>${p.suggestedBuy} ${esc(p.unitType)}</strong></td>
         <td class="muted">${p.daysSinceLast}d ago</td>
@@ -404,7 +527,7 @@ function render() {
       ? `${p.avgUnitsPerMonth} ${esc(p.unitType)}`
       : (!p.enoughHistory ? `<span class="muted">need more history</span>` : `<span class="muted">n/a</span>`);
     allHtml += `<tr class="${p.runningLow ? "running-low" : ""}">
-      <td>${esc(p.name)}</td>
+      <td><button type="button" class="link" data-key="${esc(p.key)}">${esc(p.name)}</button></td>
       <td>${esc(p.category)}</td>
       <td class="muted">${esc(p.storesSeen.join(", "))}</td>
       <td>${p.purchaseDatesCount}</td>
@@ -509,6 +632,151 @@ function render() {
   } else {
     chartCard.style.display = "none";
   }
+}
+
+// ---------------------------------------------------------------------------
+// Purchase-history pop-up (product name click). Rendered with textContent
+// only — product names come straight from receipt text.
+// ---------------------------------------------------------------------------
+const historyDialog = document.getElementById("historyDialog");
+const historyDesktop = window.matchMedia("(min-width: 768px)");
+const STORE_COLORS = { Continente: "#d0451f", Lidl: "#0071e3" };
+let historyChart = null;
+
+function destroyHistoryChart() {
+  if (historyChart) { historyChart.destroy(); historyChart = null; }
+}
+
+function historyCell(tr, text, cls) {
+  const td = tr.insertCell();
+  td.textContent = text;
+  if (cls) td.className = cls;
+  return td;
+}
+
+// Phones get a bottom sheet pinned to the *visual* viewport. A page that
+// overflows sideways (wide tables) grows the layout viewport, and that is what
+// vh units, media queries and position:fixed measure — the sheet would land
+// off-screen. Returns true when the sheet layout (and no chart) applies.
+function placeHistorySheet() {
+  const vv = window.visualViewport;
+  const narrow = !historyDesktop.matches || (vv ? vv.width : window.innerWidth) < 768;
+  historyDialog.classList.toggle("sheet", narrow);
+  if (!narrow || !vv) { historyDialog.style.cssText = ""; return narrow; }
+  const h = Math.round(vv.height * 0.92);
+  historyDialog.style.cssText =
+    `margin:0;left:${vv.offsetLeft}px;top:${vv.offsetTop + vv.height - h}px;` +
+    `width:${vv.width}px;height:${h}px;max-width:none;max-height:none;`;
+  return narrow;
+}
+
+function fmtEur(x) { return "€" + x.toFixed(2); }
+function fmtNum(x) { return String(+x.toFixed(3)); }
+
+function renderHistory(h) {
+  destroyHistoryChart();
+  const narrow = placeHistorySheet();
+  document.getElementById("historyTitle").textContent = h.title;
+  document.getElementById("historyCategory").textContent = h.category;
+
+  // Table, newest first (already ordered by getProductHistory)
+  const table = document.createElement("table");
+  const head = table.createTHead().insertRow();
+  ["Date", "Store", "Qty", "Price per item"].forEach(t => {
+    const th = document.createElement("th"); th.textContent = t; head.appendChild(th);
+  });
+  const tbody = table.createTBody();
+  for (const r of h.rows) {
+    const tr = tbody.insertRow();
+    historyCell(tr, r.date, "muted");
+    historyCell(tr, r.store);
+    historyCell(tr, r.is_weight ? `${fmtNum(r.weight_kg)} kg` : fmtNum(r.qty));
+    const priceTd = historyCell(tr, fmtEur(r.price) + (r.is_weight ? "/kg" : ""));
+    if (r.discount > 0) {
+      const tag = document.createElement("span");
+      tag.className = "tag promo";
+      tag.textContent = "promo −" + fmtEur(r.discount);
+      priceTd.appendChild(tag);
+    }
+  }
+  const body = document.getElementById("historyBody");
+  body.replaceChildren(table);
+
+  const s = h.summary;
+  const suffix = s.price_unit === "kg" ? "/kg" : "";
+  document.getElementById("historySummary").textContent =
+    `${s.count} purchase${s.count === 1 ? "" : "s"}` +
+    (s.min == null ? "" : ` · min ${fmtEur(s.min)}${suffix} · max ${fmtEur(s.max)}${suffix} · avg ${fmtEur(s.avg)}${suffix}`) +
+    (s.priced_count < s.count ? ` (prices from the ${s.priced_count} ${s.price_unit === "kg" ? "by-weight" : "per-item"} purchases)` : "");
+
+  // Price chart — desktop only; one line per store, prices in the product's main unit
+  const points = h.rows.filter(r => r.price_unit === s.price_unit);
+  const chartBox = document.getElementById("historyChartBox");
+  const chartNote = document.getElementById("historyChartNote");
+  const enough = points.length >= 2;
+  chartBox.hidden = !enough;
+  chartNote.hidden = enough;
+  if (!enough || narrow) return;
+
+  const stores = Array.from(new Set(points.map(r => r.store))).sort();
+  const datasets = stores.map((store, i) => {
+    const color = STORE_COLORS[store] || `hsl(${((i * 137.508) % 360).toFixed(1)}, 55%, 45%)`;
+    return {
+      label: store || "(unknown store)",
+      data: points
+        .filter(r => r.store === store)
+        .map(r => ({ x: Date.parse(r.date), y: r.price }))
+        .sort((a, b) => a.x - b.x),
+      borderColor: color,
+      backgroundColor: color,
+      tension: 0,
+      pointRadius: 3,
+    };
+  });
+  const fmtDate = (ms) => new Date(ms).toISOString().slice(0, 10);
+  historyChart = new Chart(document.getElementById("historyChart"), {
+    type: "line",
+    data: { datasets },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        x: { type: "linear", ticks: { callback: fmtDate, maxRotation: 0, autoSkipPadding: 16 } },
+        y: { title: { display: true, text: s.price_unit === "kg" ? "EUR / kg" : "EUR / item" } },
+      },
+      plugins: {
+        legend: { position: "bottom", labels: { boxWidth: 12, font: { size: 11 } } },
+        tooltip: {
+          callbacks: {
+            title: (items) => (items.length ? fmtDate(items[0].parsed.x) : ""),
+            label: (item) => `${item.dataset.label}: ${fmtEur(item.parsed.y)}${suffix}`,
+          },
+        },
+      },
+    },
+  });
+}
+
+historyDialog.addEventListener("close", destroyHistoryChart);
+if (window.visualViewport) {
+  const replace = () => { if (historyDialog.open) placeHistorySheet(); };
+  visualViewport.addEventListener("resize", replace);
+  visualViewport.addEventListener("scroll", replace);
+}
+historyDialog.querySelector(".history-close").addEventListener("click", () => historyDialog.close());
+// Backdrop click: the dialog itself has no padding, so a click whose target is
+// the <dialog> element can only have landed on the backdrop.
+historyDialog.addEventListener("click", (e) => { if (e.target === historyDialog) historyDialog.close(); });
+document.addEventListener("click", (e) => {
+  const btn = e.target.closest("button.link[data-key]");
+  if (btn) openHistory(btn.dataset.key);
+});
+
+function openHistory(key) {
+  const h = getProductHistory(ALL_ROWS, key, CATEGORY_OVERRIDES);
+  if (!h) return;
+  if (!historyDialog.open) historyDialog.showModal();
+  renderHistory(h);
 }
 
 async function fetchJson(url) {

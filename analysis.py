@@ -24,7 +24,7 @@ from collections import defaultdict
 from datetime import datetime, date, timedelta
 from pathlib import Path
 
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for, jsonify, abort
 
 from github_sync import push_to_github
 
@@ -161,6 +161,17 @@ DAYS_PER_MONTH = 30.44
 STALE_MONTHS_DEFAULT = 6.0
 
 
+def resolve_category(key, items, category_overrides):
+    """Override from category_overrides.json, else the most common receipt
+    category among the product's rows, else "". Shared by
+    compute_product_stats and get_product_history so they always agree."""
+    category_override = category_overrides.get(key)
+    if category_override:
+        return category_override
+    categories = [r.get("category", "") for r in items if r.get("category")]
+    return max(set(categories), key=categories.count) if categories else ""
+
+
 def compute_product_stats(rows, overrides, category_overrides=None, buffer_months=2.0, window_months=3.0,
                            stale_months=STALE_MONTHS_DEFAULT):
     """Group rows by normalized product name; estimate a rolling-window monthly
@@ -218,12 +229,7 @@ def compute_product_stats(rows, overrides, category_overrides=None, buffer_month
 
         display_name = max((r["name"] for r in items), key=len)
 
-        category_override = category_overrides.get(key)
-        if category_override:
-            category = category_override
-        else:
-            categories = [r.get("category", "") for r in items if r.get("category")]
-            category = max(set(categories), key=categories.count) if categories else ""
+        category = resolve_category(key, items, category_overrides)
 
         enough_history = purchase_dates_count >= MIN_PURCHASE_DATES and overall_span_days >= MIN_SPAN_DAYS
 
@@ -280,6 +286,91 @@ def compute_product_stats(rows, overrides, category_overrides=None, buffer_month
         })
 
     return products
+
+
+def get_product_history(rows, key, category_overrides=None):
+    """Every purchase row for one product (grouped exactly like
+    compute_product_stats: normalize_name key, corrupted rows dropped,
+    category from resolve_category), newest first, plus a price summary.
+
+    Price per item is unit_price for unit items and total_price / weight_kg
+    (EUR/kg) for weight items. The summary only covers rows sold in the
+    product's majority unit, so EUR/kg and EUR/un prices are never mixed. Values are left unrounded — formatting is
+    the caller's job (and keeps the JS port in index.html bit-identical).
+    """
+    category_overrides = category_overrides or {}
+
+    items = []
+    for r in rows:
+        if CORRUPTED_NAME_RE.match((r.get("name") or "").strip()):
+            continue
+        if normalize_name(r.get("name", "")) == key:
+            items.append(r)
+
+    dated_items = []
+    for r in items:
+        try:
+            d = datetime.strptime(r["date"], "%Y-%m-%d").date()
+        except (ValueError, KeyError):
+            continue
+        dated_items.append((d, r))
+    if not dated_items:
+        return None
+
+    unit_type = "kg" if any(_to_float(r.get("weight_kg")) > 0 for r in items) else "un"
+
+    # Display name = raw name on the most recent purchase (last CSV row on the latest date).
+    latest_date = max(d for d, _ in dated_items)
+    title = [r for d, r in dated_items if d == latest_date][-1]["name"]
+
+    category = resolve_category(key, items, category_overrides)
+
+    # Newest first; stable sort keeps CSV order within the same date.
+    dated_items.sort(key=lambda t: t[0], reverse=True)
+
+    history = []
+    for d, r in dated_items:
+        weight_kg = _to_float(r.get("weight_kg"))
+        is_weight = weight_kg > 0
+        history.append({
+            "date": d.isoformat(),
+            "store": r.get("store", ""),
+            "is_weight": is_weight,
+            "qty": _to_float(r.get("qty")),
+            "weight_kg": weight_kg if is_weight else None,
+            "price": _to_float(r.get("total_price")) / weight_kg if is_weight else _to_float(r.get("unit_price")),
+            "price_unit": "kg" if is_weight else "un",
+            "discount": _to_float(r.get("discount")),
+        })
+
+    # Summary/chart unit = the unit most rows were sold in (ties -> kg, like
+    # unit_type). A product bought 36x per-pack and once by weight must not
+    # get a summary built from that single weighed row.
+    kg_rows = sum(1 for h in history if h["price_unit"] == "kg")
+    price_unit = "kg" if kg_rows * 2 >= len(history) else "un"
+    prices = [h["price"] for h in history if h["price_unit"] == price_unit]
+    # Plain left-to-right sum (not sum(), which is compensated on Python 3.12+)
+    # so the average matches the JS port in index.html bit for bit.
+    price_total = 0.0
+    for p in prices:
+        price_total += p
+    summary = {
+        "count": len(history),
+        "price_unit": price_unit,
+        "priced_count": len(prices),
+        "min": min(prices) if prices else None,
+        "max": max(prices) if prices else None,
+        "avg": price_total / len(prices) if prices else None,
+    }
+
+    return {
+        "key": key,
+        "title": title,
+        "category": category or "(uncategorized — Lidl)",
+        "unit_type": unit_type,
+        "rows": history,
+        "summary": summary,
+    }
 
 
 def compute_monthly_category_spend(rows, category_overrides=None):
@@ -353,6 +444,18 @@ def planner():
         sort_by=sort_by,
         known_categories=known_categories,
     )
+
+
+@planner_bp.route("/planner/history")
+def product_history():
+    """Read-only JSON: full purchase history for one product (by normalized key)."""
+    key = request.args.get("key", "")
+    if not key:
+        abort(400)
+    history = get_product_history(load_items(), key, load_category_overrides())
+    if history is None:
+        abort(404)
+    return jsonify(history)
 
 
 @planner_bp.route("/planner/toggle-stockable", methods=["POST"])
