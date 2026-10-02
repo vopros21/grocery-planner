@@ -163,13 +163,23 @@ STALE_MONTHS_DEFAULT = 6.0
 
 def resolve_category(key, items, category_overrides):
     """Override from category_overrides.json, else the most common receipt
-    category among the product's rows, else "". Shared by
-    compute_product_stats and get_product_history so they always agree."""
+    category among the product's rows (ties -> first seen in CSV order),
+    else "". Shared by compute_product_stats and get_product_history so they
+    always agree."""
     category_override = category_overrides.get(key)
     if category_override:
         return category_override
     categories = [r.get("category", "") for r in items if r.get("category")]
-    return max(set(categories), key=categories.count) if categories else ""
+    # dict.fromkeys keeps first-seen order and max() returns the first maximum,
+    # so ties are deterministic (a set's order isn't) and match mode() in index.html.
+    return max(dict.fromkeys(categories), key=categories.count) if categories else ""
+
+
+def latest_name(dated_items):
+    """Raw name on the most recent purchase (last CSV row on the latest date).
+    Used as the product's display name everywhere."""
+    latest_date = max(d for d, _ in dated_items)
+    return [r for d, r in dated_items if d == latest_date][-1]["name"]
 
 
 def compute_product_stats(rows, overrides, category_overrides=None, buffer_months=2.0, window_months=3.0,
@@ -227,7 +237,7 @@ def compute_product_stats(rows, overrides, category_overrides=None, buffer_month
         total_units = sum(units_for(r) for r in items)
         total_spend = sum(_to_float(r.get("total_price")) for r in items)
 
-        display_name = max((r["name"] for r in items), key=len)
+        display_name = latest_name(dated_items)
 
         category = resolve_category(key, items, category_overrides)
 
@@ -319,9 +329,7 @@ def get_product_history(rows, key, category_overrides=None):
 
     unit_type = "kg" if any(_to_float(r.get("weight_kg")) > 0 for r in items) else "un"
 
-    # Display name = raw name on the most recent purchase (last CSV row on the latest date).
-    latest_date = max(d for d, _ in dated_items)
-    title = [r for d, r in dated_items if d == latest_date][-1]["name"]
+    title = latest_name(dated_items)
 
     category = resolve_category(key, items, category_overrides)
 

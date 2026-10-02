@@ -45,6 +45,8 @@
   th, td { text-align: left; padding: 7px 8px; border-bottom: 1px solid var(--border); }
   th { color: var(--muted); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.02em; position: sticky; top: 0; background: var(--card); z-index: 1; box-shadow: 0 1px 0 var(--border); }
   tr.running-low { background: var(--low-bg); }
+  /* Wide tables scroll inside their own box so the page never scrolls sideways */
+  .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; max-width: 100%; }
   .tag { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 600; white-space: nowrap; }
   .tag.low { background: var(--low); color: white; }
   .tag.ok { background: #e9f5ea; color: #1f7a34; }
@@ -260,6 +262,7 @@ function utcToday() {
 function diffDays(a, b) { return Math.round((b.getTime() - a.getTime()) / 86400000); }
 function addDays(d, days) { return new Date(d.getTime() + days * 86400000); }
 function roundTo(x, decimals) { const f = 10 ** decimals; return Math.round(x * f) / f; }
+// Most common value; ties -> first seen (Map keeps insertion order, strict >).
 function mode(arr) {
   const counts = new Map();
   for (const v of arr) counts.set(v, (counts.get(v) || 0) + 1);
@@ -274,11 +277,19 @@ function loadItemsFromParsed(parsedRows) {
 
 function resolveCategory(key, items, categoryOverrides) {
   // Override from category_overrides.json, else the most common receipt
-  // category among the product's rows, else "".
+  // category among the product's rows (ties -> first seen in CSV order), else "".
   const categoryOverride = categoryOverrides[key];
   if (categoryOverride) return categoryOverride;
   const categories = items.map(r => r.category).filter(Boolean);
   return categories.length ? mode(categories) : "";
+}
+
+function latestName(datedItems) {
+  // Raw name on the most recent purchase (last CSV row on the latest date).
+  // Used as the product's display name everywhere.
+  const latestTime = Math.max(...datedItems.map(([d]) => d.getTime()));
+  const atLatest = datedItems.filter(([d]) => d.getTime() === latestTime);
+  return atLatest[atLatest.length - 1][1].name;
 }
 
 function computeProductStats(rows, overrides, categoryOverrides, bufferMonths, windowMonths, staleMonths) {
@@ -320,7 +331,7 @@ function computeProductStats(rows, overrides, categoryOverrides, bufferMonths, w
 
     const totalUnits = items.reduce((s, r) => s + unitsFor(r), 0);
     const totalSpend = items.reduce((s, r) => s + toFloat(r.total_price), 0);
-    const displayName = items.reduce((a, r) => (r.name && r.name.length > a.length ? r.name : a), items[0].name || "");
+    const displayName = latestName(datedItems);
 
     const category = resolveCategory(key, items, categoryOverrides);
 
@@ -416,10 +427,7 @@ function getProductHistory(rows, key, categoryOverrides) {
 
   const unitType = items.some(r => toFloat(r.weight_kg) > 0) ? "kg" : "un";
 
-  // Display name = raw name on the most recent purchase (last row on the latest date).
-  const latestTime = Math.max(...datedItems.map(([d]) => d.getTime()));
-  const atLatest = datedItems.filter(([d]) => d.getTime() === latestTime);
-  const title = atLatest[atLatest.length - 1][1].name;
+  const title = latestName(datedItems);
 
   const category = resolveCategory(key, items, categoryOverrides);
 
@@ -501,7 +509,7 @@ function render() {
   if (!shoppingList.length) {
     shoppingBody.innerHTML = `<div class="empty">No stockable products with enough purchase history yet. Needs a product bought on 2+ shopping dates, 14+ days apart, before a rate is estimated.</div>`;
   } else {
-    let html = `<table><tr><th>Product</th><th>Avg/mo</th><th>Buy now (${bufferMonths}mo)</th><th>Last</th><th>Status</th></tr>`;
+    let html = `<div class="table-wrap"><table><tr><th>Product</th><th>Avg/mo</th><th>Buy now (${bufferMonths}mo)</th><th>Last</th><th>Status</th></tr>`;
     for (const p of shoppingList) {
       html += `<tr class="${p.runningLow ? "running-low" : ""}">
         <td><button type="button" class="link" data-key="${esc(p.key)}">${esc(p.name)}</button><div class="muted" style="font-size:11px">${esc(p.category)}</div></td>
@@ -511,7 +519,7 @@ function render() {
         <td>${p.runningLow ? '<span class="tag low">running low</span>' : '<span class="tag ok">stocked</span>'}</td>
       </tr>`;
     }
-    html += "</table>";
+    html += "</table></div>";
     shoppingBody.innerHTML = html;
   }
 
@@ -521,7 +529,7 @@ function render() {
   else if (sortBy === "last") sortedProducts.sort((a, b) => b.daysSinceLast - a.daysSinceLast);
   else sortedProducts.sort((a, b) => (a.category === b.category ? (a.name < b.name ? -1 : 1) : (a.category < b.category ? -1 : 1)));
 
-  let allHtml = `<table><tr><th>Product</th><th>Category</th><th>Store(s)</th><th>Dates</th><th>Spend</th><th>Avg/mo</th><th>Last</th><th>Stockable?</th></tr>`;
+  let allHtml = `<div class="table-wrap"><table><tr><th>Product</th><th>Category</th><th>Store(s)</th><th>Dates</th><th>Spend</th><th>Avg/mo</th><th>Last</th><th>Stockable?</th></tr>`;
   for (const p of sortedProducts) {
     const rateCell = p.avgUnitsPerMonth
       ? `${p.avgUnitsPerMonth} ${esc(p.unitType)}`
@@ -537,7 +545,7 @@ function render() {
       <td>${p.stockable ? '<span class="tag ok">stockable</span>' : '<span class="muted">not stockable</span>'}</td>
     </tr>`;
   }
-  allHtml += "</table>";
+  allHtml += "</table></div>";
   if (staleCount > 0) {
     allHtml += `<div class="muted" style="margin-top:8px">${staleCount} product${staleCount === 1 ? "" : "s"} hidden — not bought in over ${staleMonths} months. Set "Hide if not bought in" to "Never" to see them.</div>`;
   }
@@ -699,8 +707,10 @@ function renderHistory(h) {
       priceTd.appendChild(tag);
     }
   }
-  const body = document.getElementById("historyBody");
-  body.replaceChildren(table);
+  const wrap = document.createElement("div");
+  wrap.className = "table-wrap";
+  wrap.appendChild(table);
+  document.getElementById("historyBody").replaceChildren(wrap);
 
   const s = h.summary;
   const suffix = s.price_unit === "kg" ? "/kg" : "";

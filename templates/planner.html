@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Shopping Planner</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
 <style>
@@ -42,6 +43,8 @@
   th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); }
   th { color: var(--muted); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.02em; position: sticky; top: 0; background: var(--card); z-index: 1; box-shadow: 0 1px 0 var(--border); }
   tr.running-low { background: var(--low-bg); }
+  /* Wide tables scroll inside their own box so the page never scrolls sideways */
+  .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; max-width: 100%; }
   .tag { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 600; }
   .tag.low { background: var(--low); color: white; }
   .tag.ok { background: #e9f5ea; color: #1f7a34; }
@@ -135,6 +138,7 @@
 <div class="card">
   <h2>What to stock up on now</h2>
   {% if shopping_list %}
+  <div class="table-wrap">
   <table>
     <tr>
       <th>Product</th>
@@ -158,6 +162,7 @@
     </tr>
     {% endfor %}
   </table>
+  </div>
   {% else %}
   <div class="empty">No stockable products with enough purchase history yet. Buying 2 packs of something in one trip doesn't count as a purchase pattern — I need to see a product bought on at least 2 different shopping dates, 14+ days apart, before suggesting a monthly rate. This will fill in naturally as more receipts come in.</div>
   {% endif %}
@@ -209,6 +214,7 @@
   </form>
 
   <h2>All products</h2>
+  <div class="table-wrap">
   <table>
     <tr>
       <th>Product</th>
@@ -258,6 +264,7 @@
     </tr>
     {% endfor %}
   </table>
+  </div>
 </div>
 
 <script>
@@ -416,8 +423,10 @@ function renderHistory(h) {
       priceTd.appendChild(tag);
     }
   }
-  const body = document.getElementById("historyBody");
-  body.replaceChildren(table);
+  const wrap = document.createElement("div");
+  wrap.className = "table-wrap";
+  wrap.appendChild(table);
+  document.getElementById("historyBody").replaceChildren(wrap);
 
   const s = h.summary;
   const suffix = s.price_unit === "kg" ? "/kg" : "";
