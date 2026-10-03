@@ -1077,3 +1077,9 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-10-03,Continente,Take Away,PIZZA BARBECUE CNT 400G,1.0,,2.89,2.89,0.0,B
 2026-10-03,Continente,Take Away,PIZZA PEPPERONI CNT 410G,1.0,,2.89,2.89,0.0,B
 2026-10-03,Continente,DIY,LIMPA VIDROS ROSA 5L REDEX,1.0,,4.59,4.59,0.0,C
+2026-10-03,Lidl,Mercearia Salgada,MILHO DOCE,2.0,,1.99,3.98,0.0,A
+2026-10-03,Lidl,Bens Essenciais,ARROZ BASMATI,1.0,1,1.89,1.89,0.0,B
+2026-10-03,Lidl,Charcutaria&Queijos,ENTRECOSTO DE PORCO INTEIRO,1.0,1.79,8.04,8.04,0.0,B
+2026-10-03,Lidl,Frutas e Legumes,CEBOLA,1.0,1.212,1.81,1.81,0.0,B
+2026-10-03,Lidl,Frutas e Legumes,CENOURA 1 KG,1.0,1,1.09,1.09,0.0,B
+2026-10-03,Lidl,Frutas e Legumes,BETERRABA,1.0,0.276,0.47,0.47,0.0,B
