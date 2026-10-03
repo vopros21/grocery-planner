@@ -1083,3 +1083,4 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-10-03,Lidl,Frutas e Legumes,CEBOLA,1.0,1.212,1.81,1.81,0.0,B
 2026-10-03,Lidl,Frutas e Legumes,CENOURA 1 KG,1.0,1,1.09,1.09,0.0,B
 2026-10-03,Lidl,Frutas e Legumes,BETERRABA,1.0,0.276,0.47,0.47,0.0,B
+2026-10-03,Lidl,Soft Drinks,Coca Cola Regular,1.0,,3.99,3.99,0.0,
