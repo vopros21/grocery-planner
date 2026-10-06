@@ -1091,3 +1091,6 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-10-05,Lidl,Mercearia Doce,BIMBO LITTLE BITES,1.0,,3.79,3.79,0.0,A
 2026-10-05,Lidl,Soft Drinks,Bourbon Cola 5%,2.0,,1.49,2.98,0.0,A
 2026-10-05,Lidl,Soft Drinks,Coca Cola Regular,1.0,,4.29,4.29,0.0,A
+2026-10-06,Lidl,Mercearia Salgada,ERVILHAS EXTRA FINAS,2.0,,2.19,4.38,0.0,A
+2026-10-06,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,,1.89,1.89,0.0,B
+2026-10-06,Lidl,Charcutaria&Queijos,PREPARADO CARNE PIC. BOVINO,1.0,,9.99,9.99,1.7,B
