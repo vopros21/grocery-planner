@@ -1098,3 +1098,8 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-10-06,Lidl,Padaria,CROISSANT BRIOCHE,2.0,,0.59,1.18,0.0,A
 2026-10-07,Lidl,Mercearia Doce,GOMAS ACIDAS LINGUAS MULTIC,1.0,,0.79,0.79,0.0,A
 2026-10-07,Lidl,Soft Drinks,Coca Cola Regular 1l,1.0,,1.49,1.49,0.0,A
+2026-10-07,Lidl,Laticinios/Beb. Veg.,OVOSM GALINHAS CRIADAS SOLO,1.0,,5.75,5.75,0.0,B
+2026-10-07,Lidl,Charcutaria&Queijos,Queijo Fatiado Burguer,1.0,,1.29,1.29,0.0,B
+2026-10-07,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,,1.89,1.89,0.0,B
+2026-10-07,Lidl,Padaria,CROISSANT DE MANTEIGA,3.0,,0.39,1.17,0.09,A
+2026-10-07,Lidl,Frutas e Legumes,ALFACE FRISADA,1.0,0.382,0.76,0.76,0.0,B
