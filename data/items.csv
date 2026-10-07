@@ -1015,7 +1015,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-10-01,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,,1.89,1.89,0.0,B
 2026-10-01,Lidl,Peixaria,SALMAO FUMADO,1.0,,5.99,5.99,0.0,A
 2026-10-01,Lidl,Mercearia Doce,NESTLE CHOCAPIC BARRA CEREA,1.0,,1.99,1.99,0.0,A
-2026-10-01,Lidl,Padaria,CROISSANT DE MANTEIGA,2.0,,0.78,0.78,0.06,A
+2026-10-01,Lidl,Padaria,CROISSANT DE MANTEIGA,2.0,,0.39,0.78,0.06,A
 2026-10-01,Continente,Take Away,MENU SALSICHA + ARROZ DE CENOUR,1.0,,3.19,3.19,0.0,B
 2026-10-01,Continente,Congelados,Melties de Ananás,1.0,,3.49,3.49,0.0,
 2026-10-02,Lidl,Mercearia Doce,GOMAS ACIDAS LINGUAS MULTIC,1.0,,0.79,0.79,0.0,A
