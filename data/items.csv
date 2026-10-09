@@ -1116,3 +1116,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-10-09,Lidl,Padaria,FOLHADO DE CARNE MISTO,1.0,,0.99,0.99,0.0,A
 2026-10-09,Lidl,Mercearia Doce,GOMAS TIJOLOS ACIDOS,1.0,,0.99,0.99,0.0,A
 2026-10-09,Lidl,Mercearia Doce,GOMAS ACIDAS LINGUAS MULTIC,1.0,,0.79,0.79,0.0,A
+2026-10-09,Lidl,Peixaria,SALMAO POSTA,1.0,0.456,6.84,6.84,0.91,B
+2026-10-09,Lidl,Peixaria,SALMAO POSTA,1.0,0.449,6.73,6.73,0.9,B
+2026-10-09,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,,1.89,1.89,0.0,B
+2026-10-09,Lidl,Frutas e Legumes,BATATA CONS VERMELHA,1.0,4.5,3.49,3.49,1.0,B
