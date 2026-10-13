@@ -1139,3 +1139,5 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-10-12,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,,1.89,1.89,0.0,B
 2026-10-12,Lidl,Padaria,DELICIA DE MACA,2.0,,0.75,1.5,0.0,A
 2026-10-12,Lidl,Peixaria,SALMAO FUMADO,1.0,,5.99,5.99,0.0,A
+2026-10-13,Lidl,Padaria,FOLHADO DE CARNE MISTO,1.0,,0.99,0.99,0.0,A
+2026-10-13,Lidl,Padaria,Churros com Acucar,3.0,,0.25,0.75,0.0,A
