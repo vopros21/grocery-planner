@@ -1168,3 +1168,16 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-10-17,Lidl,Padaria,PIZZA FIAMBRE E QUEIJO,1.0,,1.49,1.49,0.0,A
 2026-10-17,Lidl,Padaria,DELICIA DE MACA,2.0,,0.79,1.58,0.0,A
 2026-10-17,Lidl,Padaria,ARGOLA OREO COM RECHEIO,1.0,,0.89,0.89,0.0,A
+2026-10-17,Lidl,Mercearia Salgada,Cocktail Mix,1.0,,1.99,1.99,0.0,A
+2026-10-17,Lidl,Padaria,BIMBO PAO DE FORMA FAMILIAR,1.0,,1.99,1.99,0.0,B
+2026-10-17,Lidl,Padaria,"ARGOLA OREO COM RECHEIO,89",2.0,,0.89,1.78,0.0,A
+2026-10-17,Lidl,Talho,PREPARADO CARNE PIC MISTO,1.0,,8.99,8.99,0.0,B
+2026-10-17,Lidl,Soft Drinks,DR PEPPER ZERO,1.0,,0.59,0.59,0.0,A
+2026-10-17,Lidl,Soft Drinks,MONSTER VIKING BERRY,2.0,,1.39,2.78,0.0,A
+2026-10-17,Lidl,Frutas e Legumes,SALADA CLASSICA,1.0,,0.99,0.99,0.0,B
+2026-10-17,Lidl,Charcutaria&Queijos,Queijo Fatiado Burguer,1.0,,1.29,1.29,0.0,B
+2026-10-17,Lidl,Charcutaria&Queijos,BACON FATIADO FAMILIAR,1.0,,2.79,2.79,0.0,A
+2026-10-17,Lidl,Charcutaria&Queijos,SALAME EXTRA FATIADO,1.0,,1.39,1.39,0.0,A
+2026-10-17,Lidl,Frutas e Legumes,PEPINO,1.0,0.668,1.13,1.13,0.0,B
+2026-10-17,Lidl,Frutas e Legumes,TOMATE REDONDO,1.0,0.628,1.0,1.0,0.38,B
+2026-10-17,Lidl,Laticinios/Beb. Veg.,LEITE INTEIRO,2.0,,0.99,1.98,0.0,B
