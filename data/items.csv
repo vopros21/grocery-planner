@@ -1164,3 +1164,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-10-16,Lidl,Mercearia Salgada,RUFFLES PRESUNTO,1.0,,2.19,2.19,0.0,A
 2026-10-16,Lidl,Soft Drinks,COCA COLA REGULAR 4x1L,1.0,,4.69,4.69,0.06,A
 2026-10-16,Lidl,Padaria,CROISSANT BRIOCHE REC.CACAU,1.0,,0.99,0.99,0.0,A
+2026-10-17,Lidl,Laticinios/Beb. Veg.,IOGURTE PEDACOS DE BOLACHA,2.0,,0.58,1.16,0.0,B
+2026-10-17,Lidl,Padaria,PIZZA FIAMBRE E QUEIJO,1.0,,1.49,1.49,0.0,A
+2026-10-17,Lidl,Padaria,DELICIA DE MACA,2.0,,0.79,1.58,0.0,A
+2026-10-17,Lidl,Padaria,ARGOLA OREO COM RECHEIO,1.0,,0.89,0.89,0.0,A
