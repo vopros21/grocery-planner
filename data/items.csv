@@ -1186,7 +1186,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-10-18,Continente,Higiene,PASTA AQF WHITE REV LP 75ML,1.0,,1.98,1.98,0.67,C
 2026-10-18,Continente,Padaria,CRUFFIN PISTACIO UN (AB),2.0,,1.1,2.2,0.0,C
 2026-10-19,Lidl,Padaria,FOLHADO DE CARNE MISTO,1.0,,0.99,0.99,0.0,A
-2026-10-19,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,,1.99,1.99,0.0,B
+2026-10-19,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,0.3,1.99,1.99,0.0,B
 2026-10-19,Lidl,Soft Drinks,SteamBrew Cerveja Artesanal,2.0,,0.99,1.98,0.0,A
 2026-10-20,Continente,Mercearia Doce,GOMAS SORTIDO BRILHO CNT 300G,1.0,,1.69,1.69,0.0,C
 2026-10-20,Continente,Mercearia Doce,GOMAS SORTIDO ACUCAR CNT 300G,1.0,,1.69,1.69,0.0,C
@@ -1199,3 +1199,4 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-10-20,Continente,Vinho e Espirituosas,GINJA OBIDOS MARIQUINHAS,1.0,,12.74,12.74,4.75,C
 2026-10-20,Continente,Take Away,PIZZA BARBECUE CNT 400G,1.0,,2.89,2.89,0.0,B
 2026-10-20,Continente,Take Away,PIZZA PEPPERONI CNT 410G,1.0,,2.89,2.89,0.0,B
+2026-10-20,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,0.3,1.99,1.99,0.0,B
