@@ -32,7 +32,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-06-27,Continente,Mercearia Doce,GOMAS FINI LAPIS BRILHO 90G,1.0,,1.29,1.29,0.0,C
 2026-06-27,Continente,Soft Drinks,COMPAL FAMILIA LARANJA/TANG 1L,1.0,,1.29,1.29,0.0,A
 2026-06-27,Continente,Soft Drinks,NECT.CONTINENTE LARANJA 1L,1.0,,1.19,1.19,0.0,A
-2026-06-27,Continente,Soft Drinks,AGUA S/GAS MONCHIQUE 5L,5.0,,1.65,8.25,0.0,B
+2026-06-27,Continente,Soft Drinks,MONCHIQUE AGUA ALCALINA,5.0,,1.65,8.25,0.0,B
 2026-06-27,Continente,Higiene,DEO ROLL ON MEN 50ML,1.0,,2.69,2.69,1.8,C
 2026-06-27,Continente,Higiene,PASTA AQUA PROTECAO CARIES 75ML,1.0,,1.86,1.86,0.63,C
 2026-06-27,Continente,Higiene,GEL DE BANHO 2EM1 400ML,1.0,,1.39,1.39,0.0,C
@@ -107,7 +107,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-06-27,Continente,Interiores Infantil,"23,00% 155,67 35,81",1.0,,191.48,191.48,0.0,C
 2026-06-27,Continente,Saude e Higiene,GEL CICALLIUM 8ML ELGYDIUM,1.0,,13.95,13.95,0.0,C
 2026-06-20,Continente,Mercearia Salgada,MOLHO DE SOJA CONTINENTE 200ML,1.0,,0.99,0.99,0.0,C
-2026-06-20,Continente,Soft Drinks,AGUA S/GAS MONCHIQUE 5L,1.0,,1.65,1.65,0.0,B
+2026-06-20,Continente,Soft Drinks,MONCHIQUE AGUA ALCALINA,1.0,,1.65,1.65,0.0,B
 2026-06-20,Continente,Soft Drinks,CERV C/ALC PERONI NASTRO AZZURR,2.0,,1.99,3.98,0.0,C
 2026-06-20,Continente,Laticinios/Beb. Veg.,LEIT UHT INTEIRO CNT 1L,1.0,,0.99,0.99,0.0,A
 2026-06-20,Continente,Laticinios/Beb. Veg.,OVOS M DONA GEMA 2DZ,1.0,,5.99,5.99,0.0,A
@@ -301,7 +301,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-07-10,Continente,Mercearia Salgada,SARD AZEITE BOM PETISCO 84G,1.0,,1.49,1.49,0.5,A
 2026-07-10,Continente,Soft Drinks,BEB ENERG MONSTER ULTRA STRAWBE,1.0,,1.74,1.74,0.0,C
 2026-07-10,Continente,Soft Drinks,"SIDRA SOMERS PER 0,0% TP6X20CL",1.0,,4.49,4.49,1.36,C
-2026-07-10,Continente,Soft Drinks,AGUA S/GAS MONCHIQUE 5L,4.0,,1.65,6.6,0.0,B
+2026-07-10,Continente,Soft Drinks,MONCHIQUE AGUA ALCALINA,4.0,,1.65,6.6,0.0,B
 2026-07-10,Continente,Congelados,GEL BAUN/MORA E CONTINENTE 2LT,2.0,,3.29,6.58,0.0,C
 2026-07-10,Continente,Congelados,GEL BAUNA/CHOCO E CONTINENTE 2L,2.0,,3.29,6.58,0.0,C
 2026-07-10,Continente,Congelados,"CARTE D OR BAUNILHA 1,3L",1.0,,2.99,2.99,2.0,C
@@ -410,7 +410,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-07-28,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,0.3,1.89,1.89,0.0,B
 2026-07-29,Lidl,Soft Drinks,SCHWEPPES AGUA TONICA,1.0,,2.15,2.15,0.0,A
 2026-07-29,Lidl,Mercearia Salgada,MAXI WRAPS,1.0,,2.99,2.99,0.0,A
-2026-07-29,Lidl,Soft Drinks,AGUA S/GAS MONCHIQUE 5L,1.0,,1.65,1.65,0.0,C
+2026-07-29,Lidl,Soft Drinks,MONCHIQUE AGUA ALCALINA,1.0,,1.65,1.65,0.0,C
 2026-07-29,Lidl,Vinho e Espirituosas,ARMILAR PORTO WHITE,1.0,,4.49,4.49,0.0,A
 2026-07-30,Lidl,Congelados,GELADO CONE DE NATA,1.0,,2.69,2.69,0.0,A
 2026-07-30,Lidl,Soft Drinks,SteamBrew Cerveja Artesanal,2.0,,0.79,1.58,0.4,A
@@ -423,7 +423,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-07-30,Lidl,Soft Drinks,MonsterUltraWhite SemAcucar,1.0,,1.74,1.74,0.0,A
 2026-07-30,Lidl,Soft Drinks,SCHWEPPES AGUA TONICA,1.0,,2.15,2.15,0.0,A
 2026-07-31,Lidl,Charcutaria&Queijos,SALSICHAS ESTALADICAS,1.0,,3.99,3.99,1.0,A
-2026-07-31,Lidl,Soft Drinks,AGUA S/GAS MONCHIQUE 5L,1.0,,1.65,1.65,0.0,C
+2026-07-31,Lidl,Soft Drinks,MONCHIQUE AGUA ALCALINA,1.0,,1.65,1.65,0.0,C
 2026-07-31,Lidl,Congelados,Gelado de Fruta Morango,1.0,,2.79,2.79,0.0,A
 2026-07-31,Lidl,Charcutaria&Queijos,QUEIJO MOZZARELLA RALADO,1.0,,3.79,3.79,0.1,B
 2026-07-31,Lidl,Frutas e Legumes,TOMATE CHUCHA,1.0,,1.3,1.3,0.0,B
@@ -433,7 +433,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-08-01,Continente,Mercearia Salgada,MILHO DOCE BONDUELLE 3*140G,1.0,,2.59,2.59,1.4,C
 2026-08-01,Continente,Mercearia Salgada,TORTILHA TRIGO WRAP CNT 370G,2.0,,1.59,3.18,0.0,C
 2026-08-01,Continente,Soft Drinks,MONSTER VIKING BERRY LT 50CL,1.0,,1.74,1.74,0.0,C
-2026-08-01,Continente,Soft Drinks,AGUA S/GAS MONCHIQUE 5L,5.0,,1.65,8.25,0.0,B
+2026-08-01,Continente,Soft Drinks,MONCHIQUE AGUA ALCALINA,5.0,,1.65,8.25,0.0,B
 2026-08-01,Continente,Higiene,PASTA AQUA WH REVER 7 5ML,1.0,,1.98,1.98,0.67,C
 2026-08-01,Continente,Higiene,GEL DE BANHO 2EM1 400ML,1.0,,1.39,1.39,0.0,C
 2026-08-01,Continente,Higiene,GEL DE BANHO 2EM1 400ML,1.0,,1.39,1.39,0.0,C
@@ -621,7 +621,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-08-20,Continente,Mercearia Doce,CHOCOLATE PO CONTINENTE 125G,2.0,,0.99,1.98,0.0,C
 2026-08-20,Continente,Mercearia Doce,FERMENTO PO FERMIPAN PADEIRO,1.0,,1.59,1.59,0.4,C
 2026-08-20,Continente,Soft Drinks,REF.C/GAS LARANJA FANTA 50 CL S,1.0,,1.19,1.19,0.0,C
-2026-08-20,Continente,Soft Drinks,AGUA S/GAS MONCHIQUE 5L,4.0,,1.65,6.6,0.0,B
+2026-08-20,Continente,Soft Drinks,MONCHIQUE AGUA ALCALINA,4.0,,1.65,6.6,0.0,B
 2026-08-20,Continente,Higiene,COTONETES CONTINENTE 300UN,1.0,,0.89,0.89,0.0,A
 2026-08-20,Continente,Limpeza do Lar,PH RENOVA GRAND ROYAL 32R 4F,1.0,,19.95,19.95,9.63,C
 2026-08-20,Continente,Laticinios/Beb. Veg.,BIFCREMOSO ACTIVIA COCO 4*115G,1.0,,1.99,1.99,0.5,A
@@ -761,7 +761,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-09-05,Continente,Mercearia Salgada,PAPRIKA FUMADA MARGAO SAQ 35G,1.0,,1.59,1.59,0.0,C
 2026-09-05,Continente,Mercearia Salgada,COGUMELOS LAMI. CONDI.CNT 220G,1.0,,1.89,1.89,0.0,C
 2026-09-05,Continente,Mercearia Salgada,SALSICHAS BOCKWURST 8 UNIT,1.0,,6.19,6.19,0.0,C
-2026-09-05,Continente,Soft Drinks,AGUA S/GAS MONCHIQUE 5L,6.0,,1.65,9.9,0.0,B
+2026-09-05,Continente,Soft Drinks,MONCHIQUE AGUA ALCALINA,6.0,,1.65,9.9,0.0,B
 2026-09-05,Continente,Higiene,DEO RO MEN EXP CARBON ICE 50ML,2.0,,4.49,8.98,0.0,C
 2026-09-05,Continente,Higiene,PENSO AUSONIA NOITE ABAS 9UN,1.0,,2.29,2.29,0.0,A
 2026-09-05,Continente,Higiene,PENSO HIG AUSONI AIRDRY NOI EXT,1.0,,2.29,2.29,0.0,A
@@ -1040,7 +1040,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-10-03,Continente,Mercearia Salgada,PATE BOC CARANGUE LA PIARA 170G,1.0,,2.54,2.54,0.85,C
 2026-10-03,Continente,Mercearia Salgada,SOPA GOURMET COG SELV KNORR 61G,1.0,,2.24,2.24,0.75,C
 2026-10-03,Continente,Mercearia Doce,DRAGEIAS COOKIE DOUGH M&MS 176,1.0,,3.94,3.94,1.35,C
-2026-10-03,Continente,Soft Drinks,AGUA S/GAS MONCHIQUE 5L,6.0,,1.65,9.9,0.0,B
+2026-10-03,Continente,Soft Drinks,MONCHIQUE AGUA ALCALINA,6.0,,1.65,9.9,0.0,B
 2026-10-03,Continente,Soft Drinks,REF C/GAS DR. PEPPER REG.33CL,4.0,,0.77,3.08,0.0,C
 2026-10-03,Continente,Higiene,SL CREMOSO DOYPACK MYLABEL 1L,1.0,,1.59,1.59,0.0,C
 2026-10-03,Continente,Higiene,PASTA DEN COLGATE TOT BRANQ75ML,1.0,,2.99,2.99,1.0,C
