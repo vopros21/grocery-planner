@@ -1221,3 +1221,5 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-10-23,Lidl,Pequeno Almoco,CAFE MOIDO ENCORPADO,1.0,,2.59,2.59,0.36,A
 2026-10-23,Lidl,Limpeza do Lar,DETERGENTE LIQUIDO MARSELHA,1.0,,3.89,3.89,0.46,A
 2026-10-23,Lidl,Soft Drinks,MONCHIQUE AGUA ALCALINA,1.0,,1.65,1.65,0.0,C
+2026-10-25,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,,1.99,1.99,0.0,B
+2026-10-25,Lidl,Charcutaria&Queijos,BACON FATIADO FAMILIAR,1.0,,2.79,2.79,0.0,A
