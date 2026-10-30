@@ -1264,3 +1264,5 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-10-30,Lidl,Pequeno Almoco,CAFE TORRADO GRAO DELTA PORTUGA,1.0,0.75,18.99,18.99,0.0,A
 2026-10-30,Lidl,Mercearia Doce,DOCE EXTRA MORANGO FRAMBOE,1.0,,1.99,1.99,0.0,A
 2026-10-30,Lidl,Laticinios/Beb. Veg.,OVOSM GALINHAS CRIADAS SOLO,1.0,,5.75,5.75,0.0,B
+2026-10-30,Lidl,Mercearia Doce,GOMAS ACIDAS LINGUAS MULTIC,1.0,,0.79,0.79,0.0,A
+2026-10-30,Lidl,Padaria,CROISSANT BRIOCHE,2.0,,0.59,1.18,0.0,A
