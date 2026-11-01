@@ -1279,7 +1279,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-10-31,Lidl,Mercearia Salgada,NOODLES CAMARAO,1.0,,2.79,2.79,0.0,A
 2026-10-31,Lidl,Higiene,COLGATE MAX WHITE CRISTAIS,1.0,,2.29,2.29,0.0,A
 2026-11-01,Lidl,Frutas e Legumes,BANANA,1.0,1.126,1.25,1.25,0.0,B
-2026-11-01,Lidl,Soft Drinks,Coca Cola Pack Regular,1.0,7,7.15,7.15,0.0,A
+2026-11-01,Lidl,Soft Drinks,Coca Cola,1.0,7,7.15,7.15,0.0,A
 2026-11-01,Lidl,Talho,PERNA FRANGO,1.0,1.579,4.25,4.25,0.0,B
 2026-11-01,Lidl,Talho,PEITO FRANGO,1.0,1.072,6.96,6.96,0.0,B
 2026-11-01,Lidl,Frutas e Legumes,PEPINO,1.0,0.786,0.94,0.94,0.31,B
