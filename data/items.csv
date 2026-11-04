@@ -1289,3 +1289,5 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-11-02,Lidl,Talho,COXA FRANGO,1.0,0.991,4.35,4.35,0.0,B
 2026-11-02,Lidl,Talho,PERNINHA FRANGO,1.0,1.173,5.27,5.27,0.35,B
 2026-11-02,Lidl,Laticinios/Beb. Veg.,LEITE INTEIRO,1.0,,0.99,0.99,0.0,B
+2026-11-03,Lidl,Soft Drinks,Coca Cola Zero Lata,1.0,,0.9,0.9,0.0,A
+2026-11-03,Lidl,Mercearia Doce,GOMAS ACIDAS LINGUAS MULTIC,1.0,,0.79,0.79,0.0,A
