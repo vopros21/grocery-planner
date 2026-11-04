@@ -1296,3 +1296,13 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-11-02,Lidl,Soft Drinks,Cola 330ml (frio),1.0,,0.59,0.59,0.0,A
 2026-11-03,Lidl,Soft Drinks,Coca Cola Regular Lata,2.0,,0.9,1.8,0.0,A
 2026-11-03,Lidl,Padaria,PIZZA FIAMBRE E QUEIJO,1.0,,1.59,1.59,0.0,A
+2026-11-04,Lidl,Talho,LOMBO DE PORCO,1.0,0.987,4.44,4.44,0.49,B
+2026-11-04,Lidl,Talho,LOMBO DE PORCO,1.0,0.977,4.39,4.39,0.49,B
+2026-11-04,Lidl,Casa-Cozinha/Lavand,Maquina Fazer Crepes-0522791,1.0,,14.99,14.99,0.0,A
+2026-11-04,Lidl,Laticinios/Beb. Veg.,LEITE INTEIRO,1.0,,0.99,0.99,0.0,B
+2026-11-04,Lidl,Laticinios/Beb. Veg.,QUEIJO MOZZARELLA RALADO 40,1.0,0.25,1.95,1.95,0.0,B
+2026-11-04,Lidl,Frutas e Legumes,MACA GOLDEN,1.0,1.092,2.17,2.17,0.0,B
+2026-11-04,Lidl,Frutas e Legumes,COGUMELO,1.0,0.5,1.99,1.99,0.0,B
+2026-11-04,Lidl,Mercearia Doce,CHOCOLATE DE LEITE,1.0,0.1,0.95,0.95,0.0,A
+2026-11-04,Lidl,Mercearia Salgada,Maxi Wraps,1.0,,2.99,2.99,0.0,A
+2026-11-04,Lidl,Soft Drinks,MONCHIQUE AGUA ALCALINA,1.0,5,1.65,1.65,0.0,C
