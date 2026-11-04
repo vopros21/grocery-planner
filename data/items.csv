@@ -1294,3 +1294,5 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-11-02,Lidl,Mercearia Doce,GOMAS SORTIDAS TOP MIX,1.0,,0.99,0.99,0.0,A
 2026-11-02,Lidl,Padaria,CROISSANT BRIOCHE,2.0,,0.59,1.18,0.0,A
 2026-11-02,Lidl,Soft Drinks,Cola 330ml (frio),1.0,,0.59,0.59,0.0,A
+2026-11-03,Lidl,Soft Drinks,Coca Cola Regular Lata,2.0,,0.9,1.8,0.0,A
+2026-11-03,Lidl,Padaria,PIZZA FIAMBRE E QUEIJO,1.0,,1.59,1.59,0.0,A
