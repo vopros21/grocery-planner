@@ -65,7 +65,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-06-27,Continente,Bens Essenciais,FARINHA TRIGO S/F CNT T55 1KG,1.0,,0.59,0.59,0.0,A
 2026-06-27,Continente,Bens Essenciais,LASANHA C/OVO CONTINENTE 500G,2.0,,1.59,3.18,0.0,A
 2026-06-27,Continente,Bens Essenciais,MASSA NINHOS C/OVOS CNT 500G,1.0,,1.89,1.89,0.0,A
-2026-06-27,Continente,Bens Essenciais,ACUCAR MASCAVADO CONTINENTE 1KG,1.0,,2.39,2.39,0.0,C
+2026-06-27,Continente,Bens Essenciais,ACUCAR MASCAVADO,1.0,1,2.39,2.39,0.0,C
 2026-06-27,Continente,Talho,PORCO ENTRECOSTO PARA GRELHAR,1.0,,3.27,3.27,0.0,A
 2026-06-27,Continente,Talho,PORCO ENTRECOSTO PARA GRELHAR,1.0,,3.57,3.57,0.0,A
 2026-06-27,Continente,Talho,NOVILHO JARDINEIRA NAC CNT LS,1.0,0.7,7.97,7.97,0.0,A
@@ -445,7 +445,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-08-01,Continente,Congelados,GEL COCOS CNT 2X180ML,1.0,,2.79,2.79,0.0,C
 2026-08-01,Continente,Laticinios/Beb. Veg.,LEIT UHT INTEIRO CNT 1L,6.0,,0.99,5.94,0.0,A
 2026-08-01,Continente,Beleza,CH.TRESEMME BIOTIN REPAIR 685ML,1.0,,5.99,5.99,2.0,C
-2026-08-01,Continente,Bens Essenciais,ACUCAR MASCAVADO CONTINENTE 1KG,1.0,,1.95,1.95,0.0,C
+2026-08-01,Continente,Bens Essenciais,ACUCAR MASCAVADO,1.0,1,1.95,1.95,0.0,C
 2026-08-01,Continente,Bens Essenciais,AZEITE VE PORCA MURCA 0.5L,1.0,,6.5,6.5,0.0,A
 2026-08-01,Continente,Talho,PORCO TIRAS VAO INT. CNT. KG LS,1.0,1.304,9.11,9.11,0.0,A
 2026-08-01,Continente,Talho,PORCO TIRAS VAO INT. CNT. KG LS,1.0,1.166,8.15,8.15,0.0,A
@@ -577,7 +577,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-08-15,Continente,Laticinios/Beb. Veg.,LEIT UHT INTEIRO CNT 1L,2.0,,0.99,1.98,0.0,A
 2026-08-15,Continente,Laticinios/Beb. Veg.,MANTEIGA S/ SAL CNT 250G,2.0,,1.99,3.98,0.0,A
 2026-08-15,Continente,Bens Essenciais,FARINHA TRIGO S/F CNT T55 1KG,1.0,,0.59,0.59,0.0,A
-2026-08-15,Continente,Bens Essenciais,ACUCAR MASCAVADO CONTINENTE 1KG,1.0,,2.39,2.39,0.0,C
+2026-08-15,Continente,Bens Essenciais,ACUCAR MASCAVADO,1.0,1,2.39,2.39,0.0,C
 2026-08-15,Continente,Pequeno Almoco,CAFE DELTA PORTUGAL MU 220G,1.0,,3.54,3.54,1.95,C
 2026-08-15,Continente,Frutas e Legumes,BANANA,1.0,0.706,0.91,0.91,0.0,A
 2026-08-15,Continente,Padaria,CROUTONS C.AZ/ALHO/SALSA CONTIN,2.0,,0.78,1.56,0.0,A
@@ -773,7 +773,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-09-05,Continente,Laticinios/Beb. Veg.,IOG PROT LIQ MIM FRT. TROP 250G,1.0,,1.69,1.69,0.7,A
 2026-09-05,Continente,Laticinios/Beb. Veg.,IOG PROT LIQ MIM MOR/BAN 250G,2.0,,1.69,3.38,1.4,A
 2026-09-05,Continente,Bens Essenciais,MASS COTOVELOS GR RISC CNT 500G,1.0,,0.79,0.79,0.0,A
-2026-09-05,Continente,Bens Essenciais,ACUCAR MASCAVADO CONTINENTE 1KG,1.0,,2.39,2.39,0.0,C
+2026-09-05,Continente,Bens Essenciais,ACUCAR MASCAVADO,1.0,1,2.39,2.39,0.0,C
 2026-09-05,Continente,Bens Essenciais,ESPIRAIS CNT PACK POUPANCA 1KG,1.0,,1.39,1.39,0.0,A
 2026-09-05,Continente,Talho,NOVILHO JARDINEIRA NAC CNT LS,1.0,0.702,9.47,9.47,0.0,A
 2026-09-05,Continente,Talho,PEITO FRANGO FAMILIAR CNT LS,1.0,1.05,6.81,6.81,0.0,A
@@ -1048,7 +1048,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-10-03,Continente,Laticinios/Beb. Veg.,MANTEIGA S/ SAL CNT 250G,1.0,,1.99,1.99,0.0,A
 2026-10-03,Continente,Bens Essenciais,MASS COTOVELOS GR RISC CNT 500G,1.0,,0.75,0.75,0.0,A
 2026-10-03,Continente,Bens Essenciais,LASANHA C/OVO CONTINENTE 500G,1.0,,1.59,1.59,0.0,A
-2026-10-03,Continente,Bens Essenciais,ACUCAR MASCAVADO CONTINENTE 1KG,1.0,,2.39,2.39,0.0,C
+2026-10-03,Continente,Bens Essenciais,ACUCAR MASCAVADO,1.0,1,2.39,2.39,0.0,C
 2026-10-03,Continente,Bens Essenciais,FARINHA TRIGO S/F CONT.POUPANCA,1.0,5,3.25,3.25,0.0,A
 2026-10-03,Continente,Talho,PORCO OSSOS ESPINHA/SUA,1.0,0.787,1.96,1.96,0.0,A
 2026-10-03,Continente,Talho,PORCO CACHACO 1/2 ASSAR S/OSSO,1.0,0.930,4.92,4.92,0.0,A
