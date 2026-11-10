@@ -1387,3 +1387,5 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-11-09,Lidl,Frutas e Legumes,ALHO SECO NACIONAL,1.0,0.288,1.44,1.44,0.49,B
 2026-11-09,Lidl,Frutas e Legumes,PEPINO,1.0,0.668,1.24,1.24,0.0,B
 2026-11-09,Lidl,Padaria,CROISSANT BRIOCHE,2.0,,0.59,1.18,0.0,A
+2026-11-10,Lidl,Mercearia Doce,GOMAS ACIDAS LINGUAS MULTIC,1.0,,0.79,0.79,0.0,A
+2026-11-10,Lidl,Soft Drinks,MONCHIQUE AGUA ALCALINA,2.0,10,1.65,3.3,0.0,C
