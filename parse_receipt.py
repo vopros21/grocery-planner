@@ -481,7 +481,7 @@ def extract_text_from_image(path: str) -> list[str]:
     request.setRecognitionLanguages_(["pt-PT", "en-US"])
     request.setUsesLanguageCorrection_(True)
 
-    req_handler = Vision.VNImageRequestHandler.alloc().initWithCGImage_options_(cg_image, {})
+    req_handler = Vision.VNImageRequestHandler.alloc().initWithCGImage_options_(cg_image, None)
     success, error = req_handler.performRequests_error_([request], None)
     if not success:
         raise RuntimeError(f"Vision OCR failed: {error}")
