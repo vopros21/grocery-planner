@@ -1433,3 +1433,29 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-11-18,Lidl,Mercearia Doce,GOMAS ACIDAS LINGUAS MULTIC,1.0,,0.79,0.79,0.0,A
 2026-11-20,Lidl,Soft Drinks,Coca Cola Regular,1.0,0.33,0.9,0.9,0.0,A
 2026-11-20,Lidl,Soft Drinks,MonsterUltraWhite SemAcucar,1.0,,1.39,1.39,0.35,A
+2026-11-22,Continente,Mercearia Salgada,PAPRIKA FUMADA MARGAO SAQ 35G,1.0,,1.59,1.59,0.0,C
+2026-11-22,Continente,Mercearia Salgada,PIM CAYENNE MOI MARGAO SAQ 35G,1.0,,1.84,1.84,0.0,C
+2026-11-22,Continente,Soft Drinks,Coca Cola Regular,1.0,3.5,4.49,4.49,0.29,C
+2026-11-22,Continente,Higiene,GEL DE BANHO 2EM1 400ML,1.0,,1.39,1.39,0.0,C
+2026-11-22,Continente,Higiene,GEL DE BANHO 2EM1 400ML,1.0,,1.39,1.39,0.0,C
+2026-11-22,Continente,Higiene,COMP. TNT10X10,1.0,,1.69,1.69,0.0,A
+2026-11-22,Continente,Higiene,PASTA COLGATE MA* WHITE 75ML,1.0,,2.31,2.31,0.78,C
+2026-11-22,Continente,Limpeza do Lar,PH RENOVA GRAND ROYAL 32R 4F,1.0,,14.99,14.99,14.59,C
+2026-11-22,Continente,Congelados,GEL COCOS CNT 2X180ML,1.0,,2.79,2.79,0.0,C
+2026-11-22,Continente,Congelados,GEL NATA CONTINENTE 1LT,3.0,,2.69,8.07,0.0,C
+2026-11-22,Continente,Laticinios/Beb. Veg.,LEIT UHT INTEIRO CNT 1L,6.0,,0.99,5.94,0.0,A
+2026-11-22,Continente,Laticinios/Beb. Veg.,MANTEIGA S/ SAL CNT 250G,2.0,,1.99,3.98,0.0,A
+2026-11-22,Continente,Bens Essenciais,ARROZ BASMATI,1.0,1,1.89,1.89,0.0,A
+2026-11-22,Continente,Talho,MINI SALSICHAS PORCO CONTINENTE,1.0,0.5,3.49,3.49,0.0,A
+2026-11-22,Continente,Talho,SALSICHAS FRESCAS CNT 500G,1.0,0.5,2.99,2.99,0.0,A
+2026-11-22,Continente,Peixaria,MIOLO CAMARAO 80/100 CNT 500G,1.0,,5.49,5.49,0.0,C
+2026-11-22,Continente,Peixaria,DELICIAS MAR S/GLUTEN PESC 250G,2.0,,1.39,2.78,0.94,A
+2026-11-22,Continente,Pequeno Almoco,CAFE TORRADO GRAO DELTA PORTUGA,1.0,0.75,12.99,12.99,6.0,C
+2026-11-22,Continente,Vinho e Espirituosas,VB COUTEIRO-MOR,1.0,,4.69,4.69,11.3,B
+2026-11-22,Continente,Take Away,MASSA FOLHADA RETANG. CNT 375GR,1.0,,1.35,1.35,0.0,C
+2026-11-22,Continente,Take Away,MASSA PIZZA RETANG.XXL CNT 550G,1.0,,2.49,2.49,0.0,C
+2026-11-22,Continente,Take Away,PIZZA BARBECUE CNT 400G,2.0,,2.89,5.78,0.0,B
+2026-11-22,Continente,Take Away,PIZZA PEPPERONI CNT 410G,2.0,,2.89,5.78,0.0,B
+2026-11-22,Continente,Cultura,REGUA MAPED 50CM,1.0,,2.69,2.69,0.0,C
+2026-11-22,Continente,Cultura,X-ACTO GRANDE NOTE!,1.0,,2.49,2.49,0.0,C
+2026-11-22,Continente,Casa-Cozinha/Lavand,SACO PLAS RE CNT,1.0,,0.1,0.1,0.0,C
