@@ -1459,3 +1459,9 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-11-22,Continente,Cultura,REGUA MAPED 50CM,1.0,,2.69,2.69,0.0,C
 2026-11-22,Continente,Cultura,X-ACTO GRANDE NOTE!,1.0,,2.49,2.49,0.0,C
 2026-11-22,Continente,Casa-Cozinha/Lavand,SACO PLAS RE CNT,1.0,,0.1,0.1,0.0,C
+2026-11-23,Lidl,Frutas e Legumes,BANANA,1.0,1.422,1.58,1.58,0.0,B
+2026-11-23,Lidl,Frutas e Legumes,BATATA BRANCA,1.0,2,1.99,1.99,0.7,B
+2026-11-23,Lidl,Charcutaria&Queijos,BACON EM PEDACOS,1.0,,2.19,2.19,0.0,A
+2026-11-23,Lidl,Charcutaria&Queijos,BACON FATIADO FAMILIAR,1.0,,2.79,2.79,0.0,A
+2026-11-23,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,0.3,1.99,1.99,0.0,B
+2026-11-23,Lidl,Frutas e Legumes,ALFACE FRISADA,1.0,0.44,0.96,0.96,0.0,B
