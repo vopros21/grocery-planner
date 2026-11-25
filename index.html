@@ -106,7 +106,7 @@
 </style>
 </head>
 <body>
-<div class="version-tag">v20261002-3</div>
+<div class="version-tag">v20261125-1</div>
 
 <dialog id="historyDialog" class="history">
   <div class="history-inner">
@@ -725,7 +725,9 @@ function renderHistory(h) {
       label: store || "(unknown store)",
       data: points
         .filter(r => r.store === store)
-        .map(r => ({ x: Date.parse(r.date), y: r.price }))
+        // Round away float noise from total/weight division (0.32999999999999996
+        // vs 0.33), which otherwise makes Chart.js zoom the axis onto a 1e-17 gap.
+        .map(r => ({ x: Date.parse(r.date), y: Math.round(r.price * 1e4) / 1e4 }))
         .sort((a, b) => a.x - b.x),
       borderColor: color,
       backgroundColor: color,
@@ -742,7 +744,10 @@ function renderHistory(h) {
       maintainAspectRatio: false,
       scales: {
         x: { type: "linear", ticks: { callback: fmtDate, maxRotation: 0, autoSkipPadding: 16 } },
-        y: { title: { display: true, text: s.price_unit === "kg" ? "EUR / kg" : "EUR / item" } },
+        y: {
+          title: { display: true, text: s.price_unit === "kg" ? "EUR / kg" : "EUR / item" },
+          ticks: { callback: (v) => "€" + +v.toFixed(4) },
+        },
       },
       plugins: {
         legend: { position: "bottom", labels: { boxWidth: 12, font: { size: 11 } } },
