@@ -1470,3 +1470,6 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-11-23,Lidl,Soft Drinks,Coca Cola Regular,2.0,0.66,0.9,1.8,0.0,A
 2026-11-25,Lidl,Soft Drinks,SteamBrew Cerveja Artesanal,2.0,,0.99,1.98,0.0,A
 2026-11-25,Lidl,Soft Drinks,MONCHIQUE AGUA ALCALINA,1.0,5,1.65,1.65,0.0,C
+2026-11-24,Lidl,Soft Drinks,Coca Cola Zero,1.0,0.33,0.9,0.9,0.0,A
+2026-11-24,Lidl,Soft Drinks,Coca Cola Regular,1.0,0.33,0.9,0.9,0.0,A
+2026-11-24,Lidl,Padaria,Brioche de Leite,1.0,,0.65,0.65,0.0,A
