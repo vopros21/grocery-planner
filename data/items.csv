@@ -232,12 +232,12 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-05-02,Continente,Interiores Infantil,BOXER,1.0,,12.99,12.99,0.0,C
 2026-07-04,Lidl,Congelados,DOCHI COCO,1.0,,3.59,3.59,0.0,A
 2026-07-04,Lidl,Soft Drinks,BEBIDAS BAHAMAS,1.0,,1.49,1.49,0.0,A
-2026-07-04,Lidl,Soft Drinks,Coca Cola Regular 1l,1.0,,1.49,1.49,0.0,A
+2026-07-04,Lidl,Soft Drinks,Coca Cola Regular,1.0,1,1.49,1.49,0.0,A
 2026-06-19,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,0.3,1.89,1.89,0.0,B
 2026-06-19,Lidl,Peixaria,Lombos de Salmao,1.0,,6.9,6.9,0.0,B
 2026-06-19,Lidl,Soft Drinks,COCA COLA ZERO BAUNILHA,1.0,,4.49,4.49,0.0,A
 2026-06-19,Lidl,Padaria,MINI BOLA BERLIM COM CREME,1.0,,2.99,2.99,0.0,A
-2026-06-19,Lidl,Soft Drinks,Coca Cola Regular 1l,1.0,,1.49,1.49,0.0,A
+2026-06-19,Lidl,Soft Drinks,Coca Cola Regular,1.0,1,1.49,1.49,0.0,A
 2026-06-19,Lidl,Frutas e Legumes,BANANA,1.0,,1.09,1.09,0.0,B
 2026-06-19,Lidl,Mercearia Salgada,MASSA FOLHADA FORMA RECTAN.,1.0,,0.99,0.99,0.0,A
 2026-06-19,Lidl,Frutas e Legumes,BATATA CONSER VERMELHA 5 KG,1.0,,5.39,5.39,0.0,B
@@ -477,7 +477,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-08-02,Lidl,Laticinios/Beb. Veg.,IOGURTE GREGO NATURAL,1.0,,2.25,2.25,0.0,B
 2026-08-02,Lidl,Soft Drinks,BEBIDAS BAHAMAS,1.0,,1.49,1.49,0.0,A
 2026-08-02,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,0.3,1.89,1.89,0.0,B
-2026-08-02,Lidl,Soft Drinks,Coca Cola Regular 1l,1.0,,1.49,1.49,0.0,A
+2026-08-02,Lidl,Soft Drinks,Coca Cola Regular,1.0,1,1.49,1.49,0.0,A
 2026-08-03,Lidl,Padaria,ARGOLA CHOCOLATE BRANCO,3.0,,0.69,2.07,0.0,A
 2026-08-03,Lidl,Charcutaria&Queijos,SALSICHAS ESTALADICAS,1.0,,3.59,3.59,1.4,A
 2026-08-03,Lidl,Charcutaria&Queijos,QUEIJO MOZZARELLA RALADO,1.0,,3.79,3.79,0.1,B
@@ -735,7 +735,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-08-31,Lidl,Frutas e Legumes,BANANA,1.0,1.278,1.27,1.27,0.25,B
 2026-08-31,Lidl,Mercearia Doce,CHOCOLATE DE LEITE,2.0,0.2,0.95,1.9,0.0,A
 2026-08-31,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,0.3,1.89,1.89,0.0,B
-2026-09-01,Lidl,Soft Drinks,Coca Cola Regular 1l,1.0,,1.49,1.49,0.0,A
+2026-09-01,Lidl,Soft Drinks,Coca Cola Regular,1.0,1,1.49,1.49,0.0,A
 2026-09-01,Continente,Pequeno Almoco,INFUSAO LIPTON CAMOMILA 20PYR,1.0,,1.69,1.69,0.78,A
 2026-09-01,Continente,Frutas e Legumes,LIMAO,1.0,0.624,1.23,1.23,0.0,A
 2026-09-01,Continente,Frutas e Legumes,ROMA,1.0,0.756,3.02,3.02,0.0,A
@@ -927,10 +927,10 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-09-19,Continente,Frutas e Legumes,RUCULA FLORETTE 100G,1.0,,1.99,1.99,0.0,A
 2026-09-19,Continente,Vinho e Espirituosas,VT CASTELINHO RES DOU 75CL,1.0,,3.59,3.59,5.4,B
 2026-09-19,Continente,Casa-Cozinha/Lavand,SACO PLAS RE CNT,2.0,,0.1,0.2,0.0,C
-2026-09-19,Lidl,Soft Drinks,"Coca Cola Regular Lata0,90",2.0,,0.9,1.8,0.0,A
+2026-09-19,Lidl,Soft Drinks,Coca Cola Regular,2.0,0.66,0.9,1.8,0.0,A
 2026-09-19,Lidl,Soft Drinks,AGUA COM GAS,1.0,,1.69,1.69,0.0,C
 2026-09-19,Lidl,Padaria,PASTEL DE NATA 58GR,4.0,,0.39,1.56,0.0,A
-2026-09-19,Lidl,Soft Drinks,Coca Cola Regular 1l,1.0,,1.49,1.49,0.0,A
+2026-09-19,Lidl,Soft Drinks,Coca Cola Regular,1.0,1,1.49,1.49,0.0,A
 2026-09-20,Lidl,Soft Drinks,Coca Cola Zero,1.0,,3.69,3.69,0.0,A
 2026-09-20,Lidl,Mercearia Doce,DRAGEIAS DE FRUTA ACIDAS,1.0,,1.59,1.59,0.0,A
 2026-09-20,Lidl,Mercearia Doce,MILKA MORANGO 100G,1.0,,1.59,1.59,0.0,A
@@ -959,7 +959,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-09-24,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,0.3,1.89,1.89,0.0,B
 2026-09-24,Lidl,Soft Drinks,SteamBrew Cerveja Artesanal,2.0,,0.99,1.98,0.0,A
 2026-09-24,Lidl,Soft Drinks,MonsterUltraWhite SemAcucar,1.0,,1.39,1.39,0.35,A
-2026-09-24,Lidl,Soft Drinks,Coca Cola Regular 1l,1.0,,1.49,1.49,0.0,A
+2026-09-24,Lidl,Soft Drinks,Coca Cola Regular,1.0,1,1.49,1.49,0.0,A
 2026-09-25,Lidl,Bens Essenciais,ARROZ BASMATI,1.0,,1.89,1.89,0.0,B
 2026-09-25,Lidl,Laticinios/Beb. Veg.,IOGURTE GREGO NATURAL,1.0,,2.25,2.25,0.0,B
 2026-09-25,Lidl,Mercearia Salgada,MAIONESE ERVAS REMOULADE,1.0,,1.89,1.89,0.0,A
@@ -988,7 +988,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-09-28,Lidl,Mercearia Salgada,Cocktail Mix,1.0,,1.99,1.99,0.0,A
 2026-09-28,Lidl,Mercearia Salgada,MASSA INS EST ASIATIC GALIN,2.0,,0.59,1.18,0.0,A
 2026-09-28,Lidl,Padaria,FOLHADO DE CARNE MISTO,1.0,,0.99,0.99,0.0,A
-2026-09-29,Lidl,Soft Drinks,Coca Cola Regular 1l,1.0,,1.49,1.49,0.0,A
+2026-09-29,Lidl,Soft Drinks,Coca Cola Regular,1.0,1,1.49,1.49,0.0,A
 2026-09-29,Lidl,Soft Drinks,Coca Cola Regular,1.0,3.5,3.99,3.99,0.3,A
 2026-09-29,Lidl,Soft Drinks,SteamBrew Cerveja Artesanal,2.0,,0.99,1.98,0.0,A
 2026-09-29,Lidl,Soft Drinks,Strongbeer,2.0,,0.99,1.98,0.0,A
@@ -1097,7 +1097,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-10-06,Lidl,Soft Drinks,Monster Energy Green,1.0,,1.74,1.74,0.0,A
 2026-10-06,Lidl,Padaria,CROISSANT BRIOCHE,2.0,,0.59,1.18,0.0,A
 2026-10-07,Lidl,Mercearia Doce,GOMAS ACIDAS LINGUAS MULTIC,1.0,,0.79,0.79,0.0,A
-2026-10-07,Lidl,Soft Drinks,Coca Cola Regular 1l,1.0,,1.49,1.49,0.0,A
+2026-10-07,Lidl,Soft Drinks,Coca Cola Regular,1.0,1,1.49,1.49,0.0,A
 2026-10-07,Lidl,Laticinios/Beb. Veg.,OVOSM GALINHAS CRIADAS SOLO,1.0,,5.75,5.75,0.0,B
 2026-10-07,Lidl,Charcutaria&Queijos,Queijo Fatiado Burguer,1.0,,1.29,1.29,0.0,B
 2026-10-07,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,0.3,1.89,1.89,0.0,B
@@ -1149,7 +1149,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-10-13,Lidl,Charcutaria&Queijos,SALAME EXTRA FATIADO,1.0,,1.39,1.39,0.0,A
 2026-10-13,Lidl,Frutas e Legumes,CEBOLA,1.0,1.046,1.04,1.04,0.52,B
 2026-10-13,Lidl,Frutas e Legumes,BANANA,1.0,0.878,0.92,0.92,0.0,B
-2026-10-13,Lidl,Soft Drinks,Coca Cola Regular 1l,1.0,,1.49,1.49,0.0,A
+2026-10-13,Lidl,Soft Drinks,Coca Cola Regular,1.0,1,1.49,1.49,0.0,A
 2026-10-14,Lidl,Mercearia Salgada,CHEESEBURGUER DE PORCO,2.0,,2.79,5.58,0.0,A
 2026-10-14,Lidl,Laticinios/Beb. Veg.,MANTEIGA SEM SAL,1.0,,1.99,1.99,0.0,B
 2026-10-14,Lidl,Charcutaria&Queijos,BACON FATIADO FAMILIAR,1.0,,2.79,2.79,0.0,A
@@ -1202,7 +1202,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-10-20,Lidl,Padaria,PAO DE CHIA E QUINOA,1.0,0.3,1.99,1.99,0.0,B
 2026-10-20,Lidl,Padaria,FOLHADO DE CARNE MISTO,1.0,,0.99,0.99,0.0,A
 2026-10-21,Lidl,Soft Drinks,MONCHIQUE AGUA ALCALINA,1.0,5,1.65,1.65,0.0,C
-2026-10-21,Lidl,Soft Drinks,Coca Cola Regular 1l,1.0,,1.49,1.49,0.0,A
+2026-10-21,Lidl,Soft Drinks,Coca Cola Regular,1.0,1,1.49,1.49,0.0,A
 2026-10-21,Lidl,Mercearia Salgada,BATATAS FRITAS MEL MOSTARDA,1.0,,1.49,1.49,0.0,A
 2026-10-21,Lidl,Mercearia Salgada,MAIONESE ERVAS REMOULADE,1.0,,1.89,1.89,0.0,A
 2026-10-21,Lidl,Soft Drinks,SteamBrew Cerveja Artesanal,2.0,,0.99,1.98,0.0,A
@@ -1235,14 +1235,14 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-10-25,Lidl,Mercearia Salgada,MASSA FOLHADA FORMA RECTAN.,2.0,,0.99,1.98,0.0,A
 2026-10-25,Lidl,Charcutaria&Queijos,Queijo Fatiado Burguer,1.0,,1.29,1.29,0.0,B
 2026-10-26,Lidl,Padaria,CROISSANT BRIOCHE,2.0,,0.59,1.18,0.0,A
-2026-10-26,Lidl,Soft Drinks,Coca Cola Regular 1l,1.0,,1.49,1.49,0.0,A
+2026-10-26,Lidl,Soft Drinks,Coca Cola Regular,1.0,1,1.49,1.49,0.0,A
 2026-10-26,Lidl,Casa-Cozinha/Lavand,Saco de Papel,1.0,,0.15,0.15,0.0,A
 2026-10-26,Lidl,Mercearia Salgada,PRINGLES NATAS&CEBOLA 165G,1.0,,2.25,2.25,0.1,A
 2026-10-26,Lidl,Soft Drinks,SteamBrew Cerveja Artesanal,1.0,,0.99,0.99,0.0,A
 2026-10-26,Lidl,Mercearia Salgada,MASSA FOLHADA FORMA RECTAN.,1.0,,0.99,0.99,0.0,A
 2026-10-26,Lidl,Charcutaria&Queijos,BACON FATIADO FAMILIAR,1.0,,2.79,2.79,0.0,A
 2026-10-26,Lidl,Mercearia Doce,JELLY BEANS DOCES,1.0,,1.69,1.69,0.0,A
-2026-10-27,Lidl,Soft Drinks,Coca Cola Regular 1l,1.0,,1.49,1.49,0.0,A
+2026-10-27,Lidl,Soft Drinks,Coca Cola Regular,1.0,1,1.49,1.49,0.0,A
 2026-10-27,Lidl,Soft Drinks,SteamBrew Cerveja Artesanal,2.0,,0.99,1.98,0.0,A
 2026-10-27,Lidl,Frutas e Legumes,BANANA,1.0,1.028,1.14,1.14,0.0,B
 2026-10-27,Lidl,Laticinios/Beb. Veg.,LEITE COM CHOCOLATE GARRAFA,1.0,,1.45,1.45,0.0,B
@@ -1294,7 +1294,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-11-02,Lidl,Mercearia Doce,GOMAS SORTIDAS TOP MIX,1.0,,0.99,0.99,0.0,A
 2026-11-02,Lidl,Padaria,CROISSANT BRIOCHE,2.0,,0.59,1.18,0.0,A
 2026-11-02,Lidl,Soft Drinks,Cola 330ml (frio),1.0,,0.59,0.59,0.0,A
-2026-11-03,Lidl,Soft Drinks,Coca Cola Regular Lata,2.0,,0.9,1.8,0.0,A
+2026-11-03,Lidl,Soft Drinks,Coca Cola Regular,2.0,0.66,0.9,1.8,0.0,A
 2026-11-03,Lidl,Padaria,PIZZA FIAMBRE E QUEIJO,1.0,,1.59,1.59,0.0,A
 2026-11-04,Lidl,Talho,LOMBO DE PORCO,1.0,0.987,4.44,4.44,0.49,B
 2026-11-04,Lidl,Talho,LOMBO DE PORCO,1.0,0.977,4.39,4.39,0.49,B
