@@ -249,7 +249,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-07-05,Continente,Mercearia Salgada,ERVILHAS BONDUELLE S/AD ACUCAR,1.0,,2.59,2.59,1.4,C
 2026-07-05,Continente,Mercearia Salgada,MILHO DOCE CONTINENTE 3*140G,1.0,,1.99,1.99,0.0,C
 2026-07-05,Continente,Mercearia Salgada,COG. LAMINADOS CNT POUPANCA 420,1.0,,2.19,2.19,0.0,C
-2026-07-05,Continente,Soft Drinks,COCA COLA ORIGINAL 4X1L,1.0,,4.75,4.75,1.21,C
+2026-07-05,Continente,Soft Drinks,Coca Cola Regular,1.0,4,4.75,4.75,1.21,C
 2026-07-05,Continente,Soft Drinks,REF C/ GAS ZERO BAUNILHA COCACO,1.0,,1.19,1.19,0.2,C
 2026-07-05,Continente,Laticinios/Beb. Veg.,IOG PROTEICO SOLIDO MORANGO LIM,2.0,,1.09,2.18,1.22,A
 2026-07-05,Continente,Laticinios/Beb. Veg.,IOG SOL PROTEICO FRAMBOESA LIND,1.0,,1.09,1.09,0.61,A
@@ -364,7 +364,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-07-22,Lidl,Congelados,DOCHI COCO,1.0,,3.59,3.59,0.0,A
 2026-07-23,Continente,Mercearia Doce,CHOCOLATE PO CONTINENTE 125G,1.0,,0.99,0.99,0.0,C
 2026-07-23,Continente,Mercearia Doce,CACAU PO CNT EQ MAGRO 125G,1.0,,1.99,1.99,0.0,C
-2026-07-23,Continente,Soft Drinks,"REF C/GAS COCA-COLA 2X1,75LT",1.0,,4.29,4.29,0.49,C
+2026-07-23,Continente,Soft Drinks,Coca Cola Regular,1.0,3.5,4.29,4.29,0.49,C
 2026-07-23,Continente,Soft Drinks,REF C/ GAS ZERO BAUNILHA COCACO,1.0,,1.39,1.39,0.0,C
 2026-07-23,Continente,Soft Drinks,CERV.C/ALC.SAGRES RADLER 6*33,1.0,,4.99,4.99,2.0,C
 2026-07-23,Continente,Laticinios/Beb. Veg.,OVOS M DONA GEMA 2DZ,1.0,,5.99,5.99,0.0,A
@@ -1162,7 +1162,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-10-16,Lidl,Charcutaria&Queijos,BACON FATIADO FAMILIAR,1.0,,2.79,2.79,0.0,A
 2026-10-16,Lidl,Mercearia Salgada,MASSA FOLHADA FORMA RECTAN.,2.0,,0.99,1.98,0.0,A
 2026-10-16,Lidl,Mercearia Salgada,RUFFLES PRESUNTO,1.0,,2.19,2.19,0.0,A
-2026-10-16,Lidl,Soft Drinks,COCA COLA REGULAR 4x1L,1.0,,4.69,4.69,0.06,A
+2026-10-16,Lidl,Soft Drinks,Coca Cola Regular,1.0,4,4.69,4.69,0.06,A
 2026-10-16,Lidl,Padaria,CROISSANT BRIOCHE REC.CACAU,1.0,,0.99,0.99,0.0,A
 2026-10-17,Lidl,Laticinios/Beb. Veg.,IOGURTE PEDACOS DE BOLACHA,2.0,,0.58,1.16,0.0,B
 2026-10-17,Lidl,Padaria,PIZZA FIAMBRE E QUEIJO,1.0,,1.49,1.49,0.0,A
@@ -1279,7 +1279,7 @@ date,store,category,name,qty,weight_kg,unit_price,total_price,discount,iva_band
 2026-10-31,Lidl,Mercearia Salgada,NOODLES CAMARAO,1.0,,2.79,2.79,0.0,A
 2026-10-31,Lidl,Higiene,COLGATE MAX WHITE CRISTAIS,1.0,,2.29,2.29,0.0,A
 2026-11-01,Lidl,Frutas e Legumes,BANANA,1.0,1.126,1.25,1.25,0.0,B
-2026-11-01,Lidl,Soft Drinks,Coca Cola,1.0,7,7.15,7.15,0.0,A
+2026-11-01,Lidl,Soft Drinks,Coca Cola Regular,1.0,7,7.15,7.15,0.0,A
 2026-11-01,Lidl,Talho,PERNA FRANGO,1.0,1.579,4.25,4.25,0.0,B
 2026-11-01,Lidl,Talho,PEITO FRANGO,1.0,1.072,6.96,6.96,0.0,B
 2026-11-01,Lidl,Frutas e Legumes,PEPINO,1.0,0.786,0.94,0.94,0.31,B
